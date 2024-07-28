@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             BackgroundColor="Black"
+             x:Class="UniCollabMaui.Views.RegisterPage"
+             Title="Register">
+    <ContentPage.Content>
+        <Grid Padding="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Frame Grid.Row="1" Grid.Column="1" Padding="20" BackgroundColor="DimGrey" CornerRadius="10" VerticalOptions="CenterAndExpand">
+                <StackLayout Spacing="15">
+                    <Label 
+                        Text="Register"
+                        FontSize="24"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center" 
+                        VerticalOptions="Center" 
+                        TextColor="White"/>
+
+                    <Entry x:Name="NameEntry" Placeholder="Name" PlaceholderColor="Gray" TextColor="Black" BackgroundColor="#F0F0F0" TextChanged="OnEntryTextChanged"/>
+                    <Entry x:Name="UsernameEntry" Placeholder="Username" PlaceholderColor="Gray" TextColor="Black" BackgroundColor="#F0F0F0" TextChanged="OnEntryTextChanged"/>
+                    <Entry x:Name="PasswordEntry" Placeholder="Password" PlaceholderColor="Gray" TextColor="Black" BackgroundColor="#F0F0F0" IsPassword="True" TextTransform="Lowercase" TextChanged="OnEntryTextChanged"/>
+
+                    <Button x:Name="RegisterButton" Text="Next" Clicked="OnRegisterButtonClicked" BackgroundColor="Green" TextColor="White" CornerRadius="10" IsEnabled="False"/>
+                    <Button x:Name="BackButton" Text="Cancel" Clicked="OnCancelButtonClicked" BackgroundColor="Red" TextColor="White" CornerRadius="10"/>
+                </StackLayout>
+            </Frame>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -4,14 +4,14 @@
              BackgroundColor="Black"
              x:Class="UniCollabMaui.Views.AddTaskPage">
     <ContentPage.Content>
-        <StackLayout Padding="20" Spacing="10">
-            <Entry x:Name="TaskTitleEntry" Placeholder="Task Title" TextColor="White"/>
+        <StackLayout Padding="20" Spacing="10" HorizontalOptions="Center">
+            <Entry x:Name="TaskTitleEntry" Placeholder="Task Title" TextColor="White" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
             <BoxView HeightRequest="1" Color="White" HorizontalOptions="FillAndExpand" />
 
-            <Editor x:Name="TaskDescriptionEditor" Placeholder="Task Description" TextColor="White"/>
+            <Editor x:Name="TaskDescriptionEditor" Placeholder="Task Description" TextColor="White" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
             <BoxView HeightRequest="1" Color="White" HorizontalOptions="FillAndExpand" />
 
-            <Picker x:Name="TaskColumnPicker" Title="Select Column" TextColor="White">
+            <Picker x:Name="TaskColumnPicker" Title="Select Column" TextColor="White" HorizontalOptions="Center">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>ToDo</x:String>
@@ -22,10 +22,21 @@
             </Picker>
             <BoxView HeightRequest="1" Color="White" HorizontalOptions="FillAndExpand" />
 
-            <Picker x:Name="UserPicker" Title="Select User" ItemDisplayBinding="{Binding Name}" TextColor="White" />
+            <Picker x:Name="UserPicker" Title="Select User" ItemDisplayBinding="{Binding Name}" TextColor="White" HorizontalOptions="Center"/>
             <BoxView HeightRequest="1" Color="White" HorizontalOptions="FillAndExpand" />
 
-            <Button Text="Save Task" Clicked="OnSaveTaskButtonClicked" BackgroundColor="White" TextColor="Black"/>
+            <Picker x:Name="TaskPriorityPicker" Title="Select Priority" TextColor="White" HorizontalOptions="Center">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>High</x:String>
+                        <x:String>Medium</x:String>
+                        <x:String>Low</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            <BoxView HeightRequest="1" Color="White" HorizontalOptions="FillAndExpand" />
+
+            <Button Text="Save Task" Clicked="OnSaveTaskButtonClicked" BackgroundColor="White" TextColor="Black" HorizontalOptions="Center"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

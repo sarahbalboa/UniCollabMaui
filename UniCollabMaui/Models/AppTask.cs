@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SQLite;
+﻿using SQLite;
 
 namespace UniCollabMaui.Models
 {
@@ -14,6 +9,7 @@ namespace UniCollabMaui.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public string Column { get; set; }
+        public string Priority { get; set; } // Add this property
         public int AssignedToUserId { get; set; }
     }
 }

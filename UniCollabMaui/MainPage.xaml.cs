@@ -34,7 +34,7 @@ namespace UniCollabMaui
 
         private async void OnCounterClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new TaskBoard());
+            await Navigation.PushAsync(new LogIn());
 
         }
     }

@@ -22,8 +22,8 @@ namespace UniCollabMaui.Views
 
         private async void LoadTasks()
         {
-            var tasks = await TaskBoardService.GetAppTasks();
-            var users = await TaskBoardService.GetUsers();
+            var tasks = await DatabaseService.GetAppTasks();
+            var users = await DatabaseService.GetUsers();
             var userDictionary = new Dictionary<int, User>();
 
             foreach (var user in users)
@@ -38,14 +38,21 @@ namespace UniCollabMaui.Views
             foreach (var task in tasks)
             {
                 var userName = userDictionary.ContainsKey(task.AssignedToUserId) ? userDictionary[task.AssignedToUserId].Name : "Unknown";
+
+                // Determine the background color based on the task property
+                var backgroundColor = GetTaskColor(task);
+
                 var taskView = new Frame
                 {
                     Padding = 10,
                     Margin = 5,
-                    BackgroundColor = Colors.Blue,
-                    Content = new Label { Text = $"{task.Title} (Assigned to: {userName})" },
-                    
+                    BackgroundColor = backgroundColor,
+                    Content = new Label { Text = $" [#{task.Id}] {task.Title} (Assigned to: {userName})" }
                 };
+
+                var tapGestureRecognizer = new TapGestureRecognizer();
+                tapGestureRecognizer.Tapped += async (s, e) => await OnTaskTapped(task.Id);
+                taskView.GestureRecognizers.Add(tapGestureRecognizer);
 
                 switch (task.Column)
                 {
@@ -62,10 +69,37 @@ namespace UniCollabMaui.Views
             }
         }
 
+        private Color GetTaskColor(AppTask task)
+        {
+            // Example logic to determine the color based on task priority
+            // You can modify this logic to fit your requirements
+            switch (task.Priority)
+            {
+                case "High":
+                    return Colors.Red;
+                case "Medium":
+                    return Colors.Orange;
+                case "Low":
+                    return Colors.Green;
+                default:
+                    return Colors.Blue;
+            }
+        }
+
+        private async Task OnTaskTapped(int taskId)
+        {
+            await Navigation.PushAsync(new AddTaskPage(taskId));
+        }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
             LoadTasks();
+        }
+
+        private async void OnEraseTasksButtonClicked(object sender, EventArgs e)
+        {
+            await DatabaseService.EraseAllTasksData();
         }
     }
 }

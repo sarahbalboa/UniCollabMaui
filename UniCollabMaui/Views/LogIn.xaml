@@ -1,12 +1,45 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             BackgroundColor="Black"
              x:Class="UniCollabMaui.Views.LogIn"
              Title="LogIn">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ContentPage.Content>
+        <Grid Padding="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Frame Grid.Row="1" Grid.Column="1" Padding="20" BackgroundColor="DimGrey" CornerRadius="10" VerticalOptions="CenterAndExpand" >
+                <StackLayout Spacing="15">
+                    <Label 
+                        Text="Log In"
+                        FontSize="24"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center" 
+                        VerticalOptions="Center" 
+                        TextColor="White"/>
+
+                    <Entry x:Name="Username" Placeholder="Username/Email" PlaceholderColor="Gray" TextColor="Black" BackgroundColor="#F0F0F0" TextChanged="OnUsernameTextChanged"/>
+
+                    <Entry x:Name="Password" Placeholder="Password" PlaceholderColor="Gray" TextColor="Black" BackgroundColor="#F0F0F0" IsPassword="True" TextTransform="Lowercase" TextChanged="OnPasswordTextChanged"/>
+
+                    <Button x:Name="NextButton" Text="Next" Clicked="OnLogInButtonClicked" BackgroundColor="Green" TextColor="White" CornerRadius="10" IsEnabled="False"/>
+                    <Button Text="Register" Clicked="OnRegisterButtonClicked"/>
+
+                    <Button Text="Erase Users" Clicked="OnEraseUsersButtonClicked" BackgroundColor="IndianRed"  TextColor="White"/>
+
+
+                </StackLayout>
+            </Frame>
+        </Grid>
+    </ContentPage.Content>
 </ContentPage>
