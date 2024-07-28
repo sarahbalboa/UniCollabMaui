@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             BackgroundColor="Black"
              x:Class="UniCollabMaui.Views.AddTaskPage">
     <ContentPage.Content>
-        <StackLayout Padding="20">
-            <Entry x:Name="TaskTitleEntry" Placeholder="Task Title" />
-            <Editor x:Name="TaskDescriptionEditor" Placeholder="Task Description" />
-            <Picker x:Name="TaskColumnPicker" Title="Select Column">
+        <StackLayout Padding="20" Spacing="10">
+            <Entry x:Name="TaskTitleEntry" Placeholder="Task Title" TextColor="White"/>
+            <BoxView HeightRequest="1" Color="White" HorizontalOptions="FillAndExpand" />
+
+            <Editor x:Name="TaskDescriptionEditor" Placeholder="Task Description" TextColor="White"/>
+            <BoxView HeightRequest="1" Color="White" HorizontalOptions="FillAndExpand" />
+
+            <Picker x:Name="TaskColumnPicker" Title="Select Column" TextColor="White">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>ToDo</x:String>
@@ -15,7 +20,12 @@
                     </x:Array>
                 </Picker.ItemsSource>
             </Picker>
-            <Button Text="Save Task" Clicked="OnSaveTaskButtonClicked"/>
+            <BoxView HeightRequest="1" Color="White" HorizontalOptions="FillAndExpand" />
+
+            <Picker x:Name="UserPicker" Title="Select User" ItemDisplayBinding="{Binding Name}" TextColor="White" />
+            <BoxView HeightRequest="1" Color="White" HorizontalOptions="FillAndExpand" />
+
+            <Button Text="Save Task" Clicked="OnSaveTaskButtonClicked" BackgroundColor="White" TextColor="Black"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

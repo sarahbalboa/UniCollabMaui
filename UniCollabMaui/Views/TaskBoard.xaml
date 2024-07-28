@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             BackgroundColor="Black"
              x:Class="UniCollabMaui.Views.TaskBoard">
     <ContentPage.Content>
         <StackLayout>
-            <Button Text="Add Task" Clicked="OnAddTaskButtonClicked"/>
+            <Button Text="Add Task" Clicked="OnAddTaskButtonClicked" BackgroundColor="White" TextColor="Black"/>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -12,19 +13,27 @@
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <!-- Width for the separator -->
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <!-- Width for the separator -->
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
                 <!-- Column Headers -->
-                <Label Text="ToDo" Grid.Row="0" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" />
-                <Label Text="In Progress" Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" />
-                <Label Text="Done" Grid.Row="0" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" />
+                <Label Text="ToDo" TextColor="White" Grid.Row="0" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" />
+                <Label Text="In Progress" TextColor="White" Grid.Row="0" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" />
+                <Label Text="Done" TextColor="White" Grid.Row="0" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" />
+
+                <!-- Vertical Separators -->
+                <BoxView Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" WidthRequest="1" Color="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+                <BoxView Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" WidthRequest="1" Color="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
 
                 <!-- Task Columns -->
                 <StackLayout x:Name="ToDoColumn" Grid.Row="1" Grid.Column="0" Padding="10"></StackLayout>
-                <StackLayout x:Name="InProgressColumn" Grid.Row="1" Grid.Column="1" Padding="10"></StackLayout>
-                <StackLayout x:Name="DoneColumn" Grid.Row="1" Grid.Column="2" Padding="10"></StackLayout>
+                <StackLayout x:Name="InProgressColumn" Grid.Row="1" Grid.Column="2" Padding="10"></StackLayout>
+                <StackLayout x:Name="DoneColumn" Grid.Row="1" Grid.Column="4" Padding="10"></StackLayout>
             </Grid>
         </StackLayout>
     </ContentPage.Content>

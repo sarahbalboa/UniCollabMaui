@@ -13,6 +13,7 @@ namespace UniCollabMaui.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public string AssignedToUser { get; set; }
+        public string Column { get; set; }
+        public int AssignedToUserId { get; set; }
     }
 }
