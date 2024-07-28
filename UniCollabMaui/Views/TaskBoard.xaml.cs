@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UniCollabMaui.Models;
 using UniCollabMaui.Service;
+//using Windows.Media.Capture;
 
 namespace UniCollabMaui.Views
 {
@@ -14,6 +15,14 @@ namespace UniCollabMaui.Views
             InitializeComponent();
             LoadTasks();
         }
+        private void ReloadPage()
+        {
+            // Assuming you are within a ContentPage
+            var currentPage = new TaskBoard(); // Create a new instance of the current page
+            Navigation.InsertPageBefore(currentPage, this);
+            Navigation.PopAsync();
+        }
+
 
         private async void OnAddTaskButtonClicked(object sender, EventArgs e)
         {
@@ -100,6 +109,7 @@ namespace UniCollabMaui.Views
         private async void OnEraseTasksButtonClicked(object sender, EventArgs e)
         {
             await DatabaseService.EraseAllTasksData();
+            ReloadPage();
         }
     }
 }

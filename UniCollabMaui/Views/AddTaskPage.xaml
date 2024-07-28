@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             BackgroundColor="Black"
+             Background="Black"
              x:Class="UniCollabMaui.Views.AddTaskPage">
     <ContentPage.Content>
-        <StackLayout Padding="20" Spacing="10" HorizontalOptions="Center">
-            <Entry x:Name="TaskTitleEntry" Placeholder="Task Title" TextColor="White" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+        <StackLayout Padding="20" Spacing="5" >
+            <Label Text="Title" FontSize="Small" FontAttributes="Bold" TextDecorations="Underline" TextColor="White" HorizontalOptions="Center"/>
+            <Entry x:Name="TaskTitleEntry" Placeholder="Task Title" TextColor="White" HorizontalTextAlignment="Center"/>
             <BoxView HeightRequest="1" Color="White" HorizontalOptions="FillAndExpand" />
-
-            <Editor x:Name="TaskDescriptionEditor" Placeholder="Task Description" TextColor="White" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+            
+                <Editor x:Name="TaskDescriptionEditor" Placeholder="Task Description" TextColor="White"  HorizontalTextAlignment="Center"/>
             <BoxView HeightRequest="1" Color="White" HorizontalOptions="FillAndExpand" />
 
             <Picker x:Name="TaskColumnPicker" Title="Select Column" TextColor="White" HorizontalOptions="Center">

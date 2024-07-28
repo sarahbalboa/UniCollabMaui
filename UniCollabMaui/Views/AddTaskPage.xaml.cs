@@ -14,12 +14,15 @@ namespace UniCollabMaui.Views
         public AddTaskPage(int? taskId = null)
         {
             InitializeComponent();
+          
+
             this.taskId = taskId;
             LoadUsers();
             if (taskId.HasValue)
             {
                 LoadTask(taskId.Value);
             }
+ 
         }
 
         private async void LoadUsers()
@@ -39,7 +42,10 @@ namespace UniCollabMaui.Views
                 TaskPriorityPicker.SelectedItem = task.Priority;
                 UserPicker.SelectedItem = ((List<User>)UserPicker.ItemsSource).Find(u => u.Id == task.AssignedToUserId);
             }
+
+           
         }
+        
 
         private async void OnSaveTaskButtonClicked(object sender, EventArgs e)
         {
@@ -56,7 +62,7 @@ namespace UniCollabMaui.Views
             var priority = TaskPriorityPicker.SelectedItem?.ToString(); // Correctly get the priority value
 
             // Logging for debugging
-            System.Diagnostics.Debug.WriteLine($"Updating Task: {taskId.Value}, Title: {title}, Description: {description}, Column: {column}, Priority: {priority}, UserId: {selectedUser.Id}");
+           // System.Diagnostics.Debug.WriteLine($"Updating Task: {taskId.Value}, Title: {title}, Description: {description}, Column: {column}, Priority: {priority}, UserId: {selectedUser.Id}");
 
             if (taskId.HasValue)
             {
