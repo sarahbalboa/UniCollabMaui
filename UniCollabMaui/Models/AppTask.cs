@@ -2,6 +2,7 @@
 
 namespace UniCollabMaui.Models
 {
+    [Table("AppTask")]
     public class AppTask
     {
         [PrimaryKey, AutoIncrement]
