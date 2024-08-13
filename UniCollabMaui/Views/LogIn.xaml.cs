@@ -33,7 +33,7 @@ namespace UniCollabMaui.Views
             {
                 AppSession.SessionId = await DatabaseService.CreateSession(user.Id);
                 // Navigate to another view, e.g., HomePage
-                await Shell.Current.GoToAsync("TaskBoard");
+                await Navigation.PushAsync(new TaskBoard());
             }
             else
             {

@@ -30,6 +30,7 @@
 
                     <Entry x:Name="NameEntry" Placeholder="Name" PlaceholderColor="Gray" TextColor="Black" BackgroundColor="#F0F0F0" TextChanged="OnEntryTextChanged"/>
                     <Entry x:Name="UsernameEntry" Placeholder="Username" PlaceholderColor="Gray" TextColor="Black" BackgroundColor="#F0F0F0" TextChanged="OnEntryTextChanged"/>
+                    <Entry x:Name="RoleEntry" Placeholder="Role" PlaceholderColor="Gray" TextColor="Black" BackgroundColor="#F0F0F0" TextChanged="OnEntryTextChanged"/>
                     <Entry x:Name="PasswordEntry" Placeholder="Password" PlaceholderColor="Gray" TextColor="Black" BackgroundColor="#F0F0F0" IsPassword="True" TextTransform="Lowercase" TextChanged="OnEntryTextChanged"/>
 
                     <Button x:Name="RegisterButton" Text="Next" Clicked="OnRegisterButtonClicked" BackgroundColor="Green" TextColor="White" CornerRadius="10" IsEnabled="False"/>

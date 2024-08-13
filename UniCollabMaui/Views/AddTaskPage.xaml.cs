@@ -61,9 +61,6 @@ namespace UniCollabMaui.Views
             var column = TaskColumnPicker.SelectedItem.ToString();
             var priority = TaskPriorityPicker.SelectedItem?.ToString(); // Correctly get the priority value
 
-            // Logging for debugging
-           // System.Diagnostics.Debug.WriteLine($"Updating Task: {taskId.Value}, Title: {title}, Description: {description}, Column: {column}, Priority: {priority}, UserId: {selectedUser.Id}");
-
             if (taskId.HasValue)
             {
                 await DatabaseService.UpdateAppTask(taskId.Value, title, description, column, priority, selectedUser.Id);
@@ -74,6 +71,13 @@ namespace UniCollabMaui.Views
             }
 
             await Navigation.PopAsync();
+
+            //logger for saved/updated task
+            Logger.Log("Task [#" +taskId+ "] "+ title + " is Saved/Updated: \n" +
+                "-Description: " + description +
+                "\n-Column: " + column +
+                "\n-Priority: " + priority);
+
         }
     }
 }
