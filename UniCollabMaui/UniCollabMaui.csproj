@@ -82,10 +82,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\AccountPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\AddTaskPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\LogIn.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\MainTabbedPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\MauiLoginPage.xaml">
@@ -97,7 +103,7 @@
 	  <MauiXaml Update="Views\TaskBoard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\TaskDetailsPage.xaml">
+	  <MauiXaml Update="Views\UpdateTaskPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

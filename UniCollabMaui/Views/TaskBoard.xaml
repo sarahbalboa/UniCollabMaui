@@ -3,37 +3,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              BackgroundColor="White"
              x:Class="UniCollabMaui.Views.TaskBoard">
-    <ContentPage.Content>
-        <StackLayout>
-            <Grid RowSpacing="0" ColumnSpacing="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+    <StackLayout>
+        <Grid RowSpacing="0" ColumnSpacing="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-                <!-- Column Headers -->
-                <Label Text="TODO" FontSize="Medium" HorizontalTextAlignment="Center" TextColor="White" FontAttributes="Bold" BackgroundColor="SteelBlue" Grid.Row="0" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Padding="10" />
-                <Label Text="IN PROGRESS" FontSize="Medium" HorizontalTextAlignment="Center" TextColor="White" FontAttributes="Bold" BackgroundColor="ForestGreen" Grid.Row="0" Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Padding="10" />
-                <Label Text="DONE" FontSize="Medium" HorizontalTextAlignment="Center" TextColor="White" FontAttributes="Bold" BackgroundColor="DarkGray" Grid.Row="0" Grid.Column="4" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Padding="10" />
+            <!-- Column Headers -->
+            <Label Text="TODO" FontSize="Medium" HorizontalTextAlignment="Center" TextColor="White" FontAttributes="Bold" BackgroundColor="SteelBlue" Grid.Row="0" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Padding="10" />
+            <Label Text="IN PROGRESS" FontSize="Medium" HorizontalTextAlignment="Center" TextColor="White" FontAttributes="Bold" BackgroundColor="ForestGreen" Grid.Row="0" Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Padding="10" />
+            <Label Text="DONE" FontSize="Medium" HorizontalTextAlignment="Center" TextColor="White" FontAttributes="Bold" BackgroundColor="DarkGray" Grid.Row="0" Grid.Column="4" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Padding="10" />
 
-                <!-- Vertical Separators -->
-                <BoxView Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" WidthRequest="1" Color="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
-                <BoxView Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" WidthRequest="1" Color="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+            <!-- Vertical Separators -->
+            <BoxView Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" WidthRequest="1" Color="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+            <BoxView Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" WidthRequest="1" Color="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
 
-                <!-- Task Columns -->
-                <StackLayout x:Name="ToDoColumn" Grid.Row="1" Grid.Column="0" Padding="10" BackgroundColor="LightSteelBlue" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"></StackLayout>
-                <StackLayout x:Name="InProgressColumn" Grid.Row="1" Grid.Column="2" Padding="10" BackgroundColor="LightGreen" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"></StackLayout>
-                <StackLayout x:Name="DoneColumn" Grid.Row="1" Grid.Column="4" Padding="10" BackgroundColor="LightGray" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"></StackLayout>
-            </Grid>
-            <Button Margin="0,10,0,0" Text="Add Task" Clicked="OnAddTaskButtonClicked" BackgroundColor="Green" TextColor="White" HorizontalOptions="Center"/>
-            <Button Margin="0,10,0,0" Text="Erase Tasks" Clicked="OnEraseTasksButtonClicked" BackgroundColor="DarkRed" TextColor="White" HorizontalOptions="Center"/>
-        </StackLayout>
-    </ContentPage.Content>
+            <!-- Task Columns -->
+            <StackLayout x:Name="ToDoColumn" Grid.Row="1" Grid.Column="0" Padding="10" BackgroundColor="LightSteelBlue" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"></StackLayout>
+            <StackLayout x:Name="InProgressColumn" Grid.Row="1" Grid.Column="2" Padding="10" BackgroundColor="LightGreen" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"></StackLayout>
+            <StackLayout x:Name="DoneColumn" Grid.Row="1" Grid.Column="4" Padding="10" BackgroundColor="LightGray" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"></StackLayout>
+        </Grid>
+        <Button Margin="0,10,0,0" Text="Add Task" Clicked="OnAddTaskButtonClicked" BackgroundColor="Green" TextColor="White" HorizontalOptions="Center"/>
+        <Button Margin="0,10,0,0" Text="Erase Tasks" Clicked="OnEraseTasksButtonClicked" BackgroundColor="DarkRed" TextColor="White" HorizontalOptions="Center"/>
+    </StackLayout>
 </ContentPage>
