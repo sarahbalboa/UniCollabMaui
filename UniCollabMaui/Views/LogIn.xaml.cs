@@ -31,9 +31,9 @@ namespace UniCollabMaui.Views
 
             if (user != null)
             {
-                await DisplayAlert("Success", "Login successful.", "OK");
-                // Navigate to the TaskBoard page
-                await Navigation.PushAsync(new TaskBoard());
+                AppSession.SessionId = await DatabaseService.CreateSession(user.Id);
+                // Navigate to another view, e.g., HomePage
+                await Shell.Current.GoToAsync("TaskBoard");
             }
             else
             {
