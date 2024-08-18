@@ -50,16 +50,29 @@ namespace UniCollabMaui.Views
         private async void OnSaveTaskButtonClicked(object sender, EventArgs e)
         {
             var selectedUser = (User)UserPicker.SelectedItem;
+            var title = TaskTitleEntry.Text;
+            var description = TaskDescriptionEditor.Text;
+            var column = TaskColumnPicker.SelectedItem.ToString();
+            var priority = TaskPriorityPicker.SelectedItem?.ToString();
+
+            //check that all required fields are entered
             if (selectedUser == null)
             {
                 await DisplayAlert("Error", "Please select a user.", "OK");
                 return;
             }
+            if (priority == null)
+            {
+                await DisplayAlert("Error", "Please select a a priority.", "OK");
+                return;
+            }
+            if (column == null)
+            {
+                await DisplayAlert("Error", "Please select a column.", "OK");
+                return;
+            }
 
-            var title = TaskTitleEntry.Text;
-            var description = TaskDescriptionEditor.Text;
-            var column = TaskColumnPicker.SelectedItem.ToString();
-            var priority = TaskPriorityPicker.SelectedItem?.ToString(); // Correctly get the priority value
+            // Correctly get the priority value
 
             if (taskId.HasValue)
             {
