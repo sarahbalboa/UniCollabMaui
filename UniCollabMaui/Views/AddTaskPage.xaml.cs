@@ -49,44 +49,30 @@ namespace UniCollabMaui.Views
 
         private async void OnSaveTaskButtonClicked(object sender, EventArgs e)
         {
+            
+
+            //check that all required fields are entered
+            if ((User)UserPicker.SelectedItem == null || string.IsNullOrEmpty(TaskTitleEntry.Text) || string.IsNullOrEmpty(TaskDescriptionEditor.Text) || TaskColumnPicker.SelectedItem == null && TaskPriorityPicker.SelectedItem == null)
+            {
+                await DisplayAlert("Error", "Please fill in all the task details.", "OK");
+                return;
+            }
+
             var selectedUser = (User)UserPicker.SelectedItem;
             var title = TaskTitleEntry.Text;
             var description = TaskDescriptionEditor.Text;
             var column = TaskColumnPicker.SelectedItem.ToString();
-            var priority = TaskPriorityPicker.SelectedItem?.ToString();
+            var priority = TaskPriorityPicker.SelectedItem.ToString();
 
-            //check that all required fields are entered
-            if (selectedUser == null)
-            {
-                await DisplayAlert("Error", "Please select a user.", "OK");
-                return;
-            }
-            if (priority == null)
-            {
-                await DisplayAlert("Error", "Please select a a priority.", "OK");
-                return;
-            }
-            if (column == null)
-            {
-                await DisplayAlert("Error", "Please select a column.", "OK");
-                return;
-            }
 
-            // Correctly get the priority value
 
-            if (taskId.HasValue)
-            {
-                await DatabaseService.UpdateAppTask(taskId.Value, title, description, column, priority, selectedUser.Id);
-            }
-            else
-            {
-                await DatabaseService.AddAppTask(title, description, column, priority, selectedUser.Id);
-            }
+
+            await DatabaseService.AddAppTask(title, description, column, priority, selectedUser.Id);
 
             await Navigation.PopAsync();
 
             //logger for saved/updated task
-            Logger.Log("Task [#" +taskId+ "] "+ title + " is Saved/Updated: \n" +
+            Logger.Log("Task [#" +taskId+ "] "+ title + " is Created: \n" +
                 "-Description: " + description +
                 "\n-Column: " + column +
                 "\n-Priority: " + priority);
