@@ -32,7 +32,7 @@ namespace UniCollabMaui
         }
         
 
-        private async void OnCounterClicked(object sender, EventArgs e)
+        private async void OnStartClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new LogIn());
 

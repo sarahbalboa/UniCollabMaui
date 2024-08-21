@@ -17,6 +17,7 @@ namespace UniCollabMaui.Views
             string name = NameEntry.Text;
             string username = UsernameEntry.Text;
             string password = PasswordEntry.Text;
+            string role = RoleEntry.Text;
 
             // Validate input fields
             if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
@@ -30,7 +31,8 @@ namespace UniCollabMaui.Views
             {
                 Name = name,
                 Username = username,
-                Password = password
+                Password = password,
+                Role = role,
             };
 
             // Add the user to the database
