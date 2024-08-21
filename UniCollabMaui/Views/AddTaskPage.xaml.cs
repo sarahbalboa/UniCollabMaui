@@ -49,31 +49,34 @@ namespace UniCollabMaui.Views
 
         private async void OnSaveTaskButtonClicked(object sender, EventArgs e)
         {
-            var selectedUser = (User)UserPicker.SelectedItem;
-            if (selectedUser == null)
+            
+
+            //check that all required fields are entered
+            if ((User)UserPicker.SelectedItem == null || string.IsNullOrEmpty(TaskTitleEntry.Text) || string.IsNullOrEmpty(TaskDescriptionEditor.Text) || TaskColumnPicker.SelectedItem == null && TaskPriorityPicker.SelectedItem == null)
             {
-                await DisplayAlert("Error", "Please select a user.", "OK");
+                await DisplayAlert("Error", "Please fill in all the task details.", "OK");
                 return;
             }
 
+            var selectedUser = (User)UserPicker.SelectedItem;
             var title = TaskTitleEntry.Text;
             var description = TaskDescriptionEditor.Text;
             var column = TaskColumnPicker.SelectedItem.ToString();
-            var priority = TaskPriorityPicker.SelectedItem?.ToString(); // Correctly get the priority value
+            var priority = TaskPriorityPicker.SelectedItem.ToString();
 
-            // Logging for debugging
-           // System.Diagnostics.Debug.WriteLine($"Updating Task: {taskId.Value}, Title: {title}, Description: {description}, Column: {column}, Priority: {priority}, UserId: {selectedUser.Id}");
 
-            if (taskId.HasValue)
-            {
-                await DatabaseService.UpdateAppTask(taskId.Value, title, description, column, priority, selectedUser.Id);
-            }
-            else
-            {
-                await DatabaseService.AddAppTask(title, description, column, priority, selectedUser.Id);
-            }
+
+
+            await DatabaseService.AddAppTask(title, description, column, priority, selectedUser.Id);
 
             await Navigation.PopAsync();
+
+            //logger for saved/updated task
+            Logger.Log("Task [#" +taskId+ "] "+ title + " is Created: \n" +
+                "-Description: " + description +
+                "\n-Column: " + column +
+                "\n-Priority: " + priority);
+
         }
     }
 }
