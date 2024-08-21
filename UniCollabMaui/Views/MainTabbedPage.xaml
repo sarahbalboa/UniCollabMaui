@@ -6,5 +6,6 @@
     <TabbedPage.Children>
         <local:TaskBoard Title="Task Board" />
         <!--<local:AccountPage Title="Account" /> -->
+        <local:RoleManagementPage Title="Manage Roles" />
     </TabbedPage.Children>
 </TabbedPage>

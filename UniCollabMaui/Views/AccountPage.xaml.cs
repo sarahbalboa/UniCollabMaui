@@ -6,4 +6,6 @@ public partial class AccountPage : ContentPage
 	{
 		InitializeComponent();
 	}
+
+	///add button to log out and the button to use the logouticon.png icon
 }
