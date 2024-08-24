@@ -14,6 +14,6 @@ namespace UniCollabMaui.Models
         public int Id { get; set; } 
         public string RoleName { get; set; }
         public int Active { get; set; }
-        public int SystemRole { get; set; }
+        public Boolean IsSystemRole { get; set; }
     }
 }

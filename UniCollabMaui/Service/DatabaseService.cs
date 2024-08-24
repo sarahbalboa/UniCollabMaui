@@ -1,8 +1,10 @@
 ﻿using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using UniCollabMaui.Models;
 
 namespace UniCollabMaui.Service
@@ -10,7 +12,7 @@ namespace UniCollabMaui.Service
     public static class DatabaseService
     {
         static SQLiteAsyncConnection db;
-
+       
         static async Task AddDefaultRoles(SQLiteAsyncConnection db)
         {
             // Check if roles already exist
@@ -22,10 +24,10 @@ namespace UniCollabMaui.Service
 
             var roles = new List<Role>
             {
-                new Role { RoleName = "Task Editor", Active = 1, SystemRole = 1},
-                new Role { RoleName = "Administrator", Active = 1, SystemRole = 1 },
-                new Role { RoleName = "Task Viewer", Active = 1, SystemRole = 1 },
-                new Role { RoleName = "Role Administrator", Active = 1, SystemRole = 1 }
+                new Role { RoleName = "Task Editor", Active = 1, IsSystemRole = true},
+                new Role { RoleName = "Administrator", Active = 1, IsSystemRole = true },
+                new Role { RoleName = "Task Viewer", Active = 1, IsSystemRole = true },
+                new Role { RoleName = "Role Administrator", Active = 1, IsSystemRole = true }
             };
 
             await db.InsertAllAsync(roles);
@@ -51,9 +53,16 @@ namespace UniCollabMaui.Service
 
         //----------------------   User methods (unchanged) -------------------------
 
-        public static async Task AddUser(User user)
+        public static async Task AddUser(string name, string username, string password, int role)
         {
             await Init();
+            var user = new User
+            {
+                Name = name,
+                Username = username,
+                Password = password,
+                RoleId = role,
+            };
             await db.InsertAsync(user);
         }
 
@@ -97,7 +106,8 @@ namespace UniCollabMaui.Service
         {
             await Init();
             var user = await db.FindAsync<User>(userId);
-            return user?.Role;
+            var userRole = await db.FindAsync<Role>(user?.RoleId);
+            return userRole.RoleName;
         }
 
         public static async Task<bool> UserHasRole(string sessionId, string role)

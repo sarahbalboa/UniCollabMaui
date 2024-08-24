@@ -30,7 +30,7 @@ public partial class MainTabbedPage : TabbedPage
             var userRole = await DatabaseService.GetUserRole(userId.Value);
 
             // Check if the user role is not "Admin"
-            if (userRole != "Admin")
+            if (userRole != "Administrator")
             {
                 // Find the RoleManagementPage tab and remove it if it exists
                 var manageRolesTab = this.Children.FirstOrDefault(c => c is RoleManagementPage);
