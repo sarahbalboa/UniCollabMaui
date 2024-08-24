@@ -15,14 +15,8 @@ namespace UniCollabMaui.Views
         {
             InitializeComponent();
           
-
             this.taskId = taskId;
             LoadUsers();
-            if (taskId.HasValue)
-            {
-                LoadTask(taskId.Value);
-            }
- 
         }
 
         private async void LoadUsers()
@@ -30,22 +24,6 @@ namespace UniCollabMaui.Views
             var users = await DatabaseService.GetUsers();
             UserPicker.ItemsSource = new List<User>(users);
         }
-
-        private async void LoadTask(int id)
-        {
-            var task = await DatabaseService.GetAppTaskById(id);
-            if (task != null)
-            {
-                TaskTitleEntry.Text = task.Title;
-                TaskDescriptionEditor.Text = task.Description;
-                TaskColumnPicker.SelectedItem = task.Column;
-                TaskPriorityPicker.SelectedItem = task.Priority;
-                UserPicker.SelectedItem = ((List<User>)UserPicker.ItemsSource).Find(u => u.Id == task.AssignedToUserId);
-            }
-
-           
-        }
-        
 
         private async void OnSaveTaskButtonClicked(object sender, EventArgs e)
         {
