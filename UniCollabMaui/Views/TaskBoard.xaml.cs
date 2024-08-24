@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UniCollabMaui.Models;
 using UniCollabMaui.Service;
-//using Windows.Media.Capture;
 
 namespace UniCollabMaui.Views
 {
@@ -97,7 +96,7 @@ namespace UniCollabMaui.Views
 
         private async Task OnTaskTapped(int taskId)
         {
-            await Navigation.PushAsync(new AddTaskPage(taskId));
+            await Navigation.PushAsync(new UpdateTaskPage(taskId));
         }
 
         protected override void OnAppearing()

@@ -11,8 +11,15 @@ namespace UniCollabMaui.Service
     {
         static SQLiteAsyncConnection db;
 
-        static async Task AddDefultRoles(SQLiteAsyncConnection db)
+        static async Task AddDefaultRoles(SQLiteAsyncConnection db)
         {
+            // Check if roles already exist
+            var existingRoles = await db.Table<Role>().ToListAsync();
+            if (existingRoles.Count > 0)
+            {
+                return; // Roles already exist, so exit the function
+            }
+
             var roles = new List<Role>
             {
                 new Role { RoleName = "Task Editor", Active = 1 },
@@ -21,11 +28,7 @@ namespace UniCollabMaui.Service
                 new Role { RoleName = "Role Administrator", Active = 1 }
             };
 
-            foreach (var role in roles)
-            {
-                await db.InsertAsync(role);
-            }
-
+            await db.InsertAllAsync(roles);
         }
         static async Task Init()
         {
@@ -40,7 +43,8 @@ namespace UniCollabMaui.Service
             await db.CreateTableAsync<Session>();
 
             //----------------- Add default app roles ------------------
-            AddDefultRoles(db);
+
+            await AddDefaultRoles(db);
 
 
         }
@@ -172,6 +176,12 @@ namespace UniCollabMaui.Service
             {
                 await db.InsertAsync(role);
             }
+        }
+
+        public static async Task<IEnumerable<Role>> GetRoles()
+        {
+            await Init();
+            return await db.Table<Role>().ToListAsync();
         }
 
         // -----------------------------  Erase db data mothods ----------------------------

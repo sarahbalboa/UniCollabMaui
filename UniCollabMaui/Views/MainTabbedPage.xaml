@@ -2,10 +2,11 @@
 <TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:local="clr-namespace:UniCollabMaui.Views"
+            BarBackgroundColor="{StaticResource MyBlue2}"
             x:Class="UniCollabMaui.Views.MainTabbedPage">
     <TabbedPage.Children>
-        <local:TaskBoard Title="Task Board" />
-        <!--<local:AccountPage Title="Account" /> -->
+        <local:TaskBoard Title="Task Board"  BackgroundColor="white" />
+        <local:AccountPage Title="Account" />
         <local:RoleManagementPage Title="Manage Roles" />
     </TabbedPage.Children>
 </TabbedPage>

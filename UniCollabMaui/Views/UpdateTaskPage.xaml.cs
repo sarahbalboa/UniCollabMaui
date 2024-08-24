@@ -6,7 +6,7 @@ namespace UniCollabMaui.Views;
 public partial class UpdateTaskPage : ContentPage
 {
     private int? taskId;
-    public UpdateTaskPage()
+    public UpdateTaskPage(int? taskId = null)
 	{
 		InitializeComponent();
 
