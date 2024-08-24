@@ -24,10 +24,10 @@ namespace UniCollabMaui.Service
 
             var roles = new List<Role>
             {
-                new Role { RoleName = "Task Editor", Active = 1, IsSystemRole = true},
-                new Role { RoleName = "Administrator", Active = 1, IsSystemRole = true },
-                new Role { RoleName = "Task Viewer", Active = 1, IsSystemRole = true },
-                new Role { RoleName = "Role Administrator", Active = 1, IsSystemRole = true }
+                new Role { RoleName = "Task Admin", Active = 1, IsSystemRole = true, IsRoleAdmin = false, IsTaskEditor = true, IsTaskViewer = true, IsProgressViewer = true, IsProgressEditor = true },
+                new Role { RoleName = "Administrator", Active = 1, IsSystemRole = true, IsRoleAdmin = true, IsTaskEditor = true, IsTaskViewer = true, IsProgressViewer = true, IsProgressEditor = true },
+                new Role { RoleName = "User", Active = 1, IsSystemRole = true, IsRoleAdmin = false, IsTaskEditor = false, IsTaskViewer = true, IsProgressViewer = true, IsProgressEditor = false },
+                new Role { RoleName = "Role Administrator", Active = 1, IsSystemRole = true, IsRoleAdmin = true, IsTaskEditor = false, IsTaskViewer = false, IsProgressViewer = false, IsProgressEditor = false }
             };
 
             await db.InsertAllAsync(roles);
