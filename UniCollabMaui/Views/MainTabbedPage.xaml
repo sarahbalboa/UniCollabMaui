@@ -2,9 +2,15 @@
 <TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:local="clr-namespace:UniCollabMaui.Views"
+            BarBackgroundColor="{StaticResource MyBlue2}"
+            UnselectedTabColor="White"
+            SelectedTabColor="DarkBlue"
             x:Class="UniCollabMaui.Views.MainTabbedPage">
-    <TabbedPage.Children>
-        <local:TaskBoard Title="Task Board" />
-        <!--<local:AccountPage Title="Account" /> -->
+    <TabbedPage.Children  >
+        <!--Add the following page so that it is a welcome page and possibly with some guidance?-->
+        <!--<local:TaskBoard BackgroundColor="white" IconImageSource="unicollablogo1.png" IsEnabled="False"/>-->
+        <local:TaskBoard Title="Task Board"  BackgroundColor="white" IconImageSource="task_board_icon.png"/>
+        <local:AccountPage Title="Account" />
+        <local:RoleManagementPage Title="Manage Roles" />
     </TabbedPage.Children>
 </TabbedPage>
