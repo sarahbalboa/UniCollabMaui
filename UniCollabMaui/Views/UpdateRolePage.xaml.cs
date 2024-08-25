@@ -67,8 +67,6 @@ public partial class UpdateRolePage : ContentPage
 
         await DatabaseService.UpdateRole(roleId.Value, roleName, isActive, isRoleAdmin, isTaskEditor, isTaskViewer, isProgressEditor, isProgressViewer);
 
-        await Navigation.PopAsync();
-
         //logger for saved/updated Role
         Logger.Log("Role [#" + roleId + "] " + roleName + " is Updated: \n" +
             "-Description: " + isActive +
@@ -78,6 +76,7 @@ public partial class UpdateRolePage : ContentPage
             "\n-ProgressEditor: " + isProgressEditor+
             "\n-ProgressViewer: " + isProgressViewer );
 
+        await Navigation.PopAsync();
     }
      
 }
