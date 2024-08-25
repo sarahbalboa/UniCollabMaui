@@ -50,12 +50,36 @@ namespace UniCollabMaui.Views
                 // Determine the background color based on the task property
                 var backgroundColor = GetTaskColor(task);
 
+                // Create an Image for the icon
+                var taskIcon = new Image
+                {
+                    Source = "unicollablogo1.png", // Replace with your icon file
+                    WidthRequest = 20,
+                    HeightRequest = 20,
+                    VerticalOptions = LayoutOptions.Center
+                };
+
+                // Create a Label for the task details
+                var taskLabel = new Label
+                {
+                    Text = $" [#{task.Id}] {task.Title} (Assigned to: {userName})",
+                    VerticalOptions = LayoutOptions.Center
+                };
+
+                // Create a horizontal StackLayout to hold the icon and label
+                var taskContent = new StackLayout
+                {
+                    Orientation = StackOrientation.Horizontal,
+                    Spacing = 10,
+                    Children = { taskIcon, taskLabel }
+                };
+
                 var taskView = new Frame
                 {
                     Padding = 10,
                     Margin = 5,
                     BackgroundColor = backgroundColor,
-                    Content = new Label { Text = $" [#{task.Id}] {task.Title} (Assigned to: {userName})" }
+                    Content = taskContent
                 };
 
                 var tapGestureRecognizer = new TapGestureRecognizer();
@@ -76,6 +100,7 @@ namespace UniCollabMaui.Views
                 }
             }
         }
+
 
         private Color GetTaskColor(AppTask task)
         {

@@ -27,9 +27,9 @@ public partial class RoleManagementPage : ContentPage
         switch (role.Active)
         {
             case true:
-                return Colors.LightBlue;
+                return Colors.DarkBlue;
             case false:
-                return Colors.LightGray;
+                return Colors.DarkGrey;
             default:
                 return Colors.Blue;
         }
@@ -50,12 +50,36 @@ public partial class RoleManagementPage : ContentPage
         {
             var backgroundColor = GetRoleColor(role);
 
+            // Create an Image for the icon
+            var roleIcon = new Image
+            {
+                Source = "edit_simple.png", // Replace with your icon file
+                WidthRequest = 20,
+                HeightRequest = 20,
+                VerticalOptions = LayoutOptions.Center
+            };
+
+            // Create a Label for the role name
+            var roleLabel = new Label
+            {
+                Text = $"{role.RoleName}",
+                VerticalOptions = LayoutOptions.Center
+            };
+
+            // Create a horizontal StackLayout to hold the icon and label
+            var roleContent = new StackLayout
+            {
+                Orientation = StackOrientation.Horizontal,
+                Spacing = 10,
+                Children = { roleIcon, roleLabel }
+            };
+
             var roleView = new Frame
             {
                 Padding = 10,
                 Margin = 5,
                 BackgroundColor = backgroundColor,
-                Content = new Label { Text = $"{role.RoleName}" }
+                Content = roleContent
             };
 
             var tapGestureRecognizer = new TapGestureRecognizer();
@@ -72,6 +96,5 @@ public partial class RoleManagementPage : ContentPage
                     break;
             }
         }
-
     }
 }

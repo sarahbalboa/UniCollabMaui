@@ -2,27 +2,41 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UniCollabMaui.Views.UpdateRolePage"
+             Background="LightSkyBlue"
              Title="UpdateRolePage">
     <ContentPage.Content>
-        <StackLayout Padding="20" Spacing="5" >
+        <StackLayout Padding="50" Spacing="5" >
             <Label Text="Name" FontSize="Small" FontAttributes="Bold" TextDecorations="Underline" HorizontalOptions="Center"/>
-            <Entry x:Name="RoleNameEntry" Placeholder="Name" HorizontalTextAlignment="Center" TextColor="DarkSlateGrey" BackgroundColor="White"/>
+            <Entry x:Name="RoleNameEntry" Placeholder="Name" HorizontalTextAlignment="Center" TextColor="DarkSlateGrey" BackgroundColor="White" IsSpellCheckEnabled="True" MaxLength="40"/>
             <HorizontalStackLayout Spacing="10">
                 <Label Text="Active:" FontSize="Small" VerticalOptions="Center"/>
                 <CheckBox x:Name="ActiveCheckbox" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="10">
                 <Label Text="System Role:" FontSize="Small" VerticalOptions="Center"/>
                 <CheckBox x:Name="IsSystemRoleCheckbox" IsEnabled="False"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="10">
                 <Label Text="Role Admin:" FontSize="Small" VerticalOptions="Center"/>
                 <CheckBox x:Name="IsRoleAdminCheckbox" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="10">
                 <Label Text="Task Editor:" FontSize="Small" VerticalOptions="Center"/>
                 <CheckBox x:Name="IsTaskEditorCheckbox" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="10">
                 <Label Text="Task Viewer:" FontSize="Small" VerticalOptions="Center"/>
                 <CheckBox x:Name="IsTaskViewerCheckbox" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="10">
                 <Label Text="Progress Editor:" FontSize="Small" VerticalOptions="Center"/>
                 <CheckBox x:Name="IsProgressEditorCheckbox" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="10">
                 <Label Text="Progress Viewer:" FontSize="Small" VerticalOptions="Center"/>
                 <CheckBox x:Name="IsProgressViewerCheckbox" />
             </HorizontalStackLayout>
+            <Button x:Name="SaveButton" Text="Save Role" Clicked="OnSaveRoleButtonClicked" BackgroundColor="CornflowerBlue" TextColor="Black" HorizontalOptions="Center"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

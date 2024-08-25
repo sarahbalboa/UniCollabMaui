@@ -35,6 +35,16 @@ public partial class UpdateRolePage : ContentPage
             
         }
 
+        if (role.IsSystemRole == true)
+        {
+            IsRoleAdminCheckbox.IsEnabled = false;
+            IsTaskEditorCheckbox.IsEnabled = false;
+            IsTaskViewerCheckbox.IsEnabled = false;
+            IsProgressEditorCheckbox.IsEnabled = false;
+            IsProgressViewerCheckbox.IsEnabled = false;
+            RoleNameEntry.IsEnabled = false;
+        }
+
 
     }
 

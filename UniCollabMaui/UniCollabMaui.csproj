@@ -65,6 +65,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\edit_simple.png" />
 	  <None Remove="Resources\Images\unicollablogo1.png" />
 	</ItemGroup>
 
