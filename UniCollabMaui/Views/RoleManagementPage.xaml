@@ -29,5 +29,6 @@
         </Grid>
         <Button Margin="0,10,0,0" Text="Clear board" Clicked="OnClearRoleBoardClicked" BackgroundColor="Red" TextColor="White" HorizontalOptions="Center"/>
         
+        
     </StackLayout>
 </ContentPage>

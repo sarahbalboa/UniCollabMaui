@@ -15,9 +15,9 @@ public partial class RoleManagementPage : ContentPage
         LoadRoles(); // Load roles when the page appears
     }
 
-    private async Task OnRoleTapped(int taskId)
+    private async Task OnRoleTapped(int roleId)
     {
-        //await Navigation.PushAsync(new UpdateRole(roleId));
+        await Navigation.PushAsync(new UpdateRolePage(roleId));
         //implement an update role page
     }
     private Color GetRoleColor(Role role)
@@ -26,9 +26,9 @@ public partial class RoleManagementPage : ContentPage
         // You can modify this logic to fit your requirements
         switch (role.Active)
         {
-            case 1:
+            case true:
                 return Colors.LightBlue;
-            case 0:
+            case false:
                 return Colors.LightGray;
             default:
                 return Colors.Blue;
@@ -64,10 +64,10 @@ public partial class RoleManagementPage : ContentPage
 
             switch (role.Active)
             {
-                case 1:
+                case true:
                     ActiveRolesColumn.Children.Add(roleView);
                     break;
-                case 0:
+                case false:
                     InactiveRolesColumn.Children.Add(roleView);
                     break;
             }

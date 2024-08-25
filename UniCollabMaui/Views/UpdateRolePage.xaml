@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UniCollabMaui.Views.UpdateRolePage"
+             Title="UpdateRolePage">
+    <ContentPage.Content>
+        <StackLayout Padding="20" Spacing="5" >
+            <Label Text="Name" FontSize="Small" FontAttributes="Bold" TextDecorations="Underline" HorizontalOptions="Center"/>
+            <Entry x:Name="RoleNameEntry" Placeholder="Name" HorizontalTextAlignment="Center" TextColor="DarkSlateGrey" BackgroundColor="White"/>
+            <HorizontalStackLayout Spacing="10">
+                <Label Text="Active:" FontSize="Small" VerticalOptions="Center"/>
+                <CheckBox x:Name="ActiveCheckbox" />
+                <Label Text="System Role:" FontSize="Small" VerticalOptions="Center"/>
+                <CheckBox x:Name="IsSystemRoleCheckbox" IsEnabled="False"/>
+                <Label Text="Role Admin:" FontSize="Small" VerticalOptions="Center"/>
+                <CheckBox x:Name="IsRoleAdminCheckbox" />
+                <Label Text="Task Editor:" FontSize="Small" VerticalOptions="Center"/>
+                <CheckBox x:Name="IsTaskEditorCheckbox" />
+                <Label Text="Task Viewer:" FontSize="Small" VerticalOptions="Center"/>
+                <CheckBox x:Name="IsTaskViewerCheckbox" />
+                <Label Text="Progress Editor:" FontSize="Small" VerticalOptions="Center"/>
+                <CheckBox x:Name="IsProgressEditorCheckbox" />
+                <Label Text="Progress Viewer:" FontSize="Small" VerticalOptions="Center"/>
+                <CheckBox x:Name="IsProgressViewerCheckbox" />
+            </HorizontalStackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
