@@ -38,7 +38,6 @@ public partial class UpdateTaskPage : ContentPage
 
     }
 
-
     private async void OnSaveTaskButtonClicked(object sender, EventArgs e)
     {
         //check that all required fields are entered
@@ -64,6 +63,15 @@ public partial class UpdateTaskPage : ContentPage
             "\n-Column: " + column +
             "\n-Priority: " + priority);
 
+    }
+
+    private async void OnDeleteTaskButtonClicked(object sender, EventArgs e)
+    {
+        bool answer = await DisplayAlert("Deletion Confirmation", "Are you sure you want to delete this task", "Yes", "No");
+        if(answer){ 
+            await DatabaseService.RemoveAppTask(taskId.Value);
+            await Navigation.PopAsync();
+        }
     }
 
 }

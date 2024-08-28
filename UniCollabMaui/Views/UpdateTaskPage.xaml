@@ -37,7 +37,8 @@
             </Picker>
             <BoxView HeightRequest="1" Color="White" HorizontalOptions="FillAndExpand" />
 
-            <Button Text="Save Task" Clicked="OnSaveTaskButtonClicked" BackgroundColor="CornflowerBlue" TextColor="Black" HorizontalOptions="Center"/>
+            <Button Text="Save" Clicked="OnSaveTaskButtonClicked" BackgroundColor="CornflowerBlue" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Center"/>
+            <Button Text="Delete Task" Clicked="OnDeleteTaskButtonClicked" BackgroundColor="Red" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Center"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
