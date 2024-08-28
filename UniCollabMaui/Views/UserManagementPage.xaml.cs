@@ -15,7 +15,7 @@ public partial class UserManagementPage : ContentPage
     }
     private async Task OnUserTapped(int userId)
     {
-        //await Navigation.PushAsync(new UpdateUserPage(roleId));
+        await Navigation.PushAsync(new UpdateUserPage(userId));
         //implement an update role page
     }
     private Color GetUserColor(User user)

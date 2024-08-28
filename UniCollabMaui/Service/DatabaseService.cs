@@ -66,7 +66,18 @@ namespace UniCollabMaui.Service
             };
             await db.InsertAsync(user);
         }
-
+        public static async Task UpdateUser(int userId, string name, bool active, int role)
+        {
+            await Init();
+            var user = await db.FindAsync<User>(userId);
+            if (user != null)
+            {
+                user.Name = name;
+                user.Active = active;
+                user.RoleId = role;
+                await db.UpdateAsync(user);
+            }
+        }
         public static async Task<User> ValidateUser(string username, string password)
         {
             await Init();
