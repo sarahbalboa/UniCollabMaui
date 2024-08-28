@@ -28,8 +28,5 @@
             <StackLayout x:Name="ActiveUsersColumn" Grid.Row="1" Grid.Column="0" Padding="10" BackgroundColor="LightSteelBlue" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"></StackLayout>
             <StackLayout x:Name="InactiveUsersColumn" Grid.Row="1" Grid.Column="2" Padding="10" BackgroundColor="LightGrey" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"></StackLayout>
         </Grid>
-        <Button Margin="0,10,0,0" Text="Add" Clicked="OnAddRoleClicked" BackgroundColor="{StaticResource MyBlue2}}" TextColor="White" HorizontalOptions="Center"/>
-
-
     </StackLayout>
 </ContentPage>

@@ -102,6 +102,11 @@ namespace UniCollabMaui.Service
             return await db.FindAsync<User>(userId);
         }
 
+        public static async Task<IEnumerable<User>> GetUsers()
+        {
+            await Init();
+            return await db.Table<User>().ToListAsync();
+        }
         // Role-based access control methods
         public static async Task<string> GetUserRole(int userId)
         {
@@ -165,11 +170,7 @@ namespace UniCollabMaui.Service
             return await db.Table<AppTask>().ToListAsync();
         }
 
-        public static async Task<IEnumerable<User>> GetUsers()
-        {
-            await Init();
-            return await db.Table<User>().ToListAsync();
-        }
+        
 
         public static async Task<AppTask> GetAppTaskById(int id)
         {

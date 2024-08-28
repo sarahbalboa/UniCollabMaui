@@ -47,7 +47,7 @@ public partial class RoleManagementPage : ContentPage
             var backgroundColor = GetRoleColor(role);
 
             // Create an Image for the icon
-            var roleIcon = new Image
+            var editIcon = new Image
             {
                 Source = "edit_simple.png", // Replace with your icon file
                 WidthRequest = 20,
@@ -67,13 +67,13 @@ public partial class RoleManagementPage : ContentPage
             {
                 Orientation = StackOrientation.Horizontal,
                 Spacing = 10,
-                Children = { roleIcon, roleLabel }
+                Children = { editIcon, roleLabel }
             };
 
             var roleView = new Frame
             {
                 Padding = 10,
-                Margin = 5,
+                Margin = new Thickness(5, 5, 5, 20), // Add more space at the bottom
                 BackgroundColor = backgroundColor,
                 Content = roleContent
             };
