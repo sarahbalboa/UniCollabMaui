@@ -53,19 +53,31 @@ namespace UniCollabMaui.Service
 
         //----------------------   User methods (unchanged) -------------------------
 
-        public static async Task AddUser(string name, string username, string password, int role)
+        public static async Task AddUser(string name, bool active, string username, string password, int role)
         {
             await Init();
             var user = new User
             {
                 Name = name,
+                Active = active,
                 Username = username,
                 Password = password,
                 RoleId = role,
             };
             await db.InsertAsync(user);
         }
-
+        public static async Task UpdateUser(int userId, string name, bool active, int role)
+        {
+            await Init();
+            var user = await db.FindAsync<User>(userId);
+            if (user != null)
+            {
+                user.Name = name;
+                user.Active = active;
+                user.RoleId = role;
+                await db.UpdateAsync(user);
+            }
+        }
         public static async Task<User> ValidateUser(string username, string password)
         {
             await Init();
@@ -101,6 +113,11 @@ namespace UniCollabMaui.Service
             return await db.FindAsync<User>(userId);
         }
 
+        public static async Task<IEnumerable<User>> GetUsers()
+        {
+            await Init();
+            return await db.Table<User>().ToListAsync();
+        }
         // Role-based access control methods
         public static async Task<string> GetUserRole(int userId)
         {
@@ -164,11 +181,7 @@ namespace UniCollabMaui.Service
             return await db.Table<AppTask>().ToListAsync();
         }
 
-        public static async Task<IEnumerable<User>> GetUsers()
-        {
-            await Init();
-            return await db.Table<User>().ToListAsync();
-        }
+        
 
         public static async Task<AppTask> GetAppTaskById(int id)
         {

@@ -1,30 +1,28 @@
-using System.Threading.Tasks;
 using UniCollabMaui.Models;
 using UniCollabMaui.Service;
 namespace UniCollabMaui.Views;
 
-public partial class RoleManagementPage : ContentPage
+public partial class UserManagementPage : ContentPage
 {
-	public RoleManagementPage()
+	public UserManagementPage()
 	{
 		InitializeComponent();
 	}
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        LoadRoles(); // Load roles when the page appears
+        LoadUsers(); // Load roles when the page appears
     }
-
-    private async Task OnRoleTapped(int roleId)
+    private async Task OnUserTapped(int userId)
     {
-        await Navigation.PushAsync(new UpdateRolePage(roleId));
+        await Navigation.PushAsync(new UpdateUserPage(userId));
         //implement an update role page
     }
-    private Color GetRoleColor(Role role)
+    private Color GetUserColor(User user)
     {
         // Example logic to determine the color based on task priority
         // You can modify this logic to fit your requirements
-        switch (role.Active)
+        switch (user.Active)
         {
             case true:
                 return Colors.DarkBlue;
@@ -34,17 +32,16 @@ public partial class RoleManagementPage : ContentPage
                 return Colors.Blue;
         }
     }
-
-    private async void LoadRoles()
+    private async void LoadUsers()
     {
-        var roles = await DatabaseService.GetRoles();
+        var users = await DatabaseService.GetUsers();
 
-        ActiveRolesColumn.Children.Clear();
-        InactiveRolesColumn.Children.Clear();
+        ActiveUsersColumn.Children.Clear();
+        InactiveUsersColumn.Children.Clear();
 
-        foreach (var role in roles)
+        foreach (var user in users)
         {
-            var backgroundColor = GetRoleColor(role);
+            var backgroundColor = GetUserColor(user);
 
             // Create an Image for the icon
             var editIcon = new Image
@@ -56,51 +53,41 @@ public partial class RoleManagementPage : ContentPage
             };
 
             // Create a Label for the role name
-            var roleLabel = new Label
+            var userLabel = new Label
             {
-                Text = $"{role.RoleName}",
+                Text = $"{user.Name}",
                 VerticalOptions = LayoutOptions.Center
             };
 
             // Create a horizontal StackLayout to hold the icon and label
-            var roleContent = new StackLayout
+            var userContent = new StackLayout
             {
                 Orientation = StackOrientation.Horizontal,
                 Spacing = 10,
-                Children = { editIcon, roleLabel }
+                Children = { editIcon, userLabel }
             };
 
-            var roleView = new Frame
+            var userView = new Frame
             {
                 Padding = 10,
-                Margin = new Thickness(5, 5, 5, 20), // Add more space at the bottom
+                Margin = new Thickness(5, 5, 5, 20), // Add more space at the bottom,
                 BackgroundColor = backgroundColor,
-                Content = roleContent
+                Content = userContent
             };
 
             var tapGestureRecognizer = new TapGestureRecognizer();
-            tapGestureRecognizer.Tapped += async (s, e) => await OnRoleTapped(role.Id);
-            roleView.GestureRecognizers.Add(tapGestureRecognizer);
+            tapGestureRecognizer.Tapped += async (s, e) => await OnUserTapped(user.Id);
+            userView.GestureRecognizers.Add(tapGestureRecognizer);
 
-            switch (role.Active)
+            switch (user.Active)
             {
                 case true:
-                    ActiveRolesColumn.Children.Add(roleView);
+                    ActiveUsersColumn.Children.Add(userView);
                     break;
                 case false:
-                    InactiveRolesColumn.Children.Add(roleView);
+                    InactiveUsersColumn.Children.Add(userView);
                     break;
             }
         }
-    }
-
-    private async void OnActiveAddRoleClicked(object sender, EventArgs e)
-    {
-        await Navigation.PushAsync(new AddRolePage(true));
-    }
-
-    private async void OnInactiveAddRoleClicked(object sender, EventArgs e)
-    {
-        await Navigation.PushAsync(new AddRolePage(false));
     }
 }

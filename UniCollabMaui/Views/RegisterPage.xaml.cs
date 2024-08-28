@@ -46,7 +46,7 @@ namespace UniCollabMaui.Views
             var role = (Role)RolePicker.SelectedItem;
             
             // Add the user to the database
-            await DatabaseService.AddUser(name, username, password, role.Id);
+            await DatabaseService.AddUser(name, true, username, password, role.Id);
 
             await DisplayAlert("Success", "Registration successful.", "OK");
 

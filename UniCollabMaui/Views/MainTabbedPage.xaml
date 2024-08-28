@@ -12,5 +12,6 @@
         <local:TaskBoard Title="Task Board"  BackgroundColor="white" IconImageSource="task_board_icon.png"/>
         <local:AccountPage Title="Account" />
         <local:RoleManagementPage Title="Manage Roles" />
+        <local:UserManagementPage Title="Manage Users" />
     </TabbedPage.Children>
 </TabbedPage>
