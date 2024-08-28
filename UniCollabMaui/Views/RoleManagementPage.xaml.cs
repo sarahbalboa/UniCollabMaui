@@ -94,8 +94,13 @@ public partial class RoleManagementPage : ContentPage
         }
     }
 
-    private async void OnAddRoleClicked(object sender, EventArgs e)
+    private async void OnActiveAddRoleClicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new AddRolePage());
+        await Navigation.PushAsync(new AddRolePage(true));
+    }
+
+    private async void OnInactiveAddRoleClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new AddRolePage(false));
     }
 }

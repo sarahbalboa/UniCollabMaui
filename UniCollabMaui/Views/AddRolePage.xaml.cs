@@ -5,10 +5,15 @@ namespace UniCollabMaui.Views;
 public partial class AddRolePage : ContentPage
 {
     private int? roleId;
-    public AddRolePage()
+    public AddRolePage(bool column)
 	{
 		InitializeComponent();
         this.roleId = roleId;
+        setActiveStatusPerColumn(column);
+    }
+    private void setActiveStatusPerColumn(bool column)
+    {
+       ActiveCheckbox.IsChecked = column;
     }
 
     private async void OnSaveRoleButtonClicked(object sender, EventArgs e)

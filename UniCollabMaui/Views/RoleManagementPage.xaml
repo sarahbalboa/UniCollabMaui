@@ -20,12 +20,14 @@
             <!-- Active Roles Label and Add Button -->
             <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="0" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Spacing="10">
                 <Label Text="Active Roles" FontSize="Medium" HorizontalTextAlignment="Center" TextColor="White" FontAttributes="Bold" BackgroundColor="SteelBlue" VerticalOptions="Center" Padding="10" />
-                <Button Text="Add" Clicked="OnAddRoleClicked" BackgroundColor="{StaticResource MyBlue2}" TextColor="White" VerticalOptions="Center" />
+                <Button Text="+" Clicked="OnActiveAddRoleClicked" BackgroundColor="{StaticResource MyBlue2}" TextColor="White" VerticalOptions="Center" />
             </StackLayout>
 
-            <!-- Inactive Roles Label -->
+            <!-- Inactive Roles Label and Add Button-->
+            <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="2" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Spacing="10">
             <Label Text="Inactive Roles" FontSize="Medium" HorizontalTextAlignment="Center" TextColor="White" FontAttributes="Bold" BackgroundColor="SteelBlue" Grid.Row="0" Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Padding="10" />
-
+            <Button Text="+" Clicked="OnInactiveAddRoleClicked" BackgroundColor="{StaticResource MyBlue2}" TextColor="White" VerticalOptions="Center" />
+            </StackLayout>
             <!-- Vertical Separator -->
             <BoxView Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" WidthRequest="20" Color="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
 
