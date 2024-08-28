@@ -53,12 +53,13 @@ namespace UniCollabMaui.Service
 
         //----------------------   User methods (unchanged) -------------------------
 
-        public static async Task AddUser(string name, string username, string password, int role)
+        public static async Task AddUser(string name, bool active, string username, string password, int role)
         {
             await Init();
             var user = new User
             {
                 Name = name,
+                Active = active,
                 Username = username,
                 Password = password,
                 RoleId = role,

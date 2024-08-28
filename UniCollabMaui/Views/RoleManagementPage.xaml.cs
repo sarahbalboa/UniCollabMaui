@@ -35,10 +35,6 @@ public partial class RoleManagementPage : ContentPage
         }
     }
 
-    private async void OnClearRoleBoardClicked(object sender, EventArgs e)
-    {
-        ActiveRolesColumn.Children.Clear();
-    }
     private async void LoadRoles()
     {
         var roles = await DatabaseService.GetRoles();
