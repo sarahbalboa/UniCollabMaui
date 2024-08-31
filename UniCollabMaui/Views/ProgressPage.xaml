@@ -19,12 +19,13 @@
         </Frame>
 
         <BoxView HeightRequest="5" BackgroundColor="White" HorizontalOptions="FillAndExpand" />
-        <!--<Label Text="Breakdown" Grid.Row="0" Grid.Column="0" FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold" TextDecorations="Underline" TextColor="{StaticResource MyBlue2}"/>-->
         <!-- Grid Layout for the Labels -->
         <Frame BorderColor="{StaticResource MyBlue2}" CornerRadius="5" Padding="5" HasShadow="False" HorizontalOptions="Center" VerticalOptions="Center" Background="WHite">
             <Grid HorizontalOptions="Center" VerticalOptions="Center" Padding="10"  >
                 <!-- Define two rows and two columns -->
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -38,6 +39,8 @@
                 <Label x:Name="ToDoLbl" Grid.Row="0" Grid.Column="0" FontSize="Small" TextColor="SteelBlue" HorizontalOptions="Start" VerticalOptions="Center"/>
                 <Label x:Name="InProgressLbl" Grid.Row="1" Grid.Column="0" FontSize="Small" TextColor="Green" HorizontalOptions="Start" VerticalOptions="Center"/>
                 <Label x:Name="DoneLbl" Grid.Row="2" Grid.Column="0" FontSize="Small" TextColor="Red" HorizontalOptions="Start" VerticalOptions="Center"/>
+                <BoxView Grid.Row="3" Grid.Column="0" HeightRequest="3" BackgroundColor="{StaticResource MyBlue2}" HorizontalOptions="FillAndExpand" />
+                <Label x:Name="TotalTasksLbl" Grid.Row="4" Grid.Column="0" FontSize="Small" FontAttributes="Bold" TextColor="{StaticResource MyBlue2}" HorizontalOptions="Start" VerticalOptions="Center"/>
             </Grid>
         </Frame>
     </VerticalStackLayout>

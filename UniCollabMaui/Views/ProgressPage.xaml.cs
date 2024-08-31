@@ -52,6 +52,7 @@ public partial class ProgressPage : ContentPage
         ToDoLbl.Text = "To do tasks: " + todoTasks.ToString();
         InProgressLbl.Text = "In Progress tasks: " + inProgressTasks.ToString();
         DoneLbl.Text = "Done tasks: " + doneTasks.ToString();
+        TotalTasksLbl.Text = "Total: " + allTasks.Count.ToString();
     }
         private async void UpdateProgressBar()
     {
