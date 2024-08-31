@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microcharts.Maui;
 
 namespace UniCollabMaui
 {
@@ -13,7 +14,8 @@ namespace UniCollabMaui
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
+                })
+                .UseMicrocharts();
 
 #if DEBUG
     		builder.Logging.AddDebug();
