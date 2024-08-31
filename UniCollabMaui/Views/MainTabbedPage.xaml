@@ -14,5 +14,6 @@
         <local:RoleManagementPage Title="Manage Roles" />
         <local:UserManagementPage Title="Manage Users" />
         <local:ProgressPage Title="Project Progress" />
+        <local:UserInsights Title="User Insights" />
     </TabbedPage.Children>
 </TabbedPage>

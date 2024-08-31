@@ -7,6 +7,7 @@
              Title="UserInsights">
     <ScrollView>
         <VerticalStackLayout Spacing="25" Padding="30" VerticalOptions="Center">
+            <Label Text="Tasks per User" FontSize="Medium" FontAttributes="Bold" TextDecorations="Underline" TextColor="{StaticResource MyBlue2}" HorizontalOptions="Center" VerticalOptions="Center"/>
             <charts:ChartView x:Name="userContributionChartView" HeightRequest="300" />
         </VerticalStackLayout>
     </ScrollView>
