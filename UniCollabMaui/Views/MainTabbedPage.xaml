@@ -13,5 +13,6 @@
         <local:AccountPage Title="Account" />
         <local:RoleManagementPage Title="Manage Roles" />
         <local:UserManagementPage Title="Manage Users" />
+        <local:ProgressPage Title="Project Progress" />
     </TabbedPage.Children>
 </TabbedPage>
