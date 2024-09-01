@@ -54,21 +54,25 @@ public partial class ProgressPage : ContentPage
         DoneLbl.Text = "Done tasks: " + doneTasks.ToString();
         TotalTasksLbl.Text = "Total: " + allTasks.Count.ToString();
     }
-        private async void UpdateProgressBar()
+    private async void UpdateProgressBar()
     {
         var tasks = await DatabaseService.GetAppTasks();
         List<AppTask> allTasks = new List<AppTask>(tasks);
         double doneTasks = 0.0;
+        double progress = 0.0;
 
-        foreach (var task in tasks)
+        if(tasks.Count() != 0)
         {
-            if(task.Column == "Done")
+            foreach (var task in tasks)
             {
-                doneTasks++;
+                if (task.Column == "Done")
+                {
+                    doneTasks++;
+                }
+                progress = Math.Round(doneTasks / allTasks.Count, 2);
             }
         }
 
-        double progress = Math.Round(doneTasks / allTasks.Count,2);
         MyProgressBar.Progress = progress;
         var percentageProgress = (progress * 100) + "% Done";
         ProgressLbl.Text = "Project current progress: " + percentageProgress.ToString();
