@@ -12,9 +12,14 @@ public partial class UserInsights : ContentPage
 	public UserInsights()
 	{
 		InitializeComponent();
-		UpdateUserContributionChart();
-        
+		
 	}
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        UpdateUserAssignTasksChart();
+        UpdateUserDoneTasksChart();
+    }
 
     public SKColor GetRandomColor()
     {
@@ -24,45 +29,147 @@ public partial class UserInsights : ContentPage
         byte b = (byte)random.Next(0, 256);  // Blue
         return new SKColor(r, g, b);
     }
-    private async void UpdateUserContributionChart()
-	{
+    private async void UpdateUserAssignTasksChart()
+    {
         var tasks = await DatabaseService.GetAppTasks();
-        List<AppTask> allTasks = new List<AppTask>(tasks);
-		List<ChartEntry> chartEntries = new List<ChartEntry>();
-		string userLabel = "";
-		int userAssignedTaskCount = 0;
+        List<ChartEntry> assignedChartEntries = new List<ChartEntry>();
+        if (tasks.Count() != 0 ) {
+            List<AppTask> allTasks = new List<AppTask>(tasks);
+            
+            // Dictionary to store the task count per user
+            var userTaskCount = new Dictionary<string, int>();
 
-		foreach (AppTask task in allTasks)
-		{
-			userLabel = (await DatabaseService.GetUserById(task.AssignedToUserId)).Name;
-			foreach(AppTask task2 in allTasks)
-			{
-				if(userLabel == (await DatabaseService.GetUserById(task2.AssignedToUserId)).Name){
-					userAssignedTaskCount++;
-				}
-			}
-            chartEntries.Add(
-                    new ChartEntry(userAssignedTaskCount)
+            // Count tasks per user
+            foreach (AppTask task in allTasks)
+            {
+                var user = await DatabaseService.GetUserById(task.AssignedToUserId);
+                string userLabel = user.Name;
+
+                if (userTaskCount.ContainsKey(userLabel))
+                {
+                    userTaskCount[userLabel]++;
+
+                }
+                else
+                {
+                    userTaskCount[userLabel] = 1;
+                }
+            }
+
+            // Create chart entries based on the userTaskCount dictionary
+            foreach (var userTask in userTaskCount)
+            {
+                assignedChartEntries.Add(
+                    new ChartEntry(userTask.Value)
                     {
-                        Label = userLabel,
-                        ValueLabel = userAssignedTaskCount.ToString(),
+                        Label = userTask.Key,
+                        ValueLabel = userTask.Value.ToString(),
+                        Color = GetRandomColor(),
+                    }
+                );
+            }
+        }
+        else
+        {
+            var allUsers = await DatabaseService.GetUsers();
+            List<User> allUsersList = new List<User>(allUsers);
+            foreach (var user in allUsersList) {
+                assignedChartEntries.Add(
+                    new ChartEntry(0)
+                    {
+                        Label = user.Name,
+                        ValueLabel = "0",
                         Color = GetRandomColor(),
                     }
                     );
-
-            userAssignedTaskCount = 0;
-
+            }
+            
         }
+        
 
-        userContributionChartView.Chart = new BarChart
+        // Assign the entries to the chart view
+        userAssignedTasksView.Chart = new BarChart
         {
-            Entries = chartEntries,
+            ShowYAxisLines = true,
+            Entries = assignedChartEntries,
+            BackgroundColor = SKColor.Parse("#DEEBEE"),
             LabelOrientation = Orientation.Horizontal,
             LabelTextSize = 20,
             ValueLabelOrientation = Orientation.Horizontal,
-            MaxValue = allTasks.Count(),
+            MaxValue = 1,
         };
+    }
 
-		chartEntries.Clear();
+    private async void UpdateUserDoneTasksChart()
+    {
+        var tasks = await DatabaseService.GetAppTasks();
+        List<ChartEntry> doneChartEntries = new List<ChartEntry>();
+        if (tasks.Count() != 0)
+        {
+            List<AppTask> allTasks = new List<AppTask>(tasks);
+
+
+            // Dictionary to store the task count per user
+            var userTaskCount = new Dictionary<string, int>();
+
+            // Count tasks per user
+            foreach (AppTask task in allTasks)
+            {
+                var user = await DatabaseService.GetUserById(task.AssignedToUserId);
+                string userLabel = user.Name;
+
+                if (userTaskCount.ContainsKey(userLabel))
+                {
+                    if (task.Column == "Done"){ userTaskCount[userLabel]++; }
+                }
+                else
+                {
+                    userTaskCount[userLabel] = 1;
+                }
+            }
+
+            // Create chart entries based on the userTaskCount dictionary
+            foreach (var userTask in userTaskCount)
+            {
+                doneChartEntries.Add(
+                    new ChartEntry(userTask.Value)
+                    {
+                        Label = userTask.Key,
+                        ValueLabel = userTask.Value.ToString(),
+                        Color = GetRandomColor(),
+                    }
+                );
+            }
+        }
+        else
+        {
+            var allUsers = await DatabaseService.GetUsers();
+            List<User> allUsersList = new List<User>(allUsers);
+            foreach (var user in allUsersList)
+            {
+                doneChartEntries.Add(
+                    new ChartEntry(0)
+                    {
+                        Label = user.Name,
+                        ValueLabel = "0",
+                        Color = GetRandomColor(),
+                    }
+                    );
+            }
+
+        }
+
+
+        // Assign the entries to the chart view
+        userDoneTasksView.Chart = new BarChart
+        {
+            ShowYAxisLines = true,
+            BackgroundColor = SKColor.Parse("#DEEBEE"),
+            Entries = doneChartEntries,
+            LabelOrientation = Orientation.Horizontal,
+            LabelTextSize = 20,
+            ValueLabelOrientation = Orientation.Horizontal,
+            MaxValue = 1,
+        };
     }
 }
