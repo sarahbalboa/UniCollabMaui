@@ -32,7 +32,23 @@ public partial class UpdateTaskPage : ContentPage
             TaskDescriptionEditor.Text = task.Description;
             TaskColumnPicker.SelectedItem = task.Column;
             TaskPriorityPicker.SelectedItem = task.Priority;
-            UserPicker.SelectedItem = ((List<User>)UserPicker.ItemsSource).Find(u => u.Id == task.AssignedToUserId);
+            List<User> users = (List<User>)UserPicker.ItemsSource;
+
+            //Initialize a variable to hold the selected user
+            User selectedUser = null;
+
+            //Iterate through each user in the list to find the one with the matching Id
+            foreach (User user in users)
+            {
+                if (user.Id == task.AssignedToUserId)
+                {
+                    selectedUser = user;
+                    break; // Exit the loop once the user is found
+                }
+            }
+
+            //Set the SelectedItem of the UserPicker to the found user
+            UserPicker.SelectedItem = selectedUser;
         }
 
 
