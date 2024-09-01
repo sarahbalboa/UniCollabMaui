@@ -4,10 +4,19 @@
              x:Class="UniCollabMaui.Views.AccountPage"
              BackgroundColor="White"
              Title="AccountPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Account page"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    <VerticalStackLayout Padding="30" VerticalOptions="Start">
+        <Frame WidthRequest="150"
+               HeightRequest="150"
+               CornerRadius="50"
+               HasShadow="False"
+               Padding="0"
+               BorderColor="White"
+               BackgroundColor="LightGray">
+        <Image Source="profile.png" 
+               Aspect="AspectFill"
+               WidthRequest="100"
+               HeightRequest="100" />
+            </Frame>
+        <Label x:Name="AccountName" TextColor="{StaticResource MyBlue2}" FormattedText="Bold" TextDecorations="Underline" FontSize="Medium"/>
     </VerticalStackLayout>
 </ContentPage>
