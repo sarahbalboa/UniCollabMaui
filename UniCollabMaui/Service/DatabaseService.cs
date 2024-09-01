@@ -106,6 +106,16 @@ namespace UniCollabMaui.Service
             var session = await db.Table<Session>().FirstOrDefaultAsync(s => s.SessionId == sessionId && s.ExpiresAt > DateTime.UtcNow);
             return session?.UserId;
         }
+        public static async Task Logout(string sessionId)
+        {
+            await Init();
+            var session = await db.Table<Session>().FirstOrDefaultAsync(s => s.SessionId == sessionId);
+            if (session != null)
+            {
+                await db.DeleteAsync(session);
+            }
+        }
+
 
         public static async Task<User> GetUserById(int userId)
         {

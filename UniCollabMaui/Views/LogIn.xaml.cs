@@ -13,6 +13,11 @@ namespace UniCollabMaui.Views
         {
             InitializeComponent();
         }
+        protected override bool OnBackButtonPressed()
+        {
+            // Return true to disable the back button functionality
+            return true;
+        }
 
         private async void OnLogInButtonClicked(object sender, EventArgs e)
         {
@@ -99,11 +104,6 @@ namespace UniCollabMaui.Views
         {
             // Navigate to the Register page (implement registration page navigation)
             await Navigation.PushAsync(new RegisterPage());
-        }
-
-        private async void OnEraseUsersButtonClicked(object sender, EventArgs e)
-        {
-            await DatabaseService.EraseAllUsersData();
         }
     }
 }

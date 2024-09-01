@@ -60,5 +60,18 @@ public partial class AccountPage : ContentPage
         TotalTasksLbl.Text = "Total: " + totalUserTasks.ToString();
     }
 
-    ///add button to log out and the button to use the logouticon.png icon
+    private async void OnLogoutButtonClicked(object sender, EventArgs e)
+    {
+        // Log out the user by deleting the session
+        await DatabaseService.Logout(AppSession.SessionId);
+
+        // Clear the session ID stored in AppSession
+        AppSession.SessionId = null;
+
+        // Navigate back to the login page
+        await Navigation.PushAsync(new LogIn());
+
+        // Optionally, remove all other pages in the stack
+        Navigation.RemovePage(this);
+    }
 }
