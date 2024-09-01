@@ -1,8 +1,10 @@
 ﻿using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using UniCollabMaui.Models;
 
 namespace UniCollabMaui.Service
@@ -10,22 +12,25 @@ namespace UniCollabMaui.Service
     public static class DatabaseService
     {
         static SQLiteAsyncConnection db;
-
-        static async Task AddDefultRoles(SQLiteAsyncConnection db)
+       
+        static async Task AddDefaultRoles(SQLiteAsyncConnection db)
         {
-            var roles = new List<Role>
+            // Check if roles already exist
+            var existingRoles = await db.Table<Role>().ToListAsync();
+            if (existingRoles.Count > 0)
             {
-                new Role { RoleName = "Task Editor", Active = 1 },
-                new Role { RoleName = "Administrator", Active = 1 },
-                new Role { RoleName = "Task Viewer", Active = 1 },
-                new Role { RoleName = "Role Administrator", Active = 1 }
-            };
-
-            foreach (var role in roles)
-            {
-                await db.InsertAsync(role);
+                return; // Roles already exist, so exit the function
             }
 
+            var roles = new List<Role>
+            {
+                new Role { RoleName = "Task Admin", Active = true, IsSystemRole = true, IsRoleAdmin = false, IsTaskEditor = true, IsTaskViewer = true, IsProgressViewer = true, IsProgressEditor = true },
+                new Role { RoleName = "Administrator", Active = true, IsSystemRole = true, IsRoleAdmin = true, IsTaskEditor = true, IsTaskViewer = true, IsProgressViewer = true, IsProgressEditor = true },
+                new Role { RoleName = "User", Active = true, IsSystemRole = true, IsRoleAdmin = false, IsTaskEditor = false, IsTaskViewer = true, IsProgressViewer = true, IsProgressEditor = false },
+                new Role { RoleName = "Role Administrator", Active = true, IsSystemRole = true, IsRoleAdmin = true, IsTaskEditor = false, IsTaskViewer = false, IsProgressViewer = false, IsProgressEditor = false }
+            };
+
+            await db.InsertAllAsync(roles);
         }
         static async Task Init()
         {
@@ -40,19 +45,39 @@ namespace UniCollabMaui.Service
             await db.CreateTableAsync<Session>();
 
             //----------------- Add default app roles ------------------
-            AddDefultRoles(db);
+
+            await AddDefaultRoles(db);
 
 
         }
 
         //----------------------   User methods (unchanged) -------------------------
 
-        public static async Task AddUser(User user)
+        public static async Task AddUser(string name, bool active, string username, string password, int role)
         {
             await Init();
+            var user = new User
+            {
+                Name = name,
+                Active = active,
+                Username = username,
+                Password = password,
+                RoleId = role,
+            };
             await db.InsertAsync(user);
         }
-
+        public static async Task UpdateUser(int userId, string name, bool active, int role)
+        {
+            await Init();
+            var user = await db.FindAsync<User>(userId);
+            if (user != null)
+            {
+                user.Name = name;
+                user.Active = active;
+                user.RoleId = role;
+                await db.UpdateAsync(user);
+            }
+        }
         public static async Task<User> ValidateUser(string username, string password)
         {
             await Init();
@@ -88,12 +113,18 @@ namespace UniCollabMaui.Service
             return await db.FindAsync<User>(userId);
         }
 
+        public static async Task<IEnumerable<User>> GetUsers()
+        {
+            await Init();
+            return await db.Table<User>().ToListAsync();
+        }
         // Role-based access control methods
         public static async Task<string> GetUserRole(int userId)
         {
             await Init();
             var user = await db.FindAsync<User>(userId);
-            return user?.Role;
+            var userRole = await db.FindAsync<Role>(user?.RoleId);
+            return userRole.RoleName;
         }
 
         public static async Task<bool> UserHasRole(string sessionId, string role)
@@ -150,11 +181,7 @@ namespace UniCollabMaui.Service
             return await db.Table<AppTask>().ToListAsync();
         }
 
-        public static async Task<IEnumerable<User>> GetUsers()
-        {
-            await Init();
-            return await db.Table<User>().ToListAsync();
-        }
+        
 
         public static async Task<AppTask> GetAppTaskById(int id)
         {
@@ -174,6 +201,32 @@ namespace UniCollabMaui.Service
             }
         }
 
+        public static async Task<IEnumerable<Role>> GetRoles()
+        {
+            await Init();
+            return await db.Table<Role>().ToListAsync();
+        }
+        public static async Task UpdateRole(int roleId, string name, bool active, bool isRoleAdmin, bool isTaskEditor, bool isTaskViewer, bool isProgressEditor, bool isProgressViewer)
+        {
+            await Init();
+            var role = await db.FindAsync<Role>(roleId);
+            if (role != null)
+            {
+                role.RoleName = name;
+                role.Active = active;
+                role.IsRoleAdmin = isRoleAdmin;
+                role.IsTaskEditor = isTaskEditor;
+                role.IsTaskViewer = isTaskViewer;
+                role.IsProgressEditor = isProgressEditor;
+                role.IsProgressViewer = isProgressViewer;
+                await db.UpdateAsync(role);
+            }
+        }
+        public static async Task<Role> GetRoleById(int roleId)
+        {
+            await Init();
+            return await db.FindAsync<Role>(roleId);
+        }
         // -----------------------------  Erase db data mothods ----------------------------
         public static async Task EraseAllUsersData()
         {

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UniCollabMaui.Views.UserInsights"
+             Background="White"
+             xmlns:charts="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
+             Title="UserInsights">
+    <ScrollView>
+        <VerticalStackLayout Spacing="25" Padding="30" VerticalOptions="Center">
+            <Label Text="All Tasks per User" FontSize="Medium" FontAttributes="Bold" TextDecorations="Underline" TextColor="{StaticResource MyBlue2}" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <charts:ChartView x:Name="userAssignedTasksView" HeightRequest="300" />
+            <Label Text="Done Tasks per User" FontSize="Medium" FontAttributes="Bold" TextDecorations="Underline" TextColor="{StaticResource MyBlue2}" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <charts:ChartView x:Name="userDoneTasksView" HeightRequest="300" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

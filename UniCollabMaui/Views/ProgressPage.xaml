@@ -1,25 +1,22 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="UniCollabMaui.Views.AccountPage"
              BackgroundColor="White"
-             Title="AccountPage">
-    <StackLayout Padding="30" VerticalOptions="Start">
-       
-        <Frame x:Name="FrameIcon" CornerRadius="50"
-               HasShadow="False"
-               Padding="20"
-               BorderColor="White"
-               BackgroundColor="{StaticResource MyBlue2}"
-               >
-        <Image x:Name ="ProfileImage" Source="profile.png" 
-               Aspect="AspectFill"
-               WidthRequest="100"
-               HeightRequest="100" />
-            </Frame>
+             x:Class="UniCollabMaui.Views.ProgressPage"
+             Title="ProgressPage">
+    <VerticalStackLayout Padding="50" Spacing="20">
+        <!-- Other UI Elements -->
         
-        <Label x:Name="AccountName"  TextColor="{StaticResource MyBlue2}" TextDecorations="Underline" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"/>
-        <Label x:Name="CurrentRoleLbl"  TextColor="{StaticResource MyBlue2}" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="Center"/>
+        <Label x:Name="ProgressLbl" FontSize="Small" TextColor="{StaticResource MyBlue2}" HorizontalOptions="Center" VerticalOptions="Center"/>
+        <Frame BorderColor="{StaticResource MyBlue2}" CornerRadius="5" Padding="0" HasShadow="False" HorizontalOptions="Center" VerticalOptions="Center" Background="White">
+            <ProgressBar x:Name="MyProgressBar"
+                     ScaleY="4"
+                     WidthRequest="400"
+                     Progress="0"
+                     ProgressColor="Blue"
+                     BackgroundColor= "White"
+                     VerticalOptions="CenterAndExpand"
+                     HorizontalOptions="CenterAndExpand" />
+        </Frame>
 
         <BoxView HeightRequest="5" BackgroundColor="White" HorizontalOptions="FillAndExpand" />
         <!-- Grid Layout for the Labels -->
@@ -38,7 +35,7 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Place Labels in Grid -->
-
+                
                 <Label x:Name="ToDoLbl" Grid.Row="0" Grid.Column="0" FontSize="Small" TextColor="SteelBlue" HorizontalOptions="Start" VerticalOptions="Center"/>
                 <Label x:Name="InProgressLbl" Grid.Row="1" Grid.Column="0" FontSize="Small" TextColor="Green" HorizontalOptions="Start" VerticalOptions="Center"/>
                 <Label x:Name="DoneLbl" Grid.Row="2" Grid.Column="0" FontSize="Small" TextColor="Red" HorizontalOptions="Start" VerticalOptions="Center"/>
@@ -46,6 +43,5 @@
                 <Label x:Name="TotalTasksLbl" Grid.Row="4" Grid.Column="0" FontSize="Small" FontAttributes="Bold" TextColor="{StaticResource MyBlue2}" HorizontalOptions="Start" VerticalOptions="Center"/>
             </Grid>
         </Frame>
-
-    </StackLayout>
+    </VerticalStackLayout>
 </ContentPage>

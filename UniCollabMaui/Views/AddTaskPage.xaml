@@ -6,7 +6,7 @@
     <ContentPage.Content>
         <StackLayout Padding="20" Spacing="5" >
             <Label Text="Title" FontSize="Small" FontAttributes="Bold" TextDecorations="Underline" HorizontalOptions="Center"/>
-            <Entry x:Name="TaskTitleEntry" Placeholder="Task Title" HorizontalTextAlignment="Center" TextColor="DarkSlateGrey" BackgroundColor="White"/>
+            <Entry x:Name="TaskTitleEntry" Placeholder="Task Title" HorizontalTextAlignment="Center" TextColor="DarkSlateGrey" BackgroundColor="White" IsSpellCheckEnabled="True" MaxLength="40"/>
             <BoxView HeightRequest="1" Color="White" HorizontalOptions="FillAndExpand" />
             <Editor x:Name="TaskDescriptionEditor" Placeholder="Task Description" TextColor="DarkSlateGrey" HorizontalTextAlignment="Center" BackgroundColor="White"/>
             <BoxView HeightRequest="1" Color="White" HorizontalOptions="FillAndExpand" />

@@ -6,7 +6,7 @@ namespace UniCollabMaui.Views;
 public partial class UpdateTaskPage : ContentPage
 {
     private int? taskId;
-    public UpdateTaskPage()
+    public UpdateTaskPage(int? taskId = null)
 	{
 		InitializeComponent();
 
@@ -32,12 +32,27 @@ public partial class UpdateTaskPage : ContentPage
             TaskDescriptionEditor.Text = task.Description;
             TaskColumnPicker.SelectedItem = task.Column;
             TaskPriorityPicker.SelectedItem = task.Priority;
-            UserPicker.SelectedItem = ((List<User>)UserPicker.ItemsSource).Find(u => u.Id == task.AssignedToUserId);
+            List<User> users = (List<User>)UserPicker.ItemsSource;
+
+            //Initialize a variable to hold the selected user
+            User selectedUser = null;
+
+            //Iterate through each user in the list to find the one with the matching Id
+            foreach (User user in users)
+            {
+                if (user.Id == task.AssignedToUserId)
+                {
+                    selectedUser = user;
+                    break; // Exit the loop once the user is found
+                }
+            }
+
+            //Set the SelectedItem of the UserPicker to the found user
+            UserPicker.SelectedItem = selectedUser;
         }
 
 
     }
-
 
     private async void OnSaveTaskButtonClicked(object sender, EventArgs e)
     {
@@ -64,6 +79,15 @@ public partial class UpdateTaskPage : ContentPage
             "\n-Column: " + column +
             "\n-Priority: " + priority);
 
+    }
+
+    private async void OnDeleteTaskButtonClicked(object sender, EventArgs e)
+    {
+        bool answer = await DisplayAlert("Deletion Confirmation", "Are you sure you want to delete this task", "Yes", "No");
+        if(answer){ 
+            await DatabaseService.RemoveAppTask(taskId.Value);
+            await Navigation.PopAsync();
+        }
     }
 
 }
