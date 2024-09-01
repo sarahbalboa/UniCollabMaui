@@ -129,11 +129,5 @@ namespace UniCollabMaui.Views
             base.OnAppearing();
             LoadTasks();
         }
-
-        private async void OnEraseTasksButtonClicked(object sender, EventArgs e)
-        {
-            await DatabaseService.EraseAllTasksData();
-            ReloadPage();
-        }
     }
 }
