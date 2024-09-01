@@ -13,7 +13,7 @@
 
             <Image
                 x:Name="Logo"
-                Source="unicollablogo1.png"
+                Source="unicollab_logo.png"
                 HeightRequest="400"
                 Aspect="AspectFit"
                 Opacity="0"/>
@@ -27,9 +27,9 @@
                 Background ="Transparent"
                 BorderColor="{StaticResource MyBlue2}"
                 BorderWidth="2"
-                SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnStartClicked"
-                HorizontalOptions="Center" />
+                HorizontalOptions="Center" 
+                VerticalOptions="Center"/>
         </VerticalStackLayout>
     </ScrollView>
 

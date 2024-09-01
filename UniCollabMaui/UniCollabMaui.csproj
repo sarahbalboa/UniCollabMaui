@@ -68,7 +68,7 @@
 	  <None Remove="Resources\Images\edit_simple.png" />
 	  <None Remove="Resources\Images\profile.svg" />
 	  <None Remove="Resources\Images\task_board_icon.png" />
-	  <None Remove="Resources\Images\unicollablogo1.png" />
+	  <None Remove="Resources\Images\unicollab_logo.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
