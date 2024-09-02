@@ -68,10 +68,8 @@ public partial class AccountPage : ContentPage
         // Clear the session ID stored in AppSession
         AppSession.SessionId = null;
 
-        // Navigate back to the login page
-        await Navigation.PushAsync(new LogIn());
-
-        // Optionally, remove all other pages in the stack
-        Navigation.RemovePage(this);
+        // Clear the navigation stack by navigating to the login page and removing all previous pages
+        Application.Current.MainPage = new NavigationPage(new LogIn());
     }
+
 }

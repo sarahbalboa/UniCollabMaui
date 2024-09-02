@@ -4,7 +4,7 @@
              BackgroundColor="White"
              NavigationPage.HasBackButton="false"
              x:Class="UniCollabMaui.Views.TaskBoard">
-    <StackLayout>
+    <StackLayout Padding="10">
         <Grid RowSpacing="0" ColumnSpacing="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />

@@ -6,14 +6,14 @@
             UnselectedTabColor="White"
             SelectedTabColor="DarkBlue"
             x:Class="UniCollabMaui.Views.MainTabbedPage">
-    <TabbedPage.Children  >
+    <TabbedPage.Children   >
         <!--Add the following page so that it is a welcome page and possibly with some guidance?-->
         <!--<local:TaskBoard BackgroundColor="white" IconImageSource="unicollablogo1.png" IsEnabled="False"/>-->
         <local:TaskBoard Title="Task Board"  BackgroundColor="white" IconImageSource="task_board_icon.png"/>
-        <local:AccountPage Title="Account" />
-        <local:RoleManagementPage Title="Manage Roles" />
-        <local:UserManagementPage Title="Manage Users" />
-        <local:ProgressPage Title="Project Progress" />
-        <local:UserInsights Title="User Insights" />
+        <local:AccountPage Title="Account" BackgroundColor="white" IconImageSource="profile.png"/>
+        <local:RoleManagementPage Title="Role Management" IconImageSource="role_management_icon.png" />
+        <local:UserManagementPage Title="Manage Users" BackgroundColor="white" IconImageSource="user_management_icon.png"/>
+        <local:ProgressPage Title="Project Progress" BackgroundColor="white" IconImageSource="project_progress_icon.png" />
+        <local:UserInsights Title="User Insights" BackgroundColor="white" IconImageSource="users_progress_icon.png"/>
     </TabbedPage.Children>
 </TabbedPage>

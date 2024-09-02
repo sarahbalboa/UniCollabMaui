@@ -67,8 +67,12 @@
 	<ItemGroup>
 	  <None Remove="Resources\Images\edit_simple.png" />
 	  <None Remove="Resources\Images\profile.svg" />
+	  <None Remove="Resources\Images\project_progress_icon.svg" />
+	  <None Remove="Resources\Images\role_management_icon.svg" />
 	  <None Remove="Resources\Images\task_board_icon.png" />
 	  <None Remove="Resources\Images\unicollab_logo.svg" />
+	  <None Remove="Resources\Images\users_progress_icon.svg" />
+	  <None Remove="Resources\Images\user_management_icon.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
