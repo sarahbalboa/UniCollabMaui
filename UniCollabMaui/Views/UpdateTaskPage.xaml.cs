@@ -11,11 +11,16 @@ public partial class UpdateTaskPage : ContentPage
 		InitializeComponent();
 
         this.taskId = taskId;
+    }
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
         LoadUsers();
         if (taskId.HasValue)
         {
             LoadTask(taskId.Value);
         }
+
     }
     private async void LoadUsers()
     {
@@ -25,6 +30,7 @@ public partial class UpdateTaskPage : ContentPage
 
     private async void LoadTask(int id)
     {
+        LoadUsers();
         var task = await DatabaseService.GetAppTaskById(id);
         if (task != null)
         {
@@ -32,8 +38,9 @@ public partial class UpdateTaskPage : ContentPage
             TaskDescriptionEditor.Text = task.Description;
             TaskColumnPicker.SelectedItem = task.Column;
             TaskPriorityPicker.SelectedItem = task.Priority;
+            Thread.Sleep(1000);
             List<User> users = (List<User>)UserPicker.ItemsSource;
-
+            Thread.Sleep(1000);
             //Initialize a variable to hold the selected user
             User selectedUser = null;
 

@@ -115,31 +115,51 @@ public partial class UserInsights : ContentPage
             // Count tasks per user
             foreach (AppTask task in allTasks)
             {
+                if (task.Column != "Done")
+                    continue;
                 var user = await DatabaseService.GetUserById(task.AssignedToUserId);
                 string userLabel = user.Name;
 
                 if (userTaskCount.ContainsKey(userLabel))
                 {
-                    if (task.Column == "Done"){ userTaskCount[userLabel]++; }
-                }
-                else
-                {
-                    userTaskCount[userLabel] = 1;
+                    userTaskCount[userLabel]++;
                 }
             }
 
-            // Create chart entries based on the userTaskCount dictionary
-            foreach (var userTask in userTaskCount)
+            if(userTaskCount.Count != 0)
             {
-                doneChartEntries.Add(
-                    new ChartEntry(userTask.Value)
-                    {
-                        Label = userTask.Key,
-                        ValueLabel = userTask.Value.ToString(),
-                        Color = GetRandomColor(),
-                    }
-                );
+                // Create chart entries based on the userTaskCount dictionary
+                foreach (var userTask in userTaskCount)
+                {
+                    doneChartEntries.Add(
+                        new ChartEntry(userTask.Value)
+                        {
+                            Label = userTask.Key,
+                            ValueLabel = userTask.Value.ToString(),
+                            Color = GetRandomColor(),
+                        }
+                    );
+                }
             }
+            else
+            {
+                var allUsers = await DatabaseService.GetUsers();
+                List<User> allUsersList = new List<User>(allUsers);
+                foreach (var user in allUsersList)
+                {
+                    doneChartEntries.Add(
+                        new ChartEntry(0)
+                        {
+                            Label = user.Name,
+                            ValueLabel = "0",
+                            Color = GetRandomColor(),
+                        }
+                        );
+                }
+
+            }
+
+            
         }
         else
         {
