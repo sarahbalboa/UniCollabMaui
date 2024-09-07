@@ -18,7 +18,6 @@ namespace UniCollabMaui.Models
         public bool IsRoleAdmin { get; set; } //access CRUD and assign roles
         public bool IsTaskEditor { get; set; } //access to CRUD tasks/taskboard
         public bool IsTaskViewer { get; set; } //access to view tasks/taskboard
-        public bool IsProgressEditor { get; set; } //access to CRUD progress visualisation
-        public bool IsProgressViewer { get; set; } //access to view progress visualisation
+        public bool IsProgressViewer { get; set; } //access to view progress and user insights visualisation
     }
 }

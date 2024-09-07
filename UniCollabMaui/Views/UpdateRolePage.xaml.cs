@@ -30,7 +30,6 @@ public partial class UpdateRolePage : ContentPage
             IsRoleAdminCheckbox.IsChecked = role.IsRoleAdmin;
             IsTaskEditorCheckbox.IsChecked = role.IsTaskEditor;
             IsTaskViewerCheckbox.IsChecked = role.IsTaskViewer;
-            IsProgressEditorCheckbox.IsChecked = role.IsProgressEditor;
             IsProgressViewerCheckbox.IsChecked = role.IsProgressViewer;
             
         }
@@ -40,7 +39,6 @@ public partial class UpdateRolePage : ContentPage
             IsRoleAdminCheckbox.IsEnabled = false;
             IsTaskEditorCheckbox.IsEnabled = false;
             IsTaskViewerCheckbox.IsEnabled = false;
-            IsProgressEditorCheckbox.IsEnabled = false;
             IsProgressViewerCheckbox.IsEnabled = false;
             RoleNameEntry.IsEnabled = false;
         }
@@ -62,10 +60,9 @@ public partial class UpdateRolePage : ContentPage
         var isRoleAdmin = IsRoleAdminCheckbox.IsChecked;
         var isTaskEditor = IsTaskEditorCheckbox.IsChecked;
         var isTaskViewer = IsTaskViewerCheckbox.IsChecked;
-        var isProgressEditor = IsProgressEditorCheckbox.IsChecked;
         var isProgressViewer = IsProgressViewerCheckbox.IsChecked;
 
-        await DatabaseService.UpdateRole(roleId.Value, roleName, isActive, isRoleAdmin, isTaskEditor, isTaskViewer, isProgressEditor, isProgressViewer);
+        await DatabaseService.UpdateRole(roleId.Value, roleName, isActive, isRoleAdmin, isTaskEditor, isTaskViewer, isProgressViewer);
 
         //logger for saved/updated Role
         Logger.Log("Role [#" + roleId + "] " + roleName + " is Updated: \n" +
@@ -73,7 +70,6 @@ public partial class UpdateRolePage : ContentPage
             "\n-RoleAdmin: " + isRoleAdmin +
             "\n-TaskEditor: " + isTaskEditor +
             "\n-TaskViewer: " + isTaskViewer +
-            "\n-ProgressEditor: " + isProgressEditor+
             "\n-ProgressViewer: " + isProgressViewer );
 
         await Navigation.PopAsync();

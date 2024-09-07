@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UniCollabMaui.Views.AddRolePage"
              Background="LightSkyBlue"
+             NavigationPage.HasNavigationBar="False"
              Title="AddRolePage">
     <ContentPage.Content>
         <StackLayout Padding="50" Spacing="10" >
@@ -31,10 +32,6 @@
             <HorizontalStackLayout Spacing="10">
                 <Label Text="Task Viewer:" FontSize="Small" VerticalOptions="Center"/>
                 <CheckBox x:Name="IsTaskViewerCheckbox" />
-            </HorizontalStackLayout>
-            <HorizontalStackLayout Spacing="10">
-                <Label Text="Progress Editor:" FontSize="Small" VerticalOptions="Center"/>
-                <CheckBox x:Name="IsProgressEditorCheckbox" />
             </HorizontalStackLayout>
             <HorizontalStackLayout Spacing="10">
                 <Label Text="Progress Viewer:" FontSize="Small" VerticalOptions="Center"/>

@@ -5,6 +5,7 @@
             BarBackgroundColor="{StaticResource MyBlue2}"
             UnselectedTabColor="White"
             SelectedTabColor="DarkBlue"
+            NavigationPage.HasNavigationBar="False"
             x:Class="UniCollabMaui.Views.MainTabbedPage">
     <TabbedPage.Children  >
         <!--Add the following page so that it is a welcome page and possibly with some guidance?-->

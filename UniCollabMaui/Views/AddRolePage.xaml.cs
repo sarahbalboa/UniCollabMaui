@@ -32,7 +32,6 @@ public partial class AddRolePage : ContentPage
         role.IsRoleAdmin = IsRoleAdminCheckbox.IsChecked;
         role.IsTaskEditor = IsTaskEditorCheckbox.IsChecked;
         role.IsTaskViewer = IsTaskViewerCheckbox.IsChecked;
-        role.IsProgressEditor = IsProgressEditorCheckbox.IsChecked;
         role.IsProgressViewer = IsProgressViewerCheckbox.IsChecked;
 
         await DatabaseService.AddRole(role);
@@ -43,7 +42,6 @@ public partial class AddRolePage : ContentPage
             "\n-RoleAdmin: " + role.IsRoleAdmin +
             "\n-TaskEditor: " + role.IsTaskEditor +
             "\n-TaskViewer: " + role.IsTaskViewer +
-            "\n-ProgressEditor: " + role.IsProgressEditor +
             "\n-ProgressViewer: " + role.IsProgressViewer);
 
         await Navigation.PopAsync();

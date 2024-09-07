@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              BackgroundColor="White"
              x:Class="UniCollabMaui.Views.ProgressPage"
+             NavigationPage.HasNavigationBar="False"
              Title="ProgressPage">
     <VerticalStackLayout Padding="50" Spacing="20">
         <!-- Other UI Elements -->
