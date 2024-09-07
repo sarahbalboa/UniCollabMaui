@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UniCollabMaui.Models;
 using UniCollabMaui.Service;
-using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Maui.Core;
 
 namespace UniCollabMaui.Views
 {
@@ -123,11 +121,6 @@ namespace UniCollabMaui.Views
 
         private async Task OnTaskTapped(int taskId)
         {
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-            await Toast.Make("Loading task.",
-                      ToastDuration.Short,
-                      16)
-                .Show(cancellationTokenSource.Token);
             await Navigation.PushAsync(new UpdateTaskPage(taskId));
         }
 
