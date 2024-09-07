@@ -1,3 +1,5 @@
+using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Storage;
 using System;
@@ -48,7 +50,14 @@ namespace UniCollabMaui.Views
             // Add the user to the database
             await DatabaseService.AddUser(name, true, username, password, role.Id);
 
-            await DisplayAlert("Success", "Registration successful.", "OK");
+
+            //add toast of registration successful
+
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+            await Toast.Make("Loading task.",
+                      ToastDuration.Short,
+                      16)
+                .Show(cancellationTokenSource.Token);
 
             // Navigate back to the login page
             await Navigation.PopAsync();
