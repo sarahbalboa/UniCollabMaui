@@ -11,10 +11,34 @@ public partial class UpdateTaskPage : ContentPage
 		InitializeComponent();
 
         this.taskId = taskId;
-        LoadUsers();
         if (taskId.HasValue)
         {
             LoadTask(taskId.Value);
+        }
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        // Assuming you have a session ID in AppSession
+        var userId = await DatabaseService.GetUserIdFromSession(AppSession.SessionId);
+        if (userId.HasValue)
+        {
+            var userRole = await DatabaseService.GetUserRole(userId.Value);
+            var task = await DatabaseService.GetAppTaskById(taskId.Value);
+
+            // Check if the user role is system role
+            if (userRole.IsTaskAdmin != true && (task.AssignedToUserId != userId))
+            {
+                UserPicker.IsEnabled = false;
+                TaskTitleEntry.IsEnabled = false;
+                TaskDescriptionEditor.IsEnabled = false;
+                TaskColumnPicker.IsEnabled = false;
+                TaskPriorityPicker.IsEnabled = false;
+                SaveButton.IsVisible = false;
+                DeleteButton.IsVisible = false;
+            }
         }
     }
     private async void LoadUsers()
@@ -25,6 +49,8 @@ public partial class UpdateTaskPage : ContentPage
 
     private async void LoadTask(int id)
     {
+        LoadUsers();
+        Thread.Sleep(500); // sleep for 0.5 seconds so that users can successfully be loaded in time (null object error)
         var task = await DatabaseService.GetAppTaskById(id);
         if (task != null)
         {

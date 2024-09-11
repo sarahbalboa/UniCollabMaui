@@ -15,7 +15,7 @@ public partial class AccountPage : ContentPage
         var user = await DatabaseService.GetUserById((int)userId);
 
         AccountName.Text = user.Name;
-        CurrentRoleLbl.Text = "Role: " + userRole.ToString();
+        CurrentRoleLbl.Text = "Role: " + userRole.RoleName.ToString();
 
         DisplayUserTaskCount((int)userId);
 

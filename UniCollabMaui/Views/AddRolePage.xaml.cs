@@ -30,7 +30,7 @@ public partial class AddRolePage : ContentPage
         role.Active = ActiveCheckbox.IsChecked;
         role.IsSystemRole = IsSystemRoleCheckbox.IsChecked;
         role.IsRoleAdmin = IsRoleAdminCheckbox.IsChecked;
-        role.IsTaskEditor = IsTaskEditorCheckbox.IsChecked;
+        role.IsTaskAdmin = IsTaskAdminCheckbox.IsChecked;
         role.IsTaskViewer = IsTaskViewerCheckbox.IsChecked;
         role.IsProgressViewer = IsProgressViewerCheckbox.IsChecked;
 
@@ -40,7 +40,7 @@ public partial class AddRolePage : ContentPage
         Logger.Log("Role [#" + roleId + "] " + role.RoleName + " is Updated: \n" +
             "-Description: " + role.Active +
             "\n-RoleAdmin: " + role.IsRoleAdmin +
-            "\n-TaskEditor: " + role.IsTaskEditor +
+            "\n-TaskEditor: " + role.IsTaskAdmin +
             "\n-TaskViewer: " + role.IsTaskViewer +
             "\n-ProgressViewer: " + role.IsProgressViewer);
 

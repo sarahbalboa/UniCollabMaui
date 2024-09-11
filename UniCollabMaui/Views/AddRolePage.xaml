@@ -26,8 +26,8 @@
                 <CheckBox x:Name="IsRoleAdminCheckbox" />
             </HorizontalStackLayout>
             <HorizontalStackLayout Spacing="10">
-                <Label Text="Task Editor:" FontSize="Small" VerticalOptions="Center"/>
-                <CheckBox x:Name="IsTaskEditorCheckbox" />
+                <Label Text="Task Administrator:" FontSize="Small" VerticalOptions="Center"/>
+                <CheckBox x:Name="IsTaskAdminCheckbox" />
             </HorizontalStackLayout>
             <HorizontalStackLayout Spacing="10">
                 <Label Text="Task Viewer:" FontSize="Small" VerticalOptions="Center"/>
