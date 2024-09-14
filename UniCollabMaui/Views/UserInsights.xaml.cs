@@ -135,7 +135,7 @@ public partial class UserInsights : ContentPage
         userDoneTasksView.Chart = new BarChart
         {
             ShowYAxisLines = true,
-            Entries = assignedChartEntries,
+            Entries = doneChartEntries,
             BackgroundColor = SKColor.Parse("#DEEBEE"),
             LabelOrientation = Orientation.Horizontal,
             LabelTextSize = 20,
