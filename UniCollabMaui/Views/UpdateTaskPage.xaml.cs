@@ -15,7 +15,9 @@ public partial class UpdateTaskPage : ContentPage
         {
             LoadTask(taskId.Value);
         }
+
     }
+
 
     protected override async void OnAppearing()
     {
@@ -41,7 +43,8 @@ public partial class UpdateTaskPage : ContentPage
             }
         }
     }
-    private async void LoadUsers()
+
+    private async Task LoadUsers()
     {
         var users = await DatabaseService.GetUsers();
         UserPicker.ItemsSource = new List<User>(users);
@@ -49,8 +52,7 @@ public partial class UpdateTaskPage : ContentPage
 
     private async void LoadTask(int id)
     {
-        LoadUsers();
-        Thread.Sleep(500); // sleep for 0.5 seconds so that users can successfully be loaded in time (null object error)
+        await LoadUsers();
         var task = await DatabaseService.GetAppTaskById(id);
         if (task != null)
         {
@@ -58,8 +60,9 @@ public partial class UpdateTaskPage : ContentPage
             TaskDescriptionEditor.Text = task.Description;
             TaskColumnPicker.SelectedItem = task.Column;
             TaskPriorityPicker.SelectedItem = task.Priority;
+            
             List<User> users = (List<User>)UserPicker.ItemsSource;
-
+            
             //Initialize a variable to hold the selected user
             User selectedUser = null;
 

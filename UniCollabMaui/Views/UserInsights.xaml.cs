@@ -85,6 +85,7 @@ public partial class UserInsights : ContentPage
             MaxValue = 1,
         };
     }
+    
     private async void UpdateUserDoneTasksChart()
     {
         var tasks = await DatabaseService.GetAppTasks();
@@ -101,8 +102,10 @@ public partial class UserInsights : ContentPage
             // Loop through each task and update the userTaskCount if the task is done and assigned to a user
             foreach (var task in tasks)
             {
+
                 // Find the user associated with the task (assuming task has a UserId or similar)
                 var matchingUser = users.FirstOrDefault(u => u.Id == task.AssignedToUserId);  // Or task.UserId == u.Id, depending on your data structure
+
 
                 // If the task is marked as "Done" and a matching user is found
                 if (matchingUser != null && task.Column == "Done")
@@ -128,11 +131,12 @@ public partial class UserInsights : ContentPage
         }
 
         //create chart
+
         userDoneTasksView.Chart = new BarChart
         {
             ShowYAxisLines = true,
+            Entries = assignedChartEntries,
             BackgroundColor = SKColor.Parse("#DEEBEE"),
-            Entries = doneChartEntries,
             LabelOrientation = Orientation.Horizontal,
             LabelTextSize = 20,
             ValueLabelOrientation = Orientation.Horizontal,
@@ -140,3 +144,4 @@ public partial class UserInsights : ContentPage
         };
     }
 }
+
