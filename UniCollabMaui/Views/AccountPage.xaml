@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UniCollabMaui.Views.AccountPage"
              BackgroundColor="White"
+             NavigationPage.HasNavigationBar="False"
              Title="AccountPage">
     <Grid RowDefinitions="*,Auto" Padding="20">
     <StackLayout Padding="30" VerticalOptions="Start" Grid.Row="0" >

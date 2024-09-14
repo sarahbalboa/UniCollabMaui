@@ -24,10 +24,10 @@ namespace UniCollabMaui.Service
 
             var roles = new List<Role>
             {
-                new Role { RoleName = "Task Admin", Active = true, IsSystemRole = true, IsRoleAdmin = false, IsTaskEditor = true, IsTaskViewer = true, IsProgressViewer = true, IsProgressEditor = true },
-                new Role { RoleName = "Administrator", Active = true, IsSystemRole = true, IsRoleAdmin = true, IsTaskEditor = true, IsTaskViewer = true, IsProgressViewer = true, IsProgressEditor = true },
-                new Role { RoleName = "User", Active = true, IsSystemRole = true, IsRoleAdmin = false, IsTaskEditor = false, IsTaskViewer = true, IsProgressViewer = true, IsProgressEditor = false },
-                new Role { RoleName = "Role Administrator", Active = true, IsSystemRole = true, IsRoleAdmin = true, IsTaskEditor = false, IsTaskViewer = false, IsProgressViewer = false, IsProgressEditor = false }
+                new Role { RoleName = "Task Admin", Active = true, IsSystemRole = true, IsRoleAdmin = false, IsTaskAdmin = true, IsTaskViewer = true, IsProgressViewer = true},
+                new Role { RoleName = "Administrator", Active = true, IsSystemRole = true, IsRoleAdmin = true, IsTaskAdmin = true, IsTaskViewer = true, IsProgressViewer = true},
+                new Role { RoleName = "User", Active = true, IsSystemRole = true, IsRoleAdmin = false, IsTaskAdmin = false, IsTaskViewer = true, IsProgressViewer = true},
+                new Role { RoleName = "Role Administrator", Active = true, IsSystemRole = true, IsRoleAdmin = true, IsTaskAdmin = false, IsTaskViewer = false, IsProgressViewer = false}
             };
 
             await db.InsertAllAsync(roles);
@@ -129,23 +129,12 @@ namespace UniCollabMaui.Service
             return await db.Table<User>().ToListAsync();
         }
         // Role-based access control methods
-        public static async Task<string> GetUserRole(int userId)
+        public static async Task<Role> GetUserRole(int userId)
         {
             await Init();
             var user = await db.FindAsync<User>(userId);
             var userRole = await db.FindAsync<Role>(user?.RoleId);
-            return userRole.RoleName;
-        }
-
-        public static async Task<bool> UserHasRole(string sessionId, string role)
-        {
-            var userId = await GetUserIdFromSession(sessionId);
-            if (userId.HasValue)
-            {
-                var userRole = await GetUserRole(userId.Value);
-                return userRole == role;
-            }
-            return false;
+            return userRole;
         }
 
         //-----------------  Task methods --------------------------
@@ -216,7 +205,7 @@ namespace UniCollabMaui.Service
             await Init();
             return await db.Table<Role>().ToListAsync();
         }
-        public static async Task UpdateRole(int roleId, string name, bool active, bool isRoleAdmin, bool isTaskEditor, bool isTaskViewer, bool isProgressEditor, bool isProgressViewer)
+        public static async Task UpdateRole(int roleId, string name, bool active, bool isRoleAdmin, bool IsTaskAdmin, bool isTaskViewer, bool isProgressViewer)
         {
             await Init();
             var role = await db.FindAsync<Role>(roleId);
@@ -225,9 +214,8 @@ namespace UniCollabMaui.Service
                 role.RoleName = name;
                 role.Active = active;
                 role.IsRoleAdmin = isRoleAdmin;
-                role.IsTaskEditor = isTaskEditor;
+                role.IsTaskAdmin = IsTaskAdmin;
                 role.IsTaskViewer = isTaskViewer;
-                role.IsProgressEditor = isProgressEditor;
                 role.IsProgressViewer = isProgressViewer;
                 await db.UpdateAsync(role);
             }

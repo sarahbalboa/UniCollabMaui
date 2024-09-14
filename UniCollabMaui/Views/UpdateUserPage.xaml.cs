@@ -16,6 +16,25 @@ public partial class UpdateUserPage : ContentPage
         }
         LoadRoles();
     }
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        // Assuming you have a session ID in AppSession
+        var userId = await DatabaseService.GetUserIdFromSession(AppSession.SessionId);
+        if (userId.HasValue)
+        {
+            var userRole = await DatabaseService.GetUserRole(userId.Value);
+
+            if (userRole.IsRoleAdmin != true)
+            {
+                UserNameEntry.IsEnabled = false;
+                ActiveCheckbox.IsEnabled = false;
+                RolePicker.IsEnabled = false;
+                SaveButton.IsEnabled = false;
+            }
+        }
+    }
 
     private async void LoadRoles()
     {
@@ -33,7 +52,7 @@ public partial class UpdateUserPage : ContentPage
         {
             UserNameEntry.Text = user.Name;
             ActiveCheckbox.IsChecked = user.Active;
-            CurrentRoleEntry.Text = userRole.ToString();
+            CurrentRoleEntry.Text = userRole.RoleName.ToString();
             RolePicker.SelectedItem = ((List<Role>)RolePicker.ItemsSource).Find(u => u.Id == user.RoleId);
 
         }

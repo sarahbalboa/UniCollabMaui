@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UniCollabMaui.Views.UpdateUserPage"
              BackgroundColor="LightSkyBlue"
+             NavigationPage.HasNavigationBar="False"
              Title="UpdateUserPage">
     <ContentPage.Content>
         <StackLayout Padding="50" Spacing="10" >

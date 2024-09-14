@@ -28,9 +28,8 @@ public partial class UpdateRolePage : ContentPage
             ActiveCheckbox.IsChecked = role.Active;
             IsSystemRoleCheckbox.IsChecked = role.IsSystemRole;
             IsRoleAdminCheckbox.IsChecked = role.IsRoleAdmin;
-            IsTaskEditorCheckbox.IsChecked = role.IsTaskEditor;
+            IsTaskAdminCheckbox.IsChecked = role.IsTaskAdmin;
             IsTaskViewerCheckbox.IsChecked = role.IsTaskViewer;
-            IsProgressEditorCheckbox.IsChecked = role.IsProgressEditor;
             IsProgressViewerCheckbox.IsChecked = role.IsProgressViewer;
             
         }
@@ -38,9 +37,8 @@ public partial class UpdateRolePage : ContentPage
         if (role.IsSystemRole == true)
         {
             IsRoleAdminCheckbox.IsEnabled = false;
-            IsTaskEditorCheckbox.IsEnabled = false;
+            IsTaskAdminCheckbox.IsEnabled = false;
             IsTaskViewerCheckbox.IsEnabled = false;
-            IsProgressEditorCheckbox.IsEnabled = false;
             IsProgressViewerCheckbox.IsEnabled = false;
             RoleNameEntry.IsEnabled = false;
         }
@@ -60,20 +58,18 @@ public partial class UpdateRolePage : ContentPage
         var roleName = RoleNameEntry.Text;
         var isActive = ActiveCheckbox.IsChecked;
         var isRoleAdmin = IsRoleAdminCheckbox.IsChecked;
-        var isTaskEditor = IsTaskEditorCheckbox.IsChecked;
+        var isTaskAdmin = IsTaskAdminCheckbox.IsChecked;
         var isTaskViewer = IsTaskViewerCheckbox.IsChecked;
-        var isProgressEditor = IsProgressEditorCheckbox.IsChecked;
         var isProgressViewer = IsProgressViewerCheckbox.IsChecked;
 
-        await DatabaseService.UpdateRole(roleId.Value, roleName, isActive, isRoleAdmin, isTaskEditor, isTaskViewer, isProgressEditor, isProgressViewer);
+        await DatabaseService.UpdateRole(roleId.Value, roleName, isActive, isRoleAdmin, isTaskAdmin, isTaskViewer, isProgressViewer);
 
         //logger for saved/updated Role
         Logger.Log("Role [#" + roleId + "] " + roleName + " is Updated: \n" +
             "-Description: " + isActive +
             "\n-RoleAdmin: " + isRoleAdmin +
-            "\n-TaskEditor: " + isTaskEditor +
+            "\n-TaskEditor: " + isTaskAdmin +
             "\n-TaskViewer: " + isTaskViewer +
-            "\n-ProgressEditor: " + isProgressEditor+
             "\n-ProgressViewer: " + isProgressViewer );
 
         await Navigation.PopAsync();

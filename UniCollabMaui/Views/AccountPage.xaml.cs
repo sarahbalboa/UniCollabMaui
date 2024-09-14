@@ -15,7 +15,7 @@ public partial class AccountPage : ContentPage
         var user = await DatabaseService.GetUserById((int)userId);
 
         AccountName.Text = user.Name;
-        CurrentRoleLbl.Text = "Role: " + userRole.ToString();
+        CurrentRoleLbl.Text = "Role: " + userRole.RoleName.ToString();
 
         DisplayUserTaskCount((int)userId);
 
@@ -68,8 +68,11 @@ public partial class AccountPage : ContentPage
         // Clear the session ID stored in AppSession
         AppSession.SessionId = null;
 
-        // Clear the navigation stack by navigating to the login page and removing all previous pages
-        Application.Current.MainPage = new NavigationPage(new LogIn());
+        // Clear the navigation stack by setting the login page as the new root
+        Application.Current.MainPage = new NavigationPage(new MainPage());
+
+        // Optionally, you can also call GC.Collect() to clean up memory, though it's not usually necessary
+        // GC.Collect();
     }
 
 }

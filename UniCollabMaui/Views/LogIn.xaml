@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              BackgroundColor="white"
              x:Class="UniCollabMaui.Views.LogIn"
+             NavigationPage.HasNavigationBar="False"
              Title="LogIn">
     <ContentPage.Content>
         <Grid Padding="20">
