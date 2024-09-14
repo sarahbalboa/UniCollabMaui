@@ -12,7 +12,6 @@
                 <Label Text="Name:" FontSize="Small" HorizontalOptions="Center" VerticalOptions="Center"/>
                 <Entry x:Name="RoleNameEntry" Placeholder="Name" VerticalOptions="Center" HorizontalTextAlignment="Start" TextColor="DarkSlateGrey" BackgroundColor="White" IsSpellCheckEnabled="True" MaxLength="40" WidthRequest="400"/>
             </HorizontalStackLayout>
-            <Label Text="Permissions" FontSize="Medium" HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" TextDecorations="Underline"/>
             <HorizontalStackLayout Spacing="10">
                 <Label Text="Active:" FontSize="Small" VerticalOptions="Center"/>
                 <CheckBox x:Name="ActiveCheckbox" />
@@ -21,6 +20,7 @@
                 <Label x:Name="SystemRoleLbl" Text="System Role:" FontSize="Small" VerticalOptions="Center"/>
                 <CheckBox x:Name="IsSystemRoleCheckbox" IsEnabled="False"/>
             </HorizontalStackLayout>
+            <Label Text="Permissions" FontSize="Medium" HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" TextDecorations="Underline"/>
             <HorizontalStackLayout Spacing="10">
                 <Label Text="Role Admin:" FontSize="Small" VerticalOptions="Center"/>
                 <CheckBox x:Name="IsRoleAdminCheckbox" />

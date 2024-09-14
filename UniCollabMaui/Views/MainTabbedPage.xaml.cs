@@ -39,7 +39,7 @@ public partial class MainTabbedPage : TabbedPage
                     this.Children.Remove(manageRolesTab);
                 }
             }
-            if (userRole.IsTaskViewer != true)
+            if (userRole.IsTaskViewer != true && userRole.IsTaskAdmin != true)
             {
                 // Find the RoleManagementPage tab and remove it if it exists
                 var taskBoardTab = this.Children.FirstOrDefault(c => c is TaskBoard);
