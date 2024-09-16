@@ -16,7 +16,7 @@
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>ToDo</x:String>
-                        <x:String>InProgress</x:String>
+                        <x:String>In Progress</x:String>
                         <x:String>Done</x:String>
                     </x:Array>
                 </Picker.ItemsSource>

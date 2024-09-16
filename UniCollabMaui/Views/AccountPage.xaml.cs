@@ -15,6 +15,7 @@ public partial class AccountPage : ContentPage
         var user = await DatabaseService.GetUserById((int)userId);
 
         AccountName.Text = user.Name;
+        EmailLbl.Text = user.Email;
         CurrentRoleLbl.Text = "Role: " + userRole.RoleName.ToString();
 
         DisplayUserTaskCount((int)userId);
@@ -40,7 +41,7 @@ public partial class AccountPage : ContentPage
                     case "ToDo":
                         todoTasks++;
                         break;
-                    case "InProgress":
+                    case "In Progress":
                         inProgressTasks++;
                         break;
                     case "Done":

@@ -40,7 +40,7 @@ public partial class ProgressPage : ContentPage
                 case "ToDo":
                     todoTasks++;
                     break;
-                case "InProgress":
+                case "In Progress":
                     inProgressTasks++;
                     break;
                 case "Done":

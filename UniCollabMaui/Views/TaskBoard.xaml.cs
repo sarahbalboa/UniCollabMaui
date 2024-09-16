@@ -91,7 +91,7 @@ namespace UniCollabMaui.Views
                     case "ToDo":
                         ToDoColumn.Children.Add(taskView);
                         break;
-                    case "InProgress":
+                    case "In Progress":
                         InProgressColumn.Children.Add(taskView);
                         break;
                     case "Done":
