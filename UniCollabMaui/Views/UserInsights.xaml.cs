@@ -22,15 +22,6 @@ public partial class UserInsights : ContentPage
         UpdateUserDoneTasksChart();
     }
 
-    public SKColor GetRandomColor()
-    {
-        Random random = new Random();
-        byte r = (byte)random.Next(0, 256);  // Red
-        byte g = (byte)random.Next(0, 256);  // Green
-        byte b = (byte)random.Next(0, 256);  // Blue
-        return new SKColor(r, g, b);
-    }
-    
     private async void UpdateUserTasksChart()
     {
         var tasks = await DatabaseService.GetAppTasks();
@@ -68,7 +59,7 @@ public partial class UserInsights : ContentPage
                 {
                     Label = userTask.Key,
                     ValueLabel = userTask.Value.ToString(),
-                    Color = GetRandomColor(),
+                    Color = SKColor.Parse("#0091C4"),
                 }
             );
         }
@@ -125,7 +116,7 @@ public partial class UserInsights : ContentPage
                 {
                     Label = userTask.Key,
                     ValueLabel = userTask.Value.ToString(),
-                    Color = GetRandomColor(),
+                    Color = SKColor.Parse("#0091C4"),
                 }
             );
         }

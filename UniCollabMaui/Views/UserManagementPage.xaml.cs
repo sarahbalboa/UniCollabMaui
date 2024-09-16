@@ -55,7 +55,7 @@ public partial class UserManagementPage : ContentPage
             // Create a Label for the role name
             var userLabel = new Label
             {
-                Text = $"{user.Name}",
+                Text = $"{user.Name} ({user.Email})",
                 VerticalOptions = LayoutOptions.Center
             };
 
