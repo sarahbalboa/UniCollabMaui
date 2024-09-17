@@ -79,6 +79,7 @@ namespace UniCollabMaui.Views
                     Padding = 10,
                     Margin = 5,
                     BackgroundColor = backgroundColor,
+                    BorderColor = Colors.White,
                     Content = taskContent
                 };
 

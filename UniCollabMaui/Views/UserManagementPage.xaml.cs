@@ -72,6 +72,7 @@ public partial class UserManagementPage : ContentPage
                 Padding = 10,
                 Margin = new Thickness(5, 5, 5, 20), // Add more space at the bottom,
                 BackgroundColor = backgroundColor,
+                BorderColor = Colors.White,
                 Content = userContent
             };
 

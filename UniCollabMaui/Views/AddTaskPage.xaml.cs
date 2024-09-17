@@ -30,7 +30,16 @@ namespace UniCollabMaui.Views
         {
             var users = await DatabaseService.GetUsers();
             var userId = await DatabaseService.GetUserIdFromSession(AppSession.SessionId);
-            UserPicker.ItemsSource = new List<User>(users);
+            List<User> userList = new List<User>(users);
+            List<User> activeUsersList = new List<User>();
+            foreach (var user in userList)
+            {
+                if (user.Active)
+                {
+                    activeUsersList.Add(user);
+                }
+            }
+            UserPicker.ItemsSource = activeUsersList;
 
             //check if the user is a task admin, othewise default the assigned to user to themself and readonly
             if (userId.HasValue)
