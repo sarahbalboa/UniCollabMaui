@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              BackgroundColor="white"
              x:Class="UniCollabMaui.Views.LogIn"
+             NavigationPage.HasNavigationBar="False"
              Title="LogIn">
     <ContentPage.Content>
         <Grid Padding="20">
@@ -34,9 +35,6 @@
                     
                     <Button x:Name="NextButton" Text="Next" Clicked="OnLogInButtonClicked" BackgroundColor="LightBlue" FontAttributes="Bold" TextColor="Black" CornerRadius="10" IsEnabled="False"/>
                     <Button Text="Register" Clicked="OnRegisterButtonClicked" FontAttributes="Bold" TextColor="Black" BackgroundColor="AliceBlue"/>
-                    <Button Text="Erase Users" Clicked="OnEraseUsersButtonClicked" BackgroundColor="IndianRed"  TextColor="White"/>
-
-
                 </StackLayout>
             </Frame>
             

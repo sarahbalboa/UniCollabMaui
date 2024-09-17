@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              BackgroundColor="White"
              x:Class="UniCollabMaui.Views.RegisterPage"
+             NavigationPage.HasNavigationBar="False"
              Title="Register">
     <ContentPage.Content>
         <Grid Padding="20">
@@ -29,7 +30,8 @@
                         TextColor="White"/>
 
                     <Entry x:Name="NameEntry" Placeholder="Name" PlaceholderColor="Gray" TextColor="Black" BackgroundColor="#F0F0F0" TextChanged="OnEntryTextChanged" IsSpellCheckEnabled="True" MaxLength="40"/>
-                    <Entry x:Name="UsernameEntry" Placeholder="Username" PlaceholderColor="Gray" TextColor="Black" BackgroundColor="#F0F0F0" TextChanged="OnEntryTextChanged" MaxLength="40"/>
+                    <Entry x:Name="UsernameEntry" Placeholder="Username (Student no.)" PlaceholderColor="Gray" TextColor="Black" BackgroundColor="#F0F0F0" TextChanged="OnEntryTextChanged" MaxLength="40"/>
+                    <Entry x:Name="EmailEntry" Placeholder="Email" PlaceholderColor="Gray" TextColor="Black" BackgroundColor="#F0F0F0" TextChanged="OnEntryTextChanged" MaxLength="40"/>
                     <Picker x:Name="RolePicker" Title="Select System Role" TitleColor="White" TextColor="Blue" ItemDisplayBinding="{Binding RoleName}"  BackgroundColor="#F0F0F0"/>
                     <BoxView HeightRequest="1" Color="White" HorizontalOptions="FillAndExpand" />
                     <Entry x:Name="PasswordEntry" Placeholder="Password" PlaceholderColor="Gray" TextColor="Black" BackgroundColor="#F0F0F0" IsPassword="True" TextTransform="Lowercase" TextChanged="OnEntryTextChanged" MaxLength="20"/>

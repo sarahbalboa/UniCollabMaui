@@ -67,15 +67,24 @@
 	<ItemGroup>
 	  <None Remove="Resources\Images\edit_simple.png" />
 	  <None Remove="Resources\Images\profile.svg" />
+	  <None Remove="Resources\Images\project_progress_icon.svg" />
+	  <None Remove="Resources\Images\role_management_icon.svg" />
 	  <None Remove="Resources\Images\task_board_icon.png" />
 	  <None Remove="Resources\Images\unicollab_logo.svg" />
+	  <None Remove="Resources\Images\users_progress_icon.svg" />
+	  <None Remove="Resources\Images\user_management_icon.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" Version="9.0.3" />
 		<PackageReference Include="Microcharts.Maui" Version="1.0.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="SkiaSharp" Version="2.88.8" />
+		<PackageReference Include="SkiaSharp.Views" Version="2.88.8" />
+		<PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.8" />
+		<PackageReference Include="SkiaSharp.Views.Maui.Controls.Compatibility" Version="2.88.8" />
 		<PackageReference Include="SQLite" Version="3.13.0" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
 	</ItemGroup>
@@ -87,6 +96,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Platforms\Android\Resources\values\attrs.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\AccountPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -129,6 +141,24 @@
 	  <MauiXaml Update="Views\UserManagementPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-android'">
+	  <PackageReference Include="SkiaSharp.NativeAssets.Android">
+	    <Version>2.88.8</Version>
+	  </PackageReference>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-ios'">
+	  <PackageReference Include="SkiaSharp.NativeAssets.iOS">
+	    <Version>2.88.8</Version>
+	  </PackageReference>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-maccatalyst'">
+	  <PackageReference Include="SkiaSharp.NativeAssets.iOS">
+	    <Version>2.88.8</Version>
+	  </PackageReference>
 	</ItemGroup>
 
 </Project>

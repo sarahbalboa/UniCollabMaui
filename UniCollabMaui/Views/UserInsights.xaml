@@ -4,6 +4,7 @@
              x:Class="UniCollabMaui.Views.UserInsights"
              Background="White"
              xmlns:charts="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
+             NavigationPage.HasNavigationBar="False"
              Title="UserInsights">
     <ScrollView>
         <VerticalStackLayout Spacing="25" Padding="30" VerticalOptions="Center">

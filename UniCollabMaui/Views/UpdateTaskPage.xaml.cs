@@ -11,13 +11,40 @@ public partial class UpdateTaskPage : ContentPage
 		InitializeComponent();
 
         this.taskId = taskId;
-        LoadUsers();
         if (taskId.HasValue)
         {
             LoadTask(taskId.Value);
         }
+
     }
-    private async void LoadUsers()
+
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        // Assuming you have a session ID in AppSession
+        var userId = await DatabaseService.GetUserIdFromSession(AppSession.SessionId);
+        if (userId.HasValue)
+        {
+            var userRole = await DatabaseService.GetUserRole(userId.Value);
+            var task = await DatabaseService.GetAppTaskById(taskId.Value);
+
+            // Check if the user role is system role
+            if (userRole.IsTaskAdmin != true && (task.AssignedToUserId != userId))
+            {
+                UserPicker.IsEnabled = false;
+                TaskTitleEntry.IsEnabled = false;
+                TaskDescriptionEditor.IsEnabled = false;
+                TaskColumnPicker.IsEnabled = false;
+                TaskPriorityPicker.IsEnabled = false;
+                SaveButton.IsVisible = false;
+                DeleteButton.IsVisible = false;
+            }
+        }
+    }
+
+    private async Task LoadUsers()
     {
         var users = await DatabaseService.GetUsers();
         UserPicker.ItemsSource = new List<User>(users);
@@ -25,6 +52,7 @@ public partial class UpdateTaskPage : ContentPage
 
     private async void LoadTask(int id)
     {
+        await LoadUsers();
         var task = await DatabaseService.GetAppTaskById(id);
         if (task != null)
         {
@@ -32,8 +60,9 @@ public partial class UpdateTaskPage : ContentPage
             TaskDescriptionEditor.Text = task.Description;
             TaskColumnPicker.SelectedItem = task.Column;
             TaskPriorityPicker.SelectedItem = task.Priority;
+            
             List<User> users = (List<User>)UserPicker.ItemsSource;
-
+            
             //Initialize a variable to hold the selected user
             User selectedUser = null;
 
@@ -62,12 +91,18 @@ public partial class UpdateTaskPage : ContentPage
             await DisplayAlert("Error", "Please fill in all the task details.", "OK");
             return;
         }
+        
 
         var selectedUser = (User)UserPicker.SelectedItem;
         var title = TaskTitleEntry.Text;
         var description = TaskDescriptionEditor.Text;
         var column = TaskColumnPicker.SelectedItem.ToString();
         var priority = TaskPriorityPicker.SelectedItem.ToString();
+
+        if (!selectedUser.Active) {
+            await DisplayAlert("Error", "Assigned to User is Inactive. Please select an active user.", "OK");
+            return;
+        }
 
         await DatabaseService.UpdateAppTask(taskId.Value, title, description, column, priority, selectedUser.Id);
 

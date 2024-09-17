@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              Background="LightSkyBlue"
+             NavigationPage.HasNavigationBar="False"
              x:Class="UniCollabMaui.Views.AddTaskPage">
     <ContentPage.Content>
         <StackLayout Padding="20" Spacing="5" >
@@ -15,7 +16,7 @@
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>ToDo</x:String>
-                        <x:String>InProgress</x:String>
+                        <x:String>In Progress</x:String>
                         <x:String>Done</x:String>
                     </x:Array>
                 </Picker.ItemsSource>

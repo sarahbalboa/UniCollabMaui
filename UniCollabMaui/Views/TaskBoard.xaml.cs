@@ -79,6 +79,7 @@ namespace UniCollabMaui.Views
                     Padding = 10,
                     Margin = 5,
                     BackgroundColor = backgroundColor,
+                    BorderColor = Colors.White,
                     Content = taskContent
                 };
 
@@ -91,7 +92,7 @@ namespace UniCollabMaui.Views
                     case "ToDo":
                         ToDoColumn.Children.Add(taskView);
                         break;
-                    case "InProgress":
+                    case "In Progress":
                         InProgressColumn.Children.Add(taskView);
                         break;
                     case "Done":
@@ -128,12 +129,6 @@ namespace UniCollabMaui.Views
         {
             base.OnAppearing();
             LoadTasks();
-        }
-
-        private async void OnEraseTasksButtonClicked(object sender, EventArgs e)
-        {
-            await DatabaseService.EraseAllTasksData();
-            ReloadPage();
         }
     }
 }

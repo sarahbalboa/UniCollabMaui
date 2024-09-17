@@ -55,7 +55,7 @@ public partial class UserManagementPage : ContentPage
             // Create a Label for the role name
             var userLabel = new Label
             {
-                Text = $"{user.Name}",
+                Text = $"{user.Name} ({user.Email})",
                 VerticalOptions = LayoutOptions.Center
             };
 
@@ -72,6 +72,7 @@ public partial class UserManagementPage : ContentPage
                 Padding = 10,
                 Margin = new Thickness(5, 5, 5, 20), // Add more space at the bottom,
                 BackgroundColor = backgroundColor,
+                BorderColor = Colors.White,
                 Content = userContent
             };
 

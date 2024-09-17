@@ -3,49 +3,62 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UniCollabMaui.Views.AccountPage"
              BackgroundColor="White"
+             NavigationPage.HasNavigationBar="False"
              Title="AccountPage">
-    <StackLayout Padding="30" VerticalOptions="Start">
+    <Grid RowDefinitions="*,Auto" Padding="20">
+    <StackLayout Padding="30" VerticalOptions="Start" Grid.Row="0" >
        
         <Frame x:Name="FrameIcon" CornerRadius="50"
                HasShadow="False"
                Padding="20"
                BorderColor="White"
-               BackgroundColor="{StaticResource MyBlue2}"
-               >
+               BackgroundColor="{StaticResource MyBlue2}">
         <Image x:Name ="ProfileImage" Source="profile.png" 
                Aspect="AspectFill"
                WidthRequest="100"
-               HeightRequest="100" />
+               HeightRequest="100" 
+               />
             </Frame>
         
         <Label x:Name="AccountName"  TextColor="{StaticResource MyBlue2}" TextDecorations="Underline" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"/>
+        <Label x:Name="EmailLbl"  TextColor="{StaticResource MyBlue2}" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="Center"/>
         <Label x:Name="CurrentRoleLbl"  TextColor="{StaticResource MyBlue2}" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="Center"/>
 
         <BoxView HeightRequest="5" BackgroundColor="White" HorizontalOptions="FillAndExpand" />
         <!-- Grid Layout for the Labels -->
-        <Frame BorderColor="{StaticResource MyBlue2}" CornerRadius="5" Padding="5" HasShadow="False" HorizontalOptions="Center" VerticalOptions="Center" Background="WHite">
-            <Grid HorizontalOptions="Center" VerticalOptions="Center" Padding="10"  >
-                <!-- Define two rows and two columns -->
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
+            <Frame BorderColor="{StaticResource MyBlue2}" CornerRadius="5" Padding="5" HasShadow="False" HorizontalOptions="Center" VerticalOptions="Center" Background="WHite">
+                <Grid HorizontalOptions="Center" VerticalOptions="Center" Padding="10" >
+                    <!-- Define two rows and two columns -->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
 
-                <!-- Place Labels in Grid -->
+                    <!-- Place Labels in Grid -->
 
-                <Label x:Name="ToDoLbl" Grid.Row="0" Grid.Column="0" FontSize="Small" TextColor="SteelBlue" HorizontalOptions="Start" VerticalOptions="Center"/>
-                <Label x:Name="InProgressLbl" Grid.Row="1" Grid.Column="0" FontSize="Small" TextColor="Green" HorizontalOptions="Start" VerticalOptions="Center"/>
-                <Label x:Name="DoneLbl" Grid.Row="2" Grid.Column="0" FontSize="Small" TextColor="Red" HorizontalOptions="Start" VerticalOptions="Center"/>
-                <BoxView Grid.Row="3" Grid.Column="0" HeightRequest="3" BackgroundColor="{StaticResource MyBlue2}" HorizontalOptions="FillAndExpand" />
-                <Label x:Name="TotalTasksLbl" Grid.Row="4" Grid.Column="0" FontSize="Small" FontAttributes="Bold" TextColor="{StaticResource MyBlue2}" HorizontalOptions="Start" VerticalOptions="Center"/>
-            </Grid>
-        </Frame>
+                    <Label x:Name="ToDoLbl" Grid.Row="0" Grid.Column="0" FontSize="Small" TextColor="SteelBlue" HorizontalOptions="Start" VerticalOptions="Center"/>
+                    <Label x:Name="InProgressLbl" Grid.Row="1" Grid.Column="0" FontSize="Small" TextColor="Green" HorizontalOptions="Start" VerticalOptions="Center"/>
+                    <Label x:Name="DoneLbl" Grid.Row="2" Grid.Column="0" FontSize="Small" TextColor="Red" HorizontalOptions="Start" VerticalOptions="Center"/>
+                    <Border Grid.Row="3" Grid.Column="0"  Stroke="{StaticResource MyBlue2}"
+                        StrokeThickness="2"
+                        StrokeDashArray="1,1"
+                        StrokeShape="Rectangle 40,0,0,40"
+                        Background="Transparent"
+                        Padding="16,8"
+                        HorizontalOptions="Center">
+                        <Label x:Name="TotalTasksLbl" Grid.Row="4" Grid.Column="0" FontSize="Small" FontAttributes="Bold" 
+                               TextColor="{StaticResource MyBlue2}" HorizontalOptions="Start" VerticalOptions="Center"/>
+                    </Border>
+                </Grid>
+            </Frame>
+        </StackLayout>
+        <Button x:Name="LogOutBtn" Text="Log out" Clicked="OnLogoutButtonClicked" HorizontalOptions="Center" 
+                VerticalOptions="End" TextColor="White" BackgroundColor="Red" FontSize="Small" Grid.Row="1"/>
 
-    </StackLayout>
+    </Grid>
 </ContentPage>

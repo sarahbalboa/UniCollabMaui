@@ -15,7 +15,8 @@ public partial class AccountPage : ContentPage
         var user = await DatabaseService.GetUserById((int)userId);
 
         AccountName.Text = user.Name;
-        CurrentRoleLbl.Text = "Role: " + userRole.ToString();
+        EmailLbl.Text = user.Email;
+        CurrentRoleLbl.Text = "Role: " + userRole.RoleName.ToString();
 
         DisplayUserTaskCount((int)userId);
 
@@ -40,7 +41,7 @@ public partial class AccountPage : ContentPage
                     case "ToDo":
                         todoTasks++;
                         break;
-                    case "InProgress":
+                    case "In Progress":
                         inProgressTasks++;
                         break;
                     case "Done":
@@ -60,5 +61,19 @@ public partial class AccountPage : ContentPage
         TotalTasksLbl.Text = "Total: " + totalUserTasks.ToString();
     }
 
-    ///add button to log out and the button to use the logouticon.png icon
+    private async void OnLogoutButtonClicked(object sender, EventArgs e)
+    {
+        // Log out the user by deleting the session
+        await DatabaseService.Logout(AppSession.SessionId);
+
+        // Clear the session ID stored in AppSession
+        AppSession.SessionId = null;
+
+        // Clear the navigation stack by setting the login page as the new root
+        Application.Current.MainPage = new NavigationPage(new MainPage());
+
+        // Optionally, you can also call GC.Collect() to clean up memory, though it's not usually necessary
+        // GC.Collect();
+    }
+
 }

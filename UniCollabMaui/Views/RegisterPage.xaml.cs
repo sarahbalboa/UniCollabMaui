@@ -1,7 +1,10 @@
+using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Storage;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using UniCollabMaui.Models;
 using UniCollabMaui.Service;
 
@@ -23,7 +26,7 @@ namespace UniCollabMaui.Views
             List<Role> systemRoleList = new List<Role>();
             //remove non system default roles
             foreach (Role role in roleList) {   
-                if(role.IsSystemRole == true)
+                if(role.IsSystemRole == true && role.Active == true)
                 {
                     systemRoleList.Add(role);
                 }
@@ -34,7 +37,7 @@ namespace UniCollabMaui.Views
         private async void OnRegisterButtonClicked(object sender, EventArgs e)
         {
             // Validate input fields
-            if (string.IsNullOrEmpty(NameEntry.Text) || string.IsNullOrEmpty(UsernameEntry.Text) || string.IsNullOrEmpty(PasswordEntry.Text) || (Role)RolePicker.SelectedItem == null)
+            if (string.IsNullOrEmpty(NameEntry.Text) || string.IsNullOrEmpty(UsernameEntry.Text) || string.IsNullOrEmpty(EmailEntry.Text) || string.IsNullOrEmpty(PasswordEntry.Text) || (Role)RolePicker.SelectedItem == null)
             {
                 await DisplayAlert("Error", "Please fill out all fields.", "OK");
                 return;
@@ -42,13 +45,21 @@ namespace UniCollabMaui.Views
 
             var name = NameEntry.Text;
             var username = UsernameEntry.Text;
+            var email = EmailEntry.Text;
             var password = PasswordEntry.Text;
             var role = (Role)RolePicker.SelectedItem;
             
             // Add the user to the database
-            await DatabaseService.AddUser(name, true, username, password, role.Id);
+            await DatabaseService.AddUser(name, true, username, email, password, role.Id);
 
-            await DisplayAlert("Success", "Registration successful.", "OK");
+
+            //add toast of registration successful
+
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+            await Toast.Make("User registered",
+                      ToastDuration.Short,
+                      16)
+                .Show(cancellationTokenSource.Token);
 
             // Navigate back to the login page
             await Navigation.PopAsync();
@@ -59,7 +70,9 @@ namespace UniCollabMaui.Views
             // Enable the register button if all entries are filled
             RegisterButton.IsEnabled = !string.IsNullOrEmpty(NameEntry.Text) &&
                                        !string.IsNullOrEmpty(UsernameEntry.Text) &&
-                                       !string.IsNullOrEmpty(PasswordEntry.Text);
+                                       !string.IsNullOrEmpty(EmailEntry.Text) &&
+                                       !string.IsNullOrEmpty(PasswordEntry.Text) &&
+                                       !((Role)RolePicker.SelectedItem == null);
         }
 
         private async void OnCancelButtonClicked(object sender, EventArgs e)

@@ -13,6 +13,11 @@ namespace UniCollabMaui.Views
         {
             InitializeComponent();
         }
+        protected override bool OnBackButtonPressed()
+        {
+            // Return true to disable the back button functionality
+            return true;
+        }
 
         private async void OnLogInButtonClicked(object sender, EventArgs e)
         {
@@ -28,12 +33,21 @@ namespace UniCollabMaui.Views
 
             // Attempt to log in
             var user = await DatabaseService.ValidateUser(username, password);
-
+            
             if (user != null)
             {
-                AppSession.SessionId = await DatabaseService.CreateSession(user.Id);
-                // Navigate to another view, e.g., HomePage
-                await Navigation.PushAsync(new MainTabbedPage());
+                    if (user.Active)
+                    {
+                        AppSession.SessionId = await DatabaseService.CreateSession(user.Id);
+                        // Navigate to another view, e.g., HomePage
+                        await Navigation.PushAsync(new MainTabbedPage());
+
+                    }
+                    else
+                    {
+                        await DisplayAlert("Error", "Your account is Inactive. Please contact a system administrator.", "OK");
+                    }
+                
             }
             else
             {
@@ -99,11 +113,6 @@ namespace UniCollabMaui.Views
         {
             // Navigate to the Register page (implement registration page navigation)
             await Navigation.PushAsync(new RegisterPage());
-        }
-
-        private async void OnEraseUsersButtonClicked(object sender, EventArgs e)
-        {
-            await DatabaseService.EraseAllUsersData();
         }
     }
 }
