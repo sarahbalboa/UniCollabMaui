@@ -26,7 +26,7 @@ namespace UniCollabMaui.Views
             List<Role> systemRoleList = new List<Role>();
             //remove non system default roles
             foreach (Role role in roleList) {   
-                if(role.IsSystemRole == true)
+                if(role.IsSystemRole == true && role.Active == true)
                 {
                     systemRoleList.Add(role);
                 }

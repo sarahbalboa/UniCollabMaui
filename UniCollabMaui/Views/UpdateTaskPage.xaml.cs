@@ -91,12 +91,18 @@ public partial class UpdateTaskPage : ContentPage
             await DisplayAlert("Error", "Please fill in all the task details.", "OK");
             return;
         }
+        
 
         var selectedUser = (User)UserPicker.SelectedItem;
         var title = TaskTitleEntry.Text;
         var description = TaskDescriptionEditor.Text;
         var column = TaskColumnPicker.SelectedItem.ToString();
         var priority = TaskPriorityPicker.SelectedItem.ToString();
+
+        if (!selectedUser.Active) {
+            await DisplayAlert("Error", "Assigned to User is Inactive. Please select an active user.", "OK");
+            return;
+        }
 
         await DatabaseService.UpdateAppTask(taskId.Value, title, description, column, priority, selectedUser.Id);
 

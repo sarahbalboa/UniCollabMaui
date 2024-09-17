@@ -12,12 +12,12 @@
                HasShadow="False"
                Padding="20"
                BorderColor="White"
-               BackgroundColor="{StaticResource MyBlue2}"
-               >
+               BackgroundColor="{StaticResource MyBlue2}">
         <Image x:Name ="ProfileImage" Source="profile.png" 
                Aspect="AspectFill"
                WidthRequest="100"
-               HeightRequest="100" />
+               HeightRequest="100" 
+               />
             </Frame>
         
         <Label x:Name="AccountName"  TextColor="{StaticResource MyBlue2}" TextDecorations="Underline" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"/>
@@ -34,7 +34,6 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -45,8 +44,16 @@
                     <Label x:Name="ToDoLbl" Grid.Row="0" Grid.Column="0" FontSize="Small" TextColor="SteelBlue" HorizontalOptions="Start" VerticalOptions="Center"/>
                     <Label x:Name="InProgressLbl" Grid.Row="1" Grid.Column="0" FontSize="Small" TextColor="Green" HorizontalOptions="Start" VerticalOptions="Center"/>
                     <Label x:Name="DoneLbl" Grid.Row="2" Grid.Column="0" FontSize="Small" TextColor="Red" HorizontalOptions="Start" VerticalOptions="Center"/>
-                    <BoxView Grid.Row="3" Grid.Column="0" HeightRequest="3" BackgroundColor="{StaticResource MyBlue2}" HorizontalOptions="FillAndExpand" />
-                    <Label x:Name="TotalTasksLbl" Grid.Row="4" Grid.Column="0" FontSize="Small" FontAttributes="Bold" TextColor="{StaticResource MyBlue2}" HorizontalOptions="Start" VerticalOptions="Center"/>
+                    <Border Grid.Row="3" Grid.Column="0"  Stroke="{StaticResource MyBlue2}"
+                        StrokeThickness="2"
+                        StrokeDashArray="1,1"
+                        StrokeShape="Rectangle 40,0,0,40"
+                        Background="Transparent"
+                        Padding="16,8"
+                        HorizontalOptions="Center">
+                        <Label x:Name="TotalTasksLbl" Grid.Row="4" Grid.Column="0" FontSize="Small" FontAttributes="Bold" 
+                               TextColor="{StaticResource MyBlue2}" HorizontalOptions="Start" VerticalOptions="Center"/>
+                    </Border>
                 </Grid>
             </Frame>
         </StackLayout>
