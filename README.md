@@ -2,7 +2,9 @@
 
 ![.NET 8.0](https://img.shields.io/badge/.NET-8.0-512BD4?logo=dotnet&logoColor=white)
 
-![GitHub last commit](https://img.shields.io/github/last-commit/sarahbalboa/UniCollabMaui/development?logo=github)
+![Last Commit Date](https://img.shields.io/badge/Last%20Push%20Date-2024--09--17-brightgreen?logo=github)
+
+
 
 
 # **Libraries**
