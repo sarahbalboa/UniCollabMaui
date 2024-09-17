@@ -41,6 +41,13 @@ public partial class UpdateRolePage : ContentPage
             IsTaskViewerCheckbox.IsEnabled = false;
             IsProgressViewerCheckbox.IsEnabled = false;
             RoleNameEntry.IsEnabled = false;
+
+            //user should be unable to set to Inactive the Admin Role
+            //so that there is aways at least one active role that can manage roles/users
+            if (role.RoleName == "Administrator")
+            {
+                ActiveCheckbox.IsEnabled = false;
+            }
         }
 
 

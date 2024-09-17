@@ -40,7 +40,16 @@ public partial class UpdateUserPage : ContentPage
     {
         var roles = await DatabaseService.GetRoles();
         List<Role> roleList = new List<Role>(roles);
-        RolePicker.ItemsSource = roleList;
+        List<Role> activeRoleList = new List<Role>();
+
+        //list only active roles
+        foreach (Role role in roles) {
+            if (role.Active) { 
+                activeRoleList.Add(role);
+            }
+        }
+
+        RolePicker.ItemsSource = activeRoleList;
     }
 
     private async void LoadUser(int userId)
