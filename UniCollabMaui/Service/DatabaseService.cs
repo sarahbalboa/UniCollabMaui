@@ -85,6 +85,13 @@ namespace UniCollabMaui.Service
             return await db.Table<User>().FirstOrDefaultAsync(u => u.Username == username && u.Password == password);
         }
 
+        public static async Task<bool> ValidateUniqueUser(string username)
+        {
+            await Init();
+            var existingUser = await db.Table<User>().FirstOrDefaultAsync(u => u.Username == username);
+            return existingUser == null;
+        }
+
         // New methods for session management
         public static async Task<string> CreateSession(int userId)
         {
