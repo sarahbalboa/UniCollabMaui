@@ -1,3 +1,5 @@
+# **UniCollab**
+
 ![Made with Visual Studio](https://img.shields.io/badge/Made%20with-Visual%20Studio%202022-blueviolet?logo=visualstudio&logoColor=white)
 
 ![.NET 8.0](https://img.shields.io/badge/.NET-8.0-512BD4?logo=dotnet&logoColor=white)
@@ -7,7 +9,7 @@
 
 
 
-# **Libraries**
+## **Libraries**
 
 ![CommunityToolkit.Maui](https://img.shields.io/badge/CommunityToolkit.Maui-9.0.3-blueviolet)
 
