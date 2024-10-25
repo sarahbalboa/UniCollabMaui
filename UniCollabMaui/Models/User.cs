@@ -16,7 +16,7 @@ namespace UniCollabMaui.Models
         public string ?Name { get; set; }
         public string ?Username { get; set; } //student no
         public string ?Password { get; set; }
-        public int RoleId { get; set; }   
+        //public int RoleId { get; set; }   
         public string Email { get; set; }
     }
 }

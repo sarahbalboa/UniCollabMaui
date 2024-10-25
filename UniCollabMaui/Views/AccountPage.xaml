@@ -22,7 +22,7 @@
         
         <Label x:Name="AccountName"  TextColor="{StaticResource MyBlue2}" TextDecorations="Underline" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Center"/>
         <Label x:Name="EmailLbl"  TextColor="{StaticResource MyBlue2}" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="Center"/>
-        <Label x:Name="CurrentRoleLbl"  TextColor="{StaticResource MyBlue2}" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="Center"/>
+            <!--<Label x:Name="CurrentRoleLbl"  TextColor="{StaticResource MyBlue2}" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="Center"/> -->
 
         <BoxView HeightRequest="5" BackgroundColor="White" HorizontalOptions="FillAndExpand" />
         <!-- Grid Layout for the Labels -->
