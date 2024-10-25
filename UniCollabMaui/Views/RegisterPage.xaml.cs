@@ -32,22 +32,35 @@ namespace UniCollabMaui.Views
             var username = UsernameEntry.Text;
             var email = EmailEntry.Text;
             var password = PasswordEntry.Text;
-            
-            
-            // Add the user to the database
-            await DatabaseService.AddUser(name, true, username, email, password);
 
-
-            //add toast of registration successful
-
+            // Attempt to log in
+            var isUniqueUser = await DatabaseService.ValidateUniqueUser(username);
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-            await Toast.Make("User registered",
-                      ToastDuration.Short,
-                      16)
-                .Show(cancellationTokenSource.Token);
+            if (isUniqueUser)
+            {
 
-            // Navigate back to the login page
-            await Navigation.PopAsync();
+                // Add the user to the database
+                await DatabaseService.AddUser(name, true, username, email, password);
+                //add toast of registration successful
+
+                
+                await Toast.Make("User registered",
+                          ToastDuration.Short,
+                          16)
+                    .Show(cancellationTokenSource.Token);
+
+                // Navigate back to the login page
+                await Navigation.PopAsync();
+
+            }
+            else
+            {
+                await Toast.Make("Username must be unique, please use a different username",
+                          ToastDuration.Short,
+                          16)
+                    .Show(cancellationTokenSource.Token);
+            }
+            
         }
 
         private void OnEntryTextChanged(object sender, TextChangedEventArgs e)
