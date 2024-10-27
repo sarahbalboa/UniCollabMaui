@@ -42,7 +42,7 @@
 		<AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
 		<AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
 		<GenerateTestArtifacts>True</GenerateTestArtifacts>
-		<AppInstallerUri>C:\Users\40496531\OneDrive - Edinburgh Napier University\Desktop\Uni\honours project\Publish\1.0</AppInstallerUri>
+		<AppInstallerUri>C:\Users\40496531\OneDrive - Edinburgh Napier University\Desktop\Uni\honours project\Publish\2.0</AppInstallerUri>
 		<HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
 		<PackageCertificateThumbprint>308EB5CA3DAAB753F1FF6C741647484EC7B6EB68</PackageCertificateThumbprint>
 	</PropertyGroup>
