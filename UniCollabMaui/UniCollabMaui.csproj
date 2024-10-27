@@ -44,7 +44,7 @@
 		<GenerateTestArtifacts>True</GenerateTestArtifacts>
 		<AppInstallerUri>C:\Users\40496531\OneDrive - Edinburgh Napier University\Desktop\Uni\honours project\Publish\2.0</AppInstallerUri>
 		<HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
-		<PackageCertificateThumbprint>308EB5CA3DAAB753F1FF6C741647484EC7B6EB68</PackageCertificateThumbprint>
+		<PackageCertificateThumbprint>8A8F49DF9534AF8EBC9A259782FC22495A9651AE</PackageCertificateThumbprint>
 	</PropertyGroup>
 
 	<ItemGroup>
