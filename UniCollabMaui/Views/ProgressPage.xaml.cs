@@ -71,11 +71,17 @@ public partial class ProgressPage : ContentPage
                 }
                 
             }
+
+            progress = Math.Round(doneTasks / allTasks.Count, 2);
+            MyProgressBar.Progress = progress;
+            var percentageProgress = (Math.Round((progress * 100), 2) + "% Done");
+            ProgressLbl.Text = "Project current progress: " + percentageProgress.ToString();
         }
-        progress = Math.Round(doneTasks / allTasks.Count, 2);
-        MyProgressBar.Progress = progress;
-        var percentageProgress = (Math.Round((progress * 100),2) + "% Done");
-        ProgressLbl.Text = "Project current progress: " + percentageProgress.ToString();
+        else
+        {
+            MyProgressBar.Progress = 0;
+            ProgressLbl.Text = "Project current progress: 0%";
+        }
 
     }
 
