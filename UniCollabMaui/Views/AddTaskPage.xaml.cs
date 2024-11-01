@@ -66,11 +66,12 @@ namespace UniCollabMaui.Views
             
 
             //check that all required fields are entered
-            if ((User)UserPicker.SelectedItem == null || string.IsNullOrEmpty(TaskTitleEntry.Text) || string.IsNullOrEmpty(TaskDescriptionEditor.Text) || TaskColumnPicker.SelectedItem == null || TaskPriorityPicker.SelectedItem == null)
+            if ( string.IsNullOrEmpty(TaskTitleEntry.Text) || string.IsNullOrEmpty(TaskDescriptionEditor.Text) || TaskColumnPicker.SelectedItem == null || TaskPriorityPicker.SelectedItem == null)
             {
                 await DisplayAlert("Error", "Please fill in all the task details.", "OK");
                 return;
             }
+            
 
             var selectedUser = (User)UserPicker.SelectedItem;
             var title = TaskTitleEntry.Text;
@@ -79,9 +80,16 @@ namespace UniCollabMaui.Views
             var priority = TaskPriorityPicker.SelectedItem.ToString();
 
 
+            if ((User)UserPicker.SelectedItem == null) //if user is not selected, assign it to Unassigned user
+            {
+                await DatabaseService.AddAppTask(title, description, column, priority, 1);
+            }
+            else
+            {
+                await DatabaseService.AddAppTask(title, description, column, priority, selectedUser.Id);
+            }
 
-
-            await DatabaseService.AddAppTask(title, description, column, priority, selectedUser.Id);
+            
 
             await Navigation.PopAsync();
 
