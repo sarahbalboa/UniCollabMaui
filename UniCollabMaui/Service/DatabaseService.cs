@@ -30,6 +30,7 @@ namespace UniCollabMaui.Service
             await Init();
             var user = new User
             {
+                // Do NOT set the Id; let PostgreSQL handle it
                 Name = name,
                 Active = active,
                 Username = username,
@@ -37,8 +38,14 @@ namespace UniCollabMaui.Service
                 Password = password,
                 RoleId = role,
             };
-            await _client.From<User>().Insert(user);
+
+            // Insert the user record into the Supabase User table
+            var response = await _client.From<User>().Insert(user);
+
+            // Optionally, retrieve the auto-generated ID
+            user.Id = response.Models.First().Id; // This assumes your response returns the new user with the generated Id
         }
+
 
         public static async Task UpdateUser(int userId, string name, bool active, int role)
         {
@@ -81,7 +88,7 @@ namespace UniCollabMaui.Service
         public static async Task<bool> ValidateUniqueUser(string username)
         {
             await Init();
-            var user = await _client.From<User>().Filter("username", Postgrest.Constants.Operator.Equals, username).Single();
+            var user = await _client.From<User>().Filter("Username", Postgrest.Constants.Operator.Equals, username).Single();
             return user == null;
         }
 
