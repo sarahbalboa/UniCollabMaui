@@ -43,14 +43,14 @@ namespace UniCollabMaui.Service
             var response = await _client.From<User>().Insert(user);
 
             // Optionally, retrieve the auto-generated ID
-            user.Id = response.Models.First().Id; // This assumes your response returns the new user with the generated Id
+            //user.Id = response.Models.First().Id; // This assumes your response returns the new user with the generated Id
         }
 
 
         public static async Task UpdateUser(int userId, string name, bool active, int role)
         {
             await Init();
-            var user = await _client.From<User>().Filter("id", Postgrest.Constants.Operator.Equals, userId).Single();
+            var user = await _client.From<User>().Filter("Id", Postgrest.Constants.Operator.Equals, userId).Single();
             if (user != null)
             {
                 user.Name = name;
@@ -64,8 +64,8 @@ namespace UniCollabMaui.Service
         {
             await Init();
             var user = await _client.From<User>()
-                .Filter("username", Postgrest.Constants.Operator.Equals, username)
-                .Filter("password", Postgrest.Constants.Operator.Equals, password)
+                .Filter("Username", Postgrest.Constants.Operator.Equals, username)
+                .Filter("Password", Postgrest.Constants.Operator.Equals, password)
                 .Single();
             return user;
         }
@@ -73,7 +73,7 @@ namespace UniCollabMaui.Service
         {
             await Init();
             return await _client.From<User>()
-                .Filter("id", Postgrest.Constants.Operator.Equals, userId)
+                .Filter("Id", Postgrest.Constants.Operator.Equals, userId)
                 .Single();
         }
 
@@ -115,8 +115,8 @@ namespace UniCollabMaui.Service
         {
             await Init();
             var session = await _client.From<Session>()
-                .Filter("sessionId", Postgrest.Constants.Operator.Equals, sessionId)
-                .Filter("expiresAt", Postgrest.Constants.Operator.GreaterThan, DateTime.UtcNow)
+                .Filter("SessionId", Postgrest.Constants.Operator.Equals, sessionId)
+                .Filter("ExpiresAt", Postgrest.Constants.Operator.GreaterThan, DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ"))
                 .Single();
             return session?.UserId;
         }
@@ -125,7 +125,7 @@ namespace UniCollabMaui.Service
         {
             await Init();
             var session = await _client.From<Session>()
-                .Filter("sessionId", Postgrest.Constants.Operator.Equals, sessionId)
+                .Filter("SessionId", Postgrest.Constants.Operator.Equals, sessionId)
                 .Single();
             if (session != null)
             {
@@ -138,9 +138,9 @@ namespace UniCollabMaui.Service
         public static async Task<Role> GetUserRole(int userId)
         {
             await Init();
-            var user = await _client.From<User>().Filter("id", Postgrest.Constants.Operator.Equals, userId).Single();
+            var user = await _client.From<User>().Filter("Id", Postgrest.Constants.Operator.Equals, userId).Single();
             if (user == null) return null;
-            return await _client.From<Role>().Filter("id", Postgrest.Constants.Operator.Equals, user.RoleId).Single();
+            return await _client.From<Role>().Filter("Id", Postgrest.Constants.Operator.Equals, user.RoleId).Single();
         }
 
         //----------------- Task methods --------------------------
@@ -165,7 +165,7 @@ namespace UniCollabMaui.Service
 
             // Fetch the AppTask by its ID
             return await _client.From<AppTask>()
-                .Filter("id", Postgrest.Constants.Operator.Equals, id)
+                .Filter("Id", Postgrest.Constants.Operator.Equals, id)
                 .Single();
 
         }
@@ -173,7 +173,7 @@ namespace UniCollabMaui.Service
         public static async Task UpdateAppTask(int id, string title, string description, string column, string priority, int assignedToUserId)
         {
             await Init();
-            var task = await _client.From<AppTask>().Filter("id", Postgrest.Constants.Operator.Equals, id).Single();
+            var task = await _client.From<AppTask>().Filter("Id", Postgrest.Constants.Operator.Equals, id).Single();
             if (task != null)
             {
                 task.Title = title;
@@ -188,7 +188,7 @@ namespace UniCollabMaui.Service
         public static async Task RemoveAppTask(int id)
         {
             await Init();
-            var task = await _client.From<AppTask>().Filter("id", Postgrest.Constants.Operator.Equals, id).Single();
+            var task = await _client.From<AppTask>().Filter("Id", Postgrest.Constants.Operator.Equals, id).Single();
             if (task != null)
             {
                 await _client.From<AppTask>().Delete(task);
@@ -207,7 +207,7 @@ namespace UniCollabMaui.Service
         public static async Task AddRole(Role role)
         {
             await Init();
-            var existingRole = await _client.From<Role>().Filter("roleName", Postgrest.Constants.Operator.Equals, role.RoleName).Single();
+            var existingRole = await _client.From<Role>().Filter("RoleName", Postgrest.Constants.Operator.Equals, role.RoleName).Single();
             if (existingRole == null)
             {
                 await _client.From<Role>().Insert(role);
@@ -226,7 +226,7 @@ namespace UniCollabMaui.Service
         {
             await Init();
             return await _client.From<Role>()
-                .Filter("id", Postgrest.Constants.Operator.Equals, roleId)
+                .Filter("Id", Postgrest.Constants.Operator.Equals, roleId)
                 .Single();
         }
 
@@ -237,7 +237,7 @@ namespace UniCollabMaui.Service
 
             // Fetch the existing role
             var role = await _client.From<Role>()
-                .Filter("id", Postgrest.Constants.Operator.Equals, roleId)
+                .Filter("Id", Postgrest.Constants.Operator.Equals, roleId)
                 .Single();
 
             if (role != null)

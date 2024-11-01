@@ -1,4 +1,6 @@
-﻿using Postgrest.Models; // Make sure to include this namespace
+﻿//using SQLite;
+using Postgrest.Models;
+using System.ComponentModel.DataAnnotations.Schema; // Make sure to include this namespace
 
 namespace UniCollabMaui.Models
 {
