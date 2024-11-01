@@ -1,11 +1,9 @@
-﻿using SQLite;
+﻿using Postgrest.Models; // Make sure to include this namespace
 
 namespace UniCollabMaui.Models
 {
-    [Table("AppTask")]
-    public class AppTask
+    public class AppTask : BaseModel
     {
-        [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         public string ?Title { get; set; }
         public string ?Description { get; set; }

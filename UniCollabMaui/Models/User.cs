@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SQLite;
+﻿using Postgrest.Models; // Make sure to include this namespace
 
 namespace UniCollabMaui.Models
 {
-    [Table("User")]
-    public class User
+    public class User : BaseModel
     {
-        [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         public bool Active {  get; set; }
         public string ?Name { get; set; }

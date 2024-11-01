@@ -1,16 +1,11 @@
-﻿using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Postgrest.Models; // Make sure to include this namespace
 
 namespace UniCollabMaui.Models
 {
-    [Table("Session")]
-    public class Session
+
+    public class Session : BaseModel
     {
-        [PrimaryKey]
+
         public string SessionId { get; set; }
         public int UserId { get; set; }
         public DateTime ExpiresAt { get; set; }
