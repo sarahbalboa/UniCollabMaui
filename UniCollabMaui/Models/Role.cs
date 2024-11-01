@@ -1,16 +1,13 @@
-﻿using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using Postgrest.Attributes;
+using Postgrest.Models;
 
 namespace UniCollabMaui.Models
 {
     [Table("Role")]
-    public class Role
+    public class Role : BaseModel
     {
-        [PrimaryKey, AutoIncrement]
+        [PrimaryKey("Id", false)]
         public int Id { get; set; } 
         public string ?RoleName { get; set; }
         public bool Active { get; set; }

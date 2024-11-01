@@ -1,22 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SQLite;
+﻿using Postgrest.Attributes;
+using Postgrest.Models;
+
+
 
 namespace UniCollabMaui.Models
 {
     [Table("User")]
-    public class User
+    public class User : BaseModel
     {
-        [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
-        public bool Active {  get; set; }
-        public string ?Name { get; set; }
-        public string ?Username { get; set; } //student no
-        public string ?Password { get; set; }
-        public int RoleId { get; set; }   
-        public string Email { get; set; }
+        [PrimaryKey("Id", false)]
+        public int Id { get; set; }  // Use nullable long to avoid setting it explicitly
+
+        public bool Active { get; set; }
+        public string? Name { get; set; }
+        public int Username { get; set; }
+        public string? Password { get; set; }
+        public int RoleId { get; set; }
+        public string? Email { get; set; }
     }
 }

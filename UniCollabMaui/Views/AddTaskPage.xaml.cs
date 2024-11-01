@@ -82,7 +82,7 @@ namespace UniCollabMaui.Views
 
             if ((User)UserPicker.SelectedItem == null) //if user is not selected, assign it to Unassigned user
             {
-                await DatabaseService.AddAppTask(title, description, column, priority, 1);
+                await DatabaseService.AddAppTask(title, description, column, priority, 0);
             }
             else
             {
