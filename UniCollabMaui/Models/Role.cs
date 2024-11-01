@@ -1,11 +1,13 @@
-﻿//using SQLite;
+﻿
+using Postgrest.Attributes;
 using Postgrest.Models;
-using System.ComponentModel.DataAnnotations.Schema; // Make sure to include this namespace
 
 namespace UniCollabMaui.Models
 {
+    [Table("Role")]
     public class Role : BaseModel
     {
+        [PrimaryKey("Id", false)]
         public int Id { get; set; } 
         public string ?RoleName { get; set; }
         public bool Active { get; set; }
