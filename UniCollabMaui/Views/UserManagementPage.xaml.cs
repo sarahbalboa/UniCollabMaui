@@ -41,6 +41,9 @@ public partial class UserManagementPage : ContentPage
 
         foreach (var user in users)
         {
+            //do not display unassigned user
+            if(user.Name == "Unassigned"){continue;}
+
             var backgroundColor = GetUserColor(user);
 
             // Create an Image for the icon

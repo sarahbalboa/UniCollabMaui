@@ -12,8 +12,18 @@ namespace UniCollabMaui.Service
     public static class DatabaseService
     {
         static SQLiteAsyncConnection db;
-       
-        
+
+        static async Task CreateUnassignedUser(SQLiteAsyncConnection db)
+        {
+            //check if teh user has been created already
+            bool unassignedUnique = await ValidateUniqueUser("unassigned");
+            if (!unassignedUnique) { return; }
+
+            var unassignedUser = new User { Active = true, Name = "Unassigned", Username = "unassigned", Password = "123", Email = "" };
+
+            await db.InsertAsync(unassignedUser);
+        }
+
         static async Task Init()
         {
             if (db != null)
@@ -29,6 +39,8 @@ namespace UniCollabMaui.Service
             //----------------- Add default app roles ------------------
 
             //await AddDefaultRoles(db);
+            //----------------- Create unassigned user for unassigned tasks ------------------
+            await CreateUnassignedUser(db);
 
 
         }
