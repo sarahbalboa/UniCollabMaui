@@ -4,7 +4,7 @@
 
 ![.NET 8.0](https://img.shields.io/badge/.NET-8.0-512BD4?logo=dotnet&logoColor=white)
 
-![Last Merge Date](https://img.shields.io/badge/Last%20Merge%20Date-2024--09--17-brightgreen?logo=github)
+![Last Merge Date](https://img.shields.io/badge/Last%20Merge%20Date-2024--10--27-brightgreen?logo=github)
 
 
 
@@ -29,9 +29,7 @@
 
 ![SkiaSharp.Views.Maui.Controls.Compatibility](https://img.shields.io/badge/SkiaSharp.Views.Maui.Controls.Compatibility-2.88.8-42A5F5?logo=sketchup&logoColor=white)
 
-![SQLite](https://img.shields.io/badge/SQLite-3.13.0-003B57?logo=sqlite&logoColor=white)
-
-![sqlite-net-pcl](https://img.shields.io/badge/sqlite--net--pcl-1.9.172-003B57?logo=sqlite&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-brightgreen)
 
 
 

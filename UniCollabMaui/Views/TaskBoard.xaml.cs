@@ -45,7 +45,7 @@ namespace UniCollabMaui.Views
 
             foreach (var task in tasks)
             {
-                var userName = userDictionary.ContainsKey(task.AssignedToUserId) ? userDictionary[task.AssignedToUserId].Name : "Unknown";
+                var userName = userDictionary.ContainsKey(task.AssignedToUserId.Value) ? userDictionary[task.AssignedToUserId.Value].Name : "Unknown";
 
                 // Determine the background color based on the task property
                 var backgroundColor = GetTaskColor(task);

@@ -44,7 +44,7 @@ namespace UniCollabMaui.Views
             }
 
             var name = NameEntry.Text;
-            var username = UsernameEntry.Text;
+            var username = Int32.Parse(UsernameEntry.Text);
             var email = EmailEntry.Text;
             var password = PasswordEntry.Text;
             var role = (Role)RolePicker.SelectedItem;
