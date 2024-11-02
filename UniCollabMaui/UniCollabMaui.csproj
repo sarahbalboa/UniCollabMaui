@@ -86,8 +86,6 @@
 		<PackageReference Include="SkiaSharp.Views" Version="2.88.8" />
 		<PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.8" />
 		<PackageReference Include="SkiaSharp.Views.Maui.Controls.Compatibility" Version="2.88.8" />
-		<PackageReference Include="SQLite" Version="3.13.0" />
-		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
 		<PackageReference Include="supabase-csharp" Version="0.16.1" />
 	</ItemGroup>
 
