@@ -13,13 +13,13 @@
 
 ![CommunityToolkit.Maui](https://img.shields.io/badge/CommunityToolkit.Maui-9.0.3-blueviolet)
 
-![Microcharts.Maui](https://img.shields.io/badge/Microcharts.Maui-1.0.0-brightgreen)
+![Microcharts.Maui](https://img.shields.io/badge/Microcharts.Maui-1.0.0-orange)
 
-![Microsoft.Maui.Controls](https://img.shields.io/badge/Microsoft.Maui.Controls-blue?logo=dotnet)
+![Microsoft.Maui.Controls](https://img.shields.io/badge/Microsoft.Maui.Controls-darkorange?logo=dotnet)
 
-![Microsoft.Maui.Controls.Compatibility](https://img.shields.io/badge/Microsoft.Maui.Controls.Compatibility-blue?logo=dotnet)
+![Microsoft.Maui.Controls.Compatibility](https://img.shields.io/badge/Microsoft.Maui.Controls.Compatibility-red?logo=dotnet)
 
-![Microsoft.Extensions.Logging.Debug](https://img.shields.io/badge/Microsoft.Extensions.Logging.Debug-8.0.0-blue?logo=dotnet)
+![Microsoft.Extensions.Logging.Debug](https://img.shields.io/badge/Microsoft.Extensions.Logging.Debug-8.0.0-orange?logo=dotnet)
 
 ![SkiaSharp](https://img.shields.io/badge/SkiaSharp-2.88.8-42A5F5?logo=sketchup&logoColor=white)
 
