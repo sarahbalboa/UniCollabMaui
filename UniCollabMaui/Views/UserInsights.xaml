@@ -6,8 +6,25 @@
              xmlns:charts="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
              NavigationPage.HasNavigationBar="False"
              Title="UserInsights">
+
     <ScrollView>
         <VerticalStackLayout Spacing="25" Padding="30" VerticalOptions="Center">
+            <HorizontalStackLayout HorizontalOptions="End" VerticalOptions="Start" Spacing="5">
+                <Label x:Name="RefreshLbl"
+            Text="Refreshing..."
+            TextColor="DarkSlateGrey"
+            IsVisible="False"
+            BackgroundColor="Transparent"
+            VerticalOptions="Center" />
+
+                <Button x:Name="RefreshBtn"
+             Clicked="OnRefreshClicked"
+             ImageSource="refresh_icon.png"
+             BackgroundColor="Transparent"
+             WidthRequest="30"
+             HeightRequest="30"
+             Padding="0" />
+            </HorizontalStackLayout>
             <Label Text="All Tasks per User" FontSize="Medium" FontAttributes="Bold" TextDecorations="Underline" TextColor="{StaticResource MyBlue2}" HorizontalOptions="Center" VerticalOptions="Center"/>
             <charts:ChartView x:Name="userAssignedTasksView" HeightRequest="300" />
             <Label Text="Done Tasks per User" FontSize="Medium" FontAttributes="Bold" TextDecorations="Underline" TextColor="{StaticResource MyBlue2}" HorizontalOptions="Center" VerticalOptions="Center"/>

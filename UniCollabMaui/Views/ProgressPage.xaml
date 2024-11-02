@@ -5,8 +5,23 @@
              NavigationPage.HasNavigationBar="False"
              Title="ProgressPage">
     <VerticalStackLayout Padding="50" Spacing="20">
-        <!-- Other UI Elements -->
-        
+        <HorizontalStackLayout HorizontalOptions="End" VerticalOptions="Start" Spacing="5">
+            <Label x:Name="RefreshLbl"
+            Text="Refreshing..."
+            TextColor="DarkSlateGrey"
+            IsVisible="False"
+            BackgroundColor="Transparent"
+            VerticalOptions="Center" />
+
+            <Button x:Name="RefreshBtn"
+             Clicked="OnRefreshClicked"
+             ImageSource="refresh_icon.png"
+             BackgroundColor="Transparent"
+             WidthRequest="30"
+             HeightRequest="30"
+             Padding="0" />
+        </HorizontalStackLayout>
+
         <Label x:Name="ProgressLbl" FontSize="Small" TextColor="{StaticResource MyBlue2}" HorizontalOptions="Center" VerticalOptions="Center"/>
         <Frame BorderColor="{StaticResource MyBlue2}" CornerRadius="5" Padding="0" HasShadow="False" HorizontalOptions="Center" VerticalOptions="Center" Background="White">
             <ProgressBar x:Name="MyProgressBar"

@@ -134,5 +134,16 @@ public partial class UserInsights : ContentPage
             MaxValue = 1,
         };
     }
+
+    private async void OnRefreshClicked(object sender, EventArgs e)
+    {
+        //show Refreshing... label to let teh customer know if action behind the button
+        RefreshLbl.IsVisible = true;
+        await RefreshLbl.FadeTo(1, 500);
+        UpdateUserTasksChart();
+        UpdateUserDoneTasksChart();
+        await RefreshLbl.FadeTo(0, 500);
+        RefreshLbl.IsVisible = false;
+    }
 }
 
