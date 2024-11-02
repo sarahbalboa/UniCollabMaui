@@ -32,7 +32,7 @@
 ![Supabase-CSharp](https://img.shields.io/badge/Supabase--CSharp-0.16.1-brightgreen?logo=supabase)
 
 ## **Database**
-Stored and managed in  ![Supabase](https://img.shields.io/badge/Supabase-brightgreen?logo=supabase)[🔗](https://supabase.com/)
+Stored and managed in  ![Supabase](https://img.shields.io/badge/Supabase-grey?logo=supabase)[🔗](https://supabase.com/)
 
 
 
