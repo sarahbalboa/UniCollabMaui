@@ -9,7 +9,15 @@
             <Label Text="Title" FontSize="Small" FontAttributes="Bold" TextDecorations="Underline" HorizontalOptions="Center"/>
             <Entry x:Name="TaskTitleEntry" Placeholder="Task Title" HorizontalTextAlignment="Center" TextColor="DarkSlateGrey" BackgroundColor="White" IsSpellCheckEnabled="True" MaxLength="40"/>
             <BoxView HeightRequest="1" Color="White" HorizontalOptions="FillAndExpand" />
-            <Editor x:Name="TaskDescriptionEditor" Placeholder="Task Description" TextColor="DarkSlateGrey" HorizontalTextAlignment="Center" BackgroundColor="White"/>
+            <Editor x:Name="TaskDescriptionEditor"
+                 Placeholder="Type your long text here..."
+                 AutoSize="TextChanges"
+                 MaxLength="5000" 
+                 FontSize="16"
+                 HeightRequest="200" 
+                 BackgroundColor="White"
+                 TextColor="DarkSlateGray"/>
+            <BoxView HeightRequest="1" Color="White" HorizontalOptions="FillAndExpand" />
             <BoxView HeightRequest="1" Color="White" HorizontalOptions="FillAndExpand" />
 
             <Picker x:Name="TaskColumnPicker" Title="Select Column" TitleColor="White" TextColor="DarkSlateGrey" HorizontalOptions="Center"  BackgroundColor="White">
