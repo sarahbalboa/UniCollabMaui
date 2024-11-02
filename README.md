@@ -29,7 +29,10 @@
 
 ![SkiaSharp.Views.Maui.Controls.Compatibility](https://img.shields.io/badge/SkiaSharp.Views.Maui.Controls.Compatibility-2.88.8-42A5F5?logo=sketchup&logoColor=white)
 
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-brightgreen)
+![Supabase-CSharp](https://img.shields.io/badge/Supabase--CSharp-0.16.1-brightgreen?logo=supabase)
+
+## **Database**
+Stored and managed in  ![Supabase](https://img.shields.io/badge/Supabase-brightgreen?logo=supabase)[🔗](https://supabase.com/)
 
 
 
