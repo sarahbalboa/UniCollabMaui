@@ -26,7 +26,7 @@ namespace UniCollabMaui.Service
 
         //----------------------   User methods  -------------------------
 
-        public static async Task AddUser(string name, bool active, int username, string email, string password, int role)
+        public static async Task AddUser(string name, bool active, int username, string email, string password)
         {
             await Init();
             var user = new User
@@ -36,7 +36,6 @@ namespace UniCollabMaui.Service
                 Username = username,
                 Email = email,
                 Password = password,
-                RoleId = role,
             };
 
             // Insert the user record into the Supabase User table
@@ -45,7 +44,7 @@ namespace UniCollabMaui.Service
         }
 
 
-        public static async Task UpdateUser(int userId, string name, bool active, int role)
+        public static async Task UpdateUser(int userId, string name, bool active)
         {
             await Init();
             var user = await _client.From<User>().Filter("Id", Postgrest.Constants.Operator.Equals, userId).Single();
@@ -53,7 +52,6 @@ namespace UniCollabMaui.Service
             {
                 user.Name = name;
                 user.Active = active;
-                user.RoleId = role;
                 await _client.From<User>().Update(user);
             }
         }
@@ -131,15 +129,6 @@ namespace UniCollabMaui.Service
             }
         }
 
-        //----------------- Role-based access control methods --------------------
-
-        public static async Task<Role> GetUserRole(int userId)
-        {
-            await Init();
-            var user = await _client.From<User>().Filter("Id", Postgrest.Constants.Operator.Equals, userId).Single();
-            if (user == null) return null;
-            return await _client.From<Role>().Filter("Id", Postgrest.Constants.Operator.Equals, user.RoleId).Single();
-        }
 
         //----------------- Task methods --------------------------
 
@@ -199,61 +188,6 @@ namespace UniCollabMaui.Service
             var tasks = await _client.From<AppTask>().Get();
             return tasks.Models;
         }
-
-        //-------------------  Role methods   ------------------
-
-        public static async Task AddRole(Role role)
-        {
-            await Init();
-            var existingRole = await _client.From<Role>().Filter("RoleName", Postgrest.Constants.Operator.Equals, role.RoleName).Single();
-            if (existingRole == null)
-            {
-                await _client.From<Role>().Insert(role);
-            }
-        }
-
-        public static async Task<IEnumerable<Role>> GetRoles()
-        {
-            await Init();
-            var roles = await _client.From<Role>().Get();
-            return roles.Models;
-        }
-
-        // Get Role by ID
-        public static async Task<Role> GetRoleById(int roleId)
-        {
-            await Init();
-            return await _client.From<Role>()
-                .Filter("Id", Postgrest.Constants.Operator.Equals, roleId)
-                .Single();
-        }
-
-        // Update Role
-        public static async Task UpdateRole(int roleId, string name, bool active, bool isRoleAdmin, bool isTaskAdmin, bool isTaskViewer, bool isProgressViewer)
-        {
-            await Init();
-
-            // Fetch the existing role
-            var role = await _client.From<Role>()
-                .Filter("Id", Postgrest.Constants.Operator.Equals, roleId)
-                .Single();
-
-            if (role != null)
-            {
-                // Modify the properties
-                role.RoleName = name;
-                role.Active = active;
-                role.IsRoleAdmin = isRoleAdmin;
-                role.IsTaskAdmin = isTaskAdmin;
-                role.IsTaskViewer = isTaskViewer;
-                role.IsProgressViewer = isProgressViewer;
-
-                // Update the role
-                var response = await _client.From<Role>().Update(role);
-            }
-        }
-
-
 
     }
 }
