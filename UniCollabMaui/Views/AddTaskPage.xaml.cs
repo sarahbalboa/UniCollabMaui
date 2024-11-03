@@ -41,24 +41,6 @@ namespace UniCollabMaui.Views
             }
             UserPicker.ItemsSource = activeUsersList;
 
-            //check if the user is a task admin, othewise default the assigned to user to themself and readonly
-            if (userId.HasValue)
-            {
-                var userRole = await DatabaseService.GetUserRole(userId.Value);
-
-                if (userRole.IsTaskAdmin != true)
-                {
-                    UserPicker.IsEnabled = false;
-                    foreach (User user in users)
-                    {
-                        if (user.Id == userId)
-                        {
-                            UserPicker.SelectedItem = user;
-                            break; // Exit the loop once the user is found
-                        }
-                    }
-                }
-            }
         }
 
         private async void OnSaveTaskButtonClicked(object sender, EventArgs e)

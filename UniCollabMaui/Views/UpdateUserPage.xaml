@@ -16,11 +16,6 @@
                 <Label Text="Active:" FontSize="Small" VerticalOptions="Center"/>
                 <CheckBox x:Name="ActiveCheckbox" />
             </HorizontalStackLayout>
-            <HorizontalStackLayout Spacing="10">
-                <Label Text="Current Role:" FontSize="Small" HorizontalOptions="Center" VerticalOptions="Center"/>
-                <Entry x:Name="CurrentRoleEntry" VerticalOptions="Center" HorizontalTextAlignment="Start" TextColor="DarkSlateGrey" BackgroundColor="LightGray"  IsEnabled="False"/>
-            </HorizontalStackLayout>
-            <Picker x:Name="RolePicker" Title="Select System Role" FontSize="Small" TitleColor="White" TextColor="Blue" ItemDisplayBinding="{Binding RoleName}" BackgroundColor="#F0F0F0" HorizontalOptions="Start"/>
 
             <!-- Horizontal line separator -->
             <BoxView HeightRequest="2" BackgroundColor="White" HorizontalOptions="FillAndExpand" />

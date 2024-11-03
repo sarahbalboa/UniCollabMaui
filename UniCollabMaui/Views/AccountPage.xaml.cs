@@ -11,12 +11,10 @@ public partial class AccountPage : ContentPage
     protected override async void OnAppearing()
     {
         var userId = await DatabaseService.GetUserIdFromSession(AppSession.SessionId);
-        var userRole = await DatabaseService.GetUserRole((int)userId);
         var user = await DatabaseService.GetUserById((int)userId);
 
         AccountName.Text = user.Name;
         EmailLbl.Text = user.Email;
-        CurrentRoleLbl.Text = "Role: " + userRole.RoleName.ToString();
 
         DisplayUserTaskCount((int)userId);
 
