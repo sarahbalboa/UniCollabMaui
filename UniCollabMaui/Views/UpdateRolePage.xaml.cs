@@ -1,3 +1,4 @@
+using Supabase.Gotrue;
 using System.Threading.Tasks;
 using UniCollabMaui.Models;
 using UniCollabMaui.Service;
@@ -69,15 +70,16 @@ public partial class UpdateRolePage : ContentPage
         var isTaskViewer = IsTaskViewerCheckbox.IsChecked;
         var isProgressViewer = IsProgressViewerCheckbox.IsChecked;
 
-        await DatabaseService.UpdateRole(roleId.Value, roleName, isActive, isRoleAdmin, isTaskAdmin, isTaskViewer, isProgressViewer);
+        var sessionUserId = await DatabaseService.GetUserIdFromSession(AppSession.SessionId);
+        var sessionUser = await DatabaseService.GetUserById((int)sessionUserId);
 
         //logger for saved/updated Role
-        Logger.Log("Role [#" + roleId + "] " + roleName + " is Updated: \n" +
+        Logger.Log("Changed by " + sessionUser.Username + " \nRole [#" + roleId + "] " + roleName + " is Updated: \n" +
             "-Description: " + isActive +
             "\n-RoleAdmin: " + isRoleAdmin +
             "\n-TaskEditor: " + isTaskAdmin +
             "\n-TaskViewer: " + isTaskViewer +
-            "\n-ProgressViewer: " + isProgressViewer );
+            "\n-ProgressViewer: " + isProgressViewer + "\n");
 
         await Navigation.PopAsync();
     }

@@ -80,8 +80,11 @@ public partial class UpdateUserPage : ContentPage
 
         await DatabaseService.UpdateUser(userId.Value, userNewName, isActive, userNewRole.Id);
 
+        var sessionUserId = await DatabaseService.GetUserIdFromSession(AppSession.SessionId);
+        var sessionUser = await DatabaseService.GetUserById((int)sessionUserId);
+
         //logger for saved/updated Role
-        Logger.Log("Role [#" + userId + "] " + userNewName + " is Updated: \n" +
+        Logger.Log("Changed by " + sessionUser.Username + " \nUser [#" + userId + "] " + userNewName + " is Updated: \n" +
             "-Active: " + isActive +
             "\n-User role: " + userNewRole);
 
