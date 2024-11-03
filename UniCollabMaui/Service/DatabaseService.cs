@@ -16,8 +16,8 @@ namespace UniCollabMaui.Service
             if (_client != null)
                 return;
 
-            const string SUPABASE_URL = "https://hecqgqvmpkxkbkaayvns.supabase.co";
-            const string SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhlY3FncXZtcGt4a2JrYWF5dm5zIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczMDQ2NDcxNywiZXhwIjoyMDQ2MDQwNzE3fQ.SKaFmtfVUgRHo5tqtm4xLUJdp8IirdPdY4Mq6pHDVtU";
+            const string SUPABASE_URL = "https://pqkgernhpuwfoviiqder.supabase.co";
+            const string SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBxa2dlcm5ocHV3Zm92aWlxZGVyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzA2Mzg4MDksImV4cCI6MjA0NjIxNDgwOX0.qOTwLmG-uhGXxbbeGNpVWbJySSYwNLrjBr6gzBuAvfM";
 
             _client = new Client(SUPABASE_URL, SUPABASE_KEY);
             await _client.InitializeAsync();
