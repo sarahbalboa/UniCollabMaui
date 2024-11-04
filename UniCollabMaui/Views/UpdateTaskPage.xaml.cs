@@ -108,8 +108,11 @@ public partial class UpdateTaskPage : ContentPage
 
         await Navigation.PopAsync();
 
-        //logger for saved/updated task
-        Logger.Log("Task [#" + taskId + "] " + title + " is Updated: \n" +
+        var sessionUserId = await DatabaseService.GetUserIdFromSession(AppSession.SessionId);
+        var sessionUser = await DatabaseService.GetUserById((int)sessionUserId);
+
+        //logger for saved/updated Role
+        Logger.Log("Changed by " + sessionUser.Username + " \nTask [#" + taskId + "] " + title + " is Updated: \n" +
             "-Description: " + description +
             "\n-Column: " + column +
             "\n-Priority: " + priority);
