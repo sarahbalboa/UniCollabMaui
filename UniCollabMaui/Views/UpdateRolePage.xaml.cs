@@ -73,6 +73,7 @@ public partial class UpdateRolePage : ContentPage
         var sessionUserId = await DatabaseService.GetUserIdFromSession(AppSession.SessionId);
         var sessionUser = await DatabaseService.GetUserById((int)sessionUserId);
 
+        await DatabaseService.UpdateRole(roleId.Value, roleName, isActive, isRoleAdmin, isTaskAdmin, isTaskViewer, isProgressViewer);
         //logger for saved/updated Role
         Logger.Log("Changed by " + sessionUser.Username + " \nRole [#" + roleId + "] " + roleName + " is Updated: \n" +
             "-Description: " + isActive +
