@@ -9,6 +9,18 @@ namespace UniCollabMaui.Views
 {
     public partial class TaskBoard : ContentPage
     {
+        private readonly IDatabaseService _databaseService;
+        private readonly IPageDialogService _dialogService;
+
+
+        public TaskBoard(IDatabaseService databaseService, IPageDialogService dialogService)
+        {
+            InitializeComponent();
+            _databaseService = databaseService ?? throw new ArgumentNullException(nameof(databaseService));
+            _dialogService = dialogService ?? throw new ArgumentNullException(nameof(dialogService));
+
+            LoadTasks();
+        }
         public TaskBoard()
         {
             InitializeComponent();
@@ -17,7 +29,7 @@ namespace UniCollabMaui.Views
         private void ReloadPage()
         {
             // Assuming you are within a ContentPage
-            var currentPage = new TaskBoard(); // Create a new instance of the current page
+            var currentPage = new TaskBoard(_databaseService, _dialogService); // Create a new instance of the current page
             Navigation.InsertPageBefore(currentPage, this);
             Navigation.PopAsync();
         }
@@ -25,13 +37,13 @@ namespace UniCollabMaui.Views
 
         private async void OnAddTaskButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new AddTaskPage());
+            await Navigation.PushAsync(new AddTaskPage(_databaseService, _dialogService));
         }
 
         private async void LoadTasks()
         {
-            var tasks = await DatabaseService.GetAppTasks();
-            var users = await DatabaseService.GetUsers();
+            var tasks = await _databaseService.GetAppTasks();
+            var users = await _databaseService.GetUsers();
             var userDictionary = new Dictionary<int, User>();
 
             foreach (var user in users)
@@ -122,7 +134,7 @@ namespace UniCollabMaui.Views
 
         private async Task OnTaskTapped(int taskId)
         {
-            await Navigation.PushAsync(new UpdateTaskPage(taskId));
+            await Navigation.PushAsync(new UpdateTaskPage(_databaseService,taskId));
         }
 
         protected override void OnAppearing()

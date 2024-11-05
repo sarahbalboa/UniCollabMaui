@@ -1,14 +1,21 @@
 ﻿//using AVFoundation;
 using UniCollabMaui.Views;
+using UniCollabMaui.Service;
+
 
 namespace UniCollabMaui
 {
     public partial class MainPage : ContentPage
     {
+        private readonly IDatabaseService _databaseService;
+        private readonly IPageDialogService _dialogService;
 
-        public MainPage()
+        public MainPage(IDatabaseService databaseService, IPageDialogService dialogService)
         {
             InitializeComponent();
+            _databaseService = databaseService ?? throw new ArgumentNullException(nameof(databaseService));
+            _dialogService = dialogService ?? throw new ArgumentNullException(nameof(dialogService));
+
             ShowLogo();
             StartBtnColourAnimation();
         }
@@ -34,7 +41,7 @@ namespace UniCollabMaui
 
         private async void OnStartClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new LogIn());
+            await Navigation.PushAsync(new LogIn(_databaseService, _dialogService));
 
         }
     }

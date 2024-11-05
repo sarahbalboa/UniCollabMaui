@@ -7,11 +7,17 @@ namespace UniCollabMaui.Views
 {
     public partial class LogIn : ContentPage
     {
+        private readonly IDatabaseService _databaseService;
+        private readonly IPageDialogService _dialogService;
+
         private const int MaxPasswordLength = 15;
 
-        public LogIn()
+        public LogIn(IDatabaseService databaseService, IPageDialogService dialogService)
         {
             InitializeComponent();
+            _databaseService = databaseService ?? throw new ArgumentNullException(nameof(databaseService));
+            _dialogService = dialogService ?? throw new ArgumentNullException(nameof(dialogService));
+
         }
         protected override bool OnBackButtonPressed()
         {
@@ -27,20 +33,20 @@ namespace UniCollabMaui.Views
             // Validate input fields
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                await DisplayAlert("Error", "Please enter both username and password.", "OK");
+                await _dialogService.ShowAlertAsync("Error", "Please enter both username and password.", "OK");
                 return;
             }
 
             // Attempt to log in
-            var user = await DatabaseService.ValidateUser(username, password);
+            var user = await _databaseService.ValidateUser(username, password);
             
             if (user != null)
             {
                     if (user.Active)
                     {
-                        AppSession.SessionId = await DatabaseService.CreateSession(user.Id);
+                        AppSession.SessionId = await _databaseService.CreateSession(user.Id);
                         // Navigate to another view, e.g., HomePage
-                        await Navigation.PushAsync(new MainTabbedPage());
+                        await Navigation.PushAsync(new MainTabbedPage(_databaseService));
 
                     }
                     else
@@ -112,7 +118,7 @@ namespace UniCollabMaui.Views
         private async void OnRegisterButtonClicked(object sender, EventArgs e)
         {
             // Navigate to the Register page (implement registration page navigation)
-            await Navigation.PushAsync(new RegisterPage());
+            await Navigation.PushAsync(new RegisterPage(_databaseService, _dialogService));
         }
     }
 }

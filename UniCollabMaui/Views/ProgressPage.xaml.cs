@@ -10,6 +10,14 @@ namespace UniCollabMaui.Views;
 
 public partial class ProgressPage : ContentPage
 {
+    private readonly IDatabaseService _databaseService;
+
+    public ProgressPage(IDatabaseService databaseService)
+    {
+        InitializeComponent();
+        _databaseService = databaseService ?? throw new ArgumentNullException(nameof(databaseService));
+
+    }
     public ProgressPage()
     {
         InitializeComponent();
@@ -25,7 +33,7 @@ public partial class ProgressPage : ContentPage
 
     private async void UpdateTaskStatusCount()
     {
-        var tasks = await DatabaseService.GetAppTasks();
+        var tasks = await _databaseService.GetAppTasks();
         List<AppTask> allTasks = new List<AppTask>(tasks);
         
         
@@ -56,7 +64,7 @@ public partial class ProgressPage : ContentPage
     }
     private async void UpdateProgressBar()
     {
-        var tasks = await DatabaseService.GetAppTasks();
+        var tasks = await _databaseService.GetAppTasks();
         List<AppTask> allTasks = new List<AppTask>(tasks);
         double doneTasks = 0.0;
         double progress = 0.0;

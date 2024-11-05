@@ -6,7 +6,7 @@ using UniCollabMaui.Models;
 
 namespace UniCollabMaui.Service
 {
-    public static class DatabaseService
+    public class DatabaseService : IDatabaseService
     {
         private static Client _client;
 
@@ -26,7 +26,7 @@ namespace UniCollabMaui.Service
 
         //----------------------   User methods  -------------------------
 
-        public static async Task AddUser(string name, bool active, int username, string email, string password, int role)
+        public async Task AddUser(string name, bool active, int username, string email, string password, int role)
         {
             await Init();
             var user = new User
@@ -45,7 +45,7 @@ namespace UniCollabMaui.Service
         }
 
 
-        public static async Task UpdateUser(int userId, string name, bool active, int role)
+        public async Task UpdateUser(int userId, string name, bool active, int role)
         {
             await Init();
             var user = await _client.From<User>().Filter("Id", Postgrest.Constants.Operator.Equals, userId).Single();
@@ -58,7 +58,7 @@ namespace UniCollabMaui.Service
             }
         }
 
-        public static async Task<User> ValidateUser(string username, string password)
+        public async Task<User> ValidateUser(string username, string password)
         {
             await Init();
             var user = await _client.From<User>()
@@ -67,7 +67,7 @@ namespace UniCollabMaui.Service
                 .Single();
             return user;
         }
-        public static async Task<User> GetUserById(int userId)
+        public async Task<User> GetUserById(int userId)
         {
             await Init();
             return await _client.From<User>()
@@ -76,14 +76,14 @@ namespace UniCollabMaui.Service
         }
 
         // Get all Users
-        public static async Task<IEnumerable<User>> GetUsers()
+        public async Task<IEnumerable<User>> GetUsers()
         {
             await Init();
             var users = await _client.From<User>().Get();
             return users.Models; // Get the list of user models
         }
 
-        public static async Task<bool> ValidateUniqueUser(int username)
+        public async Task<bool> ValidateUniqueUser(int username)
         {
             await Init();
             var user = await _client.From<User>().Filter("Username", Postgrest.Constants.Operator.Equals, username).Single();
@@ -94,7 +94,7 @@ namespace UniCollabMaui.Service
 
         //----------------- Session methods --------------------------
 
-        public static async Task<string> CreateSession(int userId)
+        public async Task<string> CreateSession(int userId)
         {
             await Init();
             var sessionId = Guid.NewGuid().ToString();
@@ -109,7 +109,7 @@ namespace UniCollabMaui.Service
             return sessionId;
         }
 
-        public static async Task<int?> GetUserIdFromSession(string sessionId)
+        public async Task<int?> GetUserIdFromSession(string sessionId)
         {
             await Init();
             var session = await _client.From<Session>()
@@ -119,7 +119,7 @@ namespace UniCollabMaui.Service
             return session?.UserId;
         }
 
-        public static async Task Logout(string sessionId)
+        public async Task Logout(string sessionId)
         {
             await Init();
             var session = await _client.From<Session>()
@@ -133,7 +133,7 @@ namespace UniCollabMaui.Service
 
         //----------------- Role-based access control methods --------------------
 
-        public static async Task<Role> GetUserRole(int userId)
+        public async Task<Role> GetUserRole(int userId)
         {
             await Init();
             var user = await _client.From<User>().Filter("Id", Postgrest.Constants.Operator.Equals, userId).Single();
@@ -143,7 +143,7 @@ namespace UniCollabMaui.Service
 
         //----------------- Task methods --------------------------
 
-        public static async Task AddAppTask(string title, string description, string column, string priority, int assignedToUserId)
+        public async Task AddAppTask(string title, string description, string column, string priority, int assignedToUserId)
         {
             await Init();
             var appTask = new AppTask
@@ -157,7 +157,7 @@ namespace UniCollabMaui.Service
             await _client.From<AppTask>().Insert(appTask);
         }
 
-        public static async Task<AppTask> GetAppTaskById(int id)
+        public async Task<AppTask> GetAppTaskById(int id)
         {
             await Init();
 
@@ -168,7 +168,7 @@ namespace UniCollabMaui.Service
 
         }
 
-        public static async Task UpdateAppTask(int id, string title, string description, string column, string priority, int assignedToUserId)
+        public async Task UpdateAppTask(int id, string title, string description, string column, string priority, int assignedToUserId)
         {
             await Init();
             var task = await _client.From<AppTask>().Filter("Id", Postgrest.Constants.Operator.Equals, id).Single();
@@ -183,7 +183,7 @@ namespace UniCollabMaui.Service
             }
         }
 
-        public static async Task RemoveAppTask(int id)
+        public async Task RemoveAppTask(int id)
         {
             await Init();
             var task = await _client.From<AppTask>().Filter("Id", Postgrest.Constants.Operator.Equals, id).Single();
@@ -193,7 +193,7 @@ namespace UniCollabMaui.Service
             }
         }
 
-        public static async Task<IEnumerable<AppTask>> GetAppTasks()
+        public async Task<IEnumerable<AppTask>> GetAppTasks()
         {
             await Init();
             var tasks = await _client.From<AppTask>().Get();
@@ -202,7 +202,7 @@ namespace UniCollabMaui.Service
 
         //-------------------  Role methods   ------------------
 
-        public static async Task AddRole(Role role)
+        public async Task AddRole(Role role)
         {
             await Init();
             var existingRole = await _client.From<Role>().Filter("RoleName", Postgrest.Constants.Operator.Equals, role.RoleName).Single();
@@ -212,7 +212,7 @@ namespace UniCollabMaui.Service
             }
         }
 
-        public static async Task<IEnumerable<Role>> GetRoles()
+        public async Task<IEnumerable<Role>> GetRoles()
         {
             await Init();
             var roles = await _client.From<Role>().Get();
@@ -220,7 +220,7 @@ namespace UniCollabMaui.Service
         }
 
         // Get Role by ID
-        public static async Task<Role> GetRoleById(int roleId)
+        public async Task<Role> GetRoleById(int roleId)
         {
             await Init();
             return await _client.From<Role>()
@@ -229,7 +229,7 @@ namespace UniCollabMaui.Service
         }
 
         // Update Role
-        public static async Task UpdateRole(int roleId, string name, bool active, bool isRoleAdmin, bool isTaskAdmin, bool isTaskViewer, bool isProgressViewer)
+        public async Task UpdateRole(int roleId, string name, bool active, bool isRoleAdmin, bool isTaskAdmin, bool isTaskViewer, bool isProgressViewer)
         {
             await Init();
 

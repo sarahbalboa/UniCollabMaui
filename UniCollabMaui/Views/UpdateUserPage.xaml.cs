@@ -5,10 +5,16 @@ namespace UniCollabMaui.Views;
 
 public partial class UpdateUserPage : ContentPage
 {
+    private readonly IDatabaseService _databaseService;
+    private readonly IPageDialogService _dialogService;
+
     private int? userId;
-    public UpdateUserPage(int? userId = null)
+    public UpdateUserPage(IDatabaseService databaseService, IPageDialogService dialogService, int? userId = null)
     {
         InitializeComponent();
+        _databaseService = databaseService ?? throw new ArgumentNullException(nameof(databaseService));
+        _dialogService = dialogService ?? throw new ArgumentNullException(nameof(dialogService));
+
         this.userId = userId;
         if (userId.HasValue)
         {
@@ -21,10 +27,10 @@ public partial class UpdateUserPage : ContentPage
         base.OnAppearing();
 
         // Assuming you have a session ID in AppSession
-        var userId = await DatabaseService.GetUserIdFromSession(AppSession.SessionId);
+        var userId = await _databaseService.GetUserIdFromSession(AppSession.SessionId);
         if (userId.HasValue)
         {
-            var userRole = await DatabaseService.GetUserRole(userId.Value);
+            var userRole = await _databaseService.GetUserRole(userId.Value);
 
             if (userRole.IsRoleAdmin != true)
             {
@@ -38,7 +44,7 @@ public partial class UpdateUserPage : ContentPage
 
     private async void LoadRoles()
     {
-        var roles = await DatabaseService.GetRoles();
+        var roles = await _databaseService.GetRoles();
         List<Role> roleList = new List<Role>(roles);
         List<Role> activeRoleList = new List<Role>();
 
@@ -54,8 +60,8 @@ public partial class UpdateUserPage : ContentPage
 
     private async void LoadUser(int userId)
     {
-        var user = await DatabaseService.GetUserById(userId);
-        var userRole = await DatabaseService.GetUserRole(userId);
+        var user = await _databaseService.GetUserById(userId);
+        var userRole = await _databaseService.GetUserRole(userId);
 
         if (user != null)
         {
@@ -71,17 +77,17 @@ public partial class UpdateUserPage : ContentPage
         //check that all required fields are entered
         if (string.IsNullOrEmpty(UserNameEntry.Text))
         {
-            await DisplayAlert("Error", "Please enter a Name.", "OK");
+            await _dialogService.ShowAlertAsync("Error", "Please enter a Name.", "OK");
             return;
         }
         var userNewName = UserNameEntry.Text;
         var isActive = ActiveCheckbox.IsChecked;
         var userNewRole = (Role)RolePicker.SelectedItem;
 
-        await DatabaseService.UpdateUser(userId.Value, userNewName, isActive, userNewRole.Id);
+        await _databaseService.UpdateUser(userId.Value, userNewName, isActive, userNewRole.Id);
 
-        var sessionUserId = await DatabaseService.GetUserIdFromSession(AppSession.SessionId);
-        var sessionUser = await DatabaseService.GetUserById((int)sessionUserId);
+        var sessionUserId = await _databaseService.GetUserIdFromSession(AppSession.SessionId);
+        var sessionUser = await _databaseService.GetUserById((int)sessionUserId);
 
         //logger for saved/updated Role
         Logger.Log("Changed by " + sessionUser.Username + " \nUser [#" + userId + "] " + userNewName + " is Updated: \n" +

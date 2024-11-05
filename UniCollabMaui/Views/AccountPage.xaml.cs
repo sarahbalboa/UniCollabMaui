@@ -4,15 +4,25 @@ namespace UniCollabMaui.Views;
 
 public partial class AccountPage : ContentPage
 {
-	public AccountPage()
+    private readonly IDatabaseService _databaseService;
+    private readonly IPageDialogService _dialogService;
+
+    public AccountPage(IDatabaseService databaseService, IPageDialogService dialogService)
 	{
 		InitializeComponent();
-	}
+        _databaseService = databaseService ?? throw new ArgumentNullException(nameof(databaseService));
+        _dialogService = dialogService ?? throw new ArgumentNullException(nameof(dialogService));
+
+    }
+    public AccountPage()
+    {
+        InitializeComponent();
+    }
     protected override async void OnAppearing()
     {
-        var userId = await DatabaseService.GetUserIdFromSession(AppSession.SessionId);
-        var userRole = await DatabaseService.GetUserRole((int)userId);
-        var user = await DatabaseService.GetUserById((int)userId);
+        var userId = await _databaseService.GetUserIdFromSession(AppSession.SessionId);
+        var userRole = await _databaseService.GetUserRole((int)userId);
+        var user = await _databaseService.GetUserById((int)userId);
 
         AccountName.Text = user.Name;
         EmailLbl.Text = user.Email;
@@ -23,7 +33,7 @@ public partial class AccountPage : ContentPage
     }
     private async void DisplayUserTaskCount(int? userId)
     {
-        var tasks = await DatabaseService.GetAppTasks();
+        var tasks = await _databaseService.GetAppTasks();
         List<AppTask> allTasks = new List<AppTask>(tasks);
 
 
@@ -64,13 +74,13 @@ public partial class AccountPage : ContentPage
     private async void OnLogoutButtonClicked(object sender, EventArgs e)
     {
         // Log out the user by deleting the session
-        await DatabaseService.Logout(AppSession.SessionId);
+        await _databaseService.Logout(AppSession.SessionId);
 
         // Clear the session ID stored in AppSession
         AppSession.SessionId = null;
 
         // Clear the navigation stack by setting the login page as the new root
-        Application.Current.MainPage = new NavigationPage(new MainPage());
+        Application.Current.MainPage = new NavigationPage(new MainPage(_databaseService, _dialogService));
 
         // Optionally, you can also call GC.Collect() to clean up memory, though it's not usually necessary
         // GC.Collect();

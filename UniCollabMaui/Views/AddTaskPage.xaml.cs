@@ -10,12 +10,17 @@ namespace UniCollabMaui.Views
 {
     public partial class AddTaskPage : ContentPage
     {
+        private readonly IDatabaseService _databaseService;
+        private readonly IPageDialogService _dialogService;
+
         private int? taskId;
 
-        public AddTaskPage(int? taskId = null)
+        public AddTaskPage(IDatabaseService databaseService, IPageDialogService dialogService,  int? taskId = null)
         {
             InitializeComponent();
-          
+            _databaseService = databaseService ?? throw new ArgumentNullException(nameof(databaseService));
+            _dialogService = dialogService ?? throw new ArgumentNullException(nameof(dialogService));
+
             this.taskId = taskId;
             LoadUsers();
         }
@@ -28,8 +33,8 @@ namespace UniCollabMaui.Views
         }
         private async void LoadUsers()
         {
-            var users = await DatabaseService.GetUsers();
-            var userId = await DatabaseService.GetUserIdFromSession(AppSession.SessionId);
+            var users = await _databaseService.GetUsers();
+            var userId = await _databaseService.GetUserIdFromSession(AppSession.SessionId);
             List<User> userList = new List<User>(users);
             List<User> activeUsersList = new List<User>();
             foreach (var user in userList)
@@ -44,7 +49,7 @@ namespace UniCollabMaui.Views
             //check if the user is a task admin, othewise default the assigned to user to themself and readonly
             if (userId.HasValue)
             {
-                var userRole = await DatabaseService.GetUserRole(userId.Value);
+                var userRole = await _databaseService.GetUserRole(userId.Value);
 
                 if (userRole.IsTaskAdmin != true)
                 {
@@ -68,7 +73,7 @@ namespace UniCollabMaui.Views
             //check that all required fields are entered
             if ( string.IsNullOrEmpty(TaskTitleEntry.Text) || string.IsNullOrEmpty(TaskDescriptionEditor.Text) || TaskColumnPicker.SelectedItem == null || TaskPriorityPicker.SelectedItem == null)
             {
-                await DisplayAlert("Error", "Please fill in all the task details.", "OK");
+                await _dialogService.ShowAlertAsync("Error", "Please fill in all the task details.", "OK");
                 return;
             }
             
@@ -82,11 +87,11 @@ namespace UniCollabMaui.Views
 
             if ((User)UserPicker.SelectedItem == null) //if user is not selected, assign it to Unassigned user
             {
-                await DatabaseService.AddAppTask(title, description, column, priority, 0);
+                await _databaseService.AddAppTask(title, description, column, priority, 0);
             }
             else
             {
-                await DatabaseService.AddAppTask(title, description, column, priority, selectedUser.Id);
+                await _databaseService.AddAppTask(title, description, column, priority, selectedUser.Id);
             }
 
             

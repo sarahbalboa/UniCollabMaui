@@ -5,10 +5,21 @@ namespace UniCollabMaui.Views;
 
 public partial class RoleManagementPage : ContentPage
 {
-	public RoleManagementPage()
+    private readonly IDatabaseService _databaseService;
+    private readonly IPageDialogService _dialogService;
+
+
+    public RoleManagementPage(IDatabaseService databaseService, IPageDialogService dialogService)
 	{
 		InitializeComponent();
-	}
+        _databaseService = databaseService ?? throw new ArgumentNullException(nameof(databaseService));
+        _dialogService = dialogService ?? throw new ArgumentNullException(nameof(dialogService));
+
+    }
+    public RoleManagementPage()
+    {
+        InitializeComponent();
+    }
     protected override void OnAppearing()
     {
         base.OnAppearing();
@@ -17,7 +28,7 @@ public partial class RoleManagementPage : ContentPage
 
     private async Task OnRoleTapped(int roleId)
     {
-        await Navigation.PushAsync(new UpdateRolePage(roleId));
+        await Navigation.PushAsync(new UpdateRolePage(_databaseService, _dialogService, roleId));
         //implement an update role page
     }
     private Color GetRoleColor(Role role)
@@ -37,7 +48,7 @@ public partial class RoleManagementPage : ContentPage
 
     private async void LoadRoles()
     {
-        var roles = await DatabaseService.GetRoles();
+        var roles = await _databaseService.GetRoles();
 
         ActiveRolesColumn.Children.Clear();
         InactiveRolesColumn.Children.Clear();
@@ -97,11 +108,11 @@ public partial class RoleManagementPage : ContentPage
 
     private async void OnActiveAddRoleClicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new AddRolePage(true));
+        await Navigation.PushAsync(new AddRolePage(_databaseService, _dialogService,  true));
     }
 
     private async void OnInactiveAddRoleClicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new AddRolePage(false));
+        await Navigation.PushAsync(new AddRolePage(_databaseService, _dialogService, false));
     }
 }

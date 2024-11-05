@@ -5,13 +5,16 @@ namespace UniCollabMaui.Views;
 
 public partial class MainTabbedPage : TabbedPage
 {
-	public MainTabbedPage()
+    private readonly IDatabaseService _databaseService;
+    public MainTabbedPage(IDatabaseService databaseService)
 	{
 		InitializeComponent();
-	}
-    
-/** Function to disable the back button
- */
+        _databaseService = databaseService ?? throw new ArgumentNullException(nameof(databaseService));
+
+    }
+
+    /** Function to disable the back button
+     */
 
     protected override bool OnBackButtonPressed()
     {
@@ -24,10 +27,10 @@ public partial class MainTabbedPage : TabbedPage
         base.OnAppearing();
 
         // Assuming you have a session ID in AppSession
-        var userId = await DatabaseService.GetUserIdFromSession(AppSession.SessionId);
+        var userId = await _databaseService.GetUserIdFromSession(AppSession.SessionId);
         if (userId.HasValue)
         {
-            var userRole = await DatabaseService.GetUserRole(userId.Value);
+            var userRole = await _databaseService.GetUserRole(userId.Value);
 
             // Check if the user role is system role
             if (userRole.IsRoleAdmin != true)

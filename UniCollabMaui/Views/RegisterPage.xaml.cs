@@ -12,16 +12,22 @@ namespace UniCollabMaui.Views
 {
     public partial class RegisterPage : ContentPage
     {
-        public RegisterPage()
+        private readonly IDatabaseService _databaseService;
+        private readonly IPageDialogService _dialogService;
+
+        public RegisterPage(IDatabaseService databaseService, IPageDialogService dialogService)
         {
             InitializeComponent();
+            _databaseService = databaseService ?? throw new ArgumentNullException(nameof(databaseService));
+            _dialogService = dialogService ?? throw new ArgumentNullException(nameof(dialogService));
+
 
             LoadRoles();
         }
 
         private async void LoadRoles()
         {
-            var roles = await DatabaseService.GetRoles();
+            var roles = await _databaseService.GetRoles();
             List<Role> roleList = new List<Role>(roles);
             List<Role> systemRoleList = new List<Role>();
             //remove non system default roles
@@ -39,7 +45,7 @@ namespace UniCollabMaui.Views
             // Validate input fields
             if (string.IsNullOrEmpty(NameEntry.Text) || string.IsNullOrEmpty(UsernameEntry.Text) || string.IsNullOrEmpty(EmailEntry.Text) || string.IsNullOrEmpty(PasswordEntry.Text) || (Role)RolePicker.SelectedItem == null)
             {
-                await DisplayAlert("Error", "Please fill out all fields.", "OK");
+                await _dialogService.ShowAlertAsync("Error", "Please fill out all fields.", "OK");
                 return;
             }
 
@@ -50,20 +56,17 @@ namespace UniCollabMaui.Views
             var role = (Role)RolePicker.SelectedItem;
 
             // Attempt to log in
-            var isUniqueUser = await DatabaseService.ValidateUniqueUser(username);
+            var isUniqueUser = await _databaseService.ValidateUniqueUser(username);
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
             if (isUniqueUser)
             {
 
                 // Add the user to the database
-                await DatabaseService.AddUser(name, true, username, email, password, role.Id);
+                await _databaseService.AddUser(name, true, username, email, password, role.Id);
                 //add toast of registration successful
 
 
-                await Toast.Make("User registered",
-                          ToastDuration.Short,
-                          16)
-                    .Show(cancellationTokenSource.Token);
+                await _dialogService.ShowToastAsync("User registered");
 
                 // Navigate back to the login page
                 await Navigation.PopAsync();
@@ -71,10 +74,7 @@ namespace UniCollabMaui.Views
             }
             else
             {
-                await Toast.Make("Username must be unique, please use a different username",
-                          ToastDuration.Short,
-                          16)
-                    .Show(cancellationTokenSource.Token);
+                await _dialogService.ShowToastAsync("Username must be unique, please use a different username");
             }
         }
 

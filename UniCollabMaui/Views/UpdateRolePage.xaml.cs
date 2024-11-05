@@ -7,10 +7,17 @@ namespace UniCollabMaui.Views;
 
 public partial class UpdateRolePage : ContentPage
 {
+    private readonly IDatabaseService _databaseService;
+    private readonly IPageDialogService _dialogService;
+
     private int? roleId;
-    public UpdateRolePage(int? roleId = null)
+    public UpdateRolePage(IDatabaseService databaseService, IPageDialogService dialogService, int? roleId = null)
     {
 		InitializeComponent();
+        _databaseService = databaseService ?? throw new ArgumentNullException(nameof(databaseService));
+        _dialogService = dialogService ?? throw new ArgumentNullException(nameof(dialogService));
+
+
         this.roleId = roleId;
         if (roleId.HasValue)
         {
@@ -22,7 +29,7 @@ public partial class UpdateRolePage : ContentPage
     
     private async void LoadRole(int roleId)
     {
-        var role = await DatabaseService.GetRoleById(roleId);
+        var role = await _databaseService.GetRoleById(roleId);
         if (role != null)
         {
             RoleNameEntry.Text = role.RoleName;
@@ -60,7 +67,7 @@ public partial class UpdateRolePage : ContentPage
         //check that all required fields are entered
         if (string.IsNullOrEmpty(RoleNameEntry.Text))
         {
-            await DisplayAlert("Error", "Please fill in all the Role details.", "OK");
+            await _dialogService.ShowAlertAsync("Error", "Please fill in all the Role details.", "OK");
             return;
         }
         var roleName = RoleNameEntry.Text;
@@ -70,8 +77,8 @@ public partial class UpdateRolePage : ContentPage
         var isTaskViewer = IsTaskViewerCheckbox.IsChecked;
         var isProgressViewer = IsProgressViewerCheckbox.IsChecked;
 
-        var sessionUserId = await DatabaseService.GetUserIdFromSession(AppSession.SessionId);
-        var sessionUser = await DatabaseService.GetUserById((int)sessionUserId);
+        var sessionUserId = await _databaseService.GetUserIdFromSession(AppSession.SessionId);
+        var sessionUser = await _databaseService.GetUserById((int)sessionUserId);
 
         //logger for saved/updated Role
         Logger.Log("Changed by " + sessionUser.Username + " \nRole [#" + roleId + "] " + roleName + " is Updated: \n" +

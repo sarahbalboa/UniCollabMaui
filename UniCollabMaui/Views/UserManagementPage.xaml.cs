@@ -4,10 +4,21 @@ namespace UniCollabMaui.Views;
 
 public partial class UserManagementPage : ContentPage
 {
-	public UserManagementPage()
-	{
+    private readonly IDatabaseService _databaseService;
+    private readonly IPageDialogService _dialogService;
+
+
+    public UserManagementPage(IDatabaseService databaseService, IPageDialogService dialogService)
+    {
 		InitializeComponent();
-	}
+        _databaseService = databaseService ?? throw new ArgumentNullException(nameof(databaseService));
+        _dialogService = dialogService ?? throw new ArgumentNullException(nameof(dialogService));
+
+    }
+    public UserManagementPage()
+    {
+        InitializeComponent();
+    }
     protected override void OnAppearing()
     {
         base.OnAppearing();
@@ -15,7 +26,7 @@ public partial class UserManagementPage : ContentPage
     }
     private async Task OnUserTapped(int userId)
     {
-        await Navigation.PushAsync(new UpdateUserPage(userId));
+        await Navigation.PushAsync(new UpdateUserPage(_databaseService, _dialogService, userId));
         //implement an update role page
     }
     private Color GetUserColor(User user)
@@ -34,7 +45,7 @@ public partial class UserManagementPage : ContentPage
     }
     private async void LoadUsers()
     {
-        var users = await DatabaseService.GetUsers();
+        var users = await _databaseService.GetUsers();
 
         ActiveUsersColumn.Children.Clear();
         InactiveUsersColumn.Children.Clear();

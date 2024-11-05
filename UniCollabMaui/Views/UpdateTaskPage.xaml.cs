@@ -5,10 +5,12 @@ namespace UniCollabMaui.Views;
 
 public partial class UpdateTaskPage : ContentPage
 {
+    private readonly IDatabaseService _databaseService;
     private int? taskId;
-    public UpdateTaskPage(int? taskId = null)
+    public UpdateTaskPage(IDatabaseService databaseService, int? taskId = null)
 	{
 		InitializeComponent();
+        _databaseService = databaseService ?? throw new ArgumentNullException(nameof(databaseService));
 
         this.taskId = taskId;
         if (taskId.HasValue)
@@ -24,11 +26,11 @@ public partial class UpdateTaskPage : ContentPage
         base.OnAppearing();
 
         // Assuming you have a session ID in AppSession
-        var userId = await DatabaseService.GetUserIdFromSession(AppSession.SessionId);
+        var userId = await _databaseService.GetUserIdFromSession(AppSession.SessionId);
         if (userId.HasValue)
         {
-            var userRole = await DatabaseService.GetUserRole(userId.Value);
-            var task = await DatabaseService.GetAppTaskById(taskId.Value);
+            var userRole = await _databaseService.GetUserRole(userId.Value);
+            var task = await _databaseService.GetAppTaskById(taskId.Value);
 
             // Check if the user role is system role
             if (userRole.IsTaskAdmin != true && (task.AssignedToUserId != userId))
@@ -46,14 +48,14 @@ public partial class UpdateTaskPage : ContentPage
 
     private async Task LoadUsers()
     {
-        var users = await DatabaseService.GetUsers();
+        var users = await _databaseService.GetUsers();
         UserPicker.ItemsSource = new List<User>(users);
     }
 
     private async void LoadTask(int id)
     {
         await LoadUsers();
-        var task = await DatabaseService.GetAppTaskById(id);
+        var task = await _databaseService.GetAppTaskById(id);
         if (task != null)
         {
             TaskTitleEntry.Text = task.Title;
@@ -104,12 +106,12 @@ public partial class UpdateTaskPage : ContentPage
             return;
         }
 
-        await DatabaseService.UpdateAppTask(taskId.Value, title, description, column, priority, selectedUser.Id);
+        await _databaseService.UpdateAppTask(taskId.Value, title, description, column, priority, selectedUser.Id);
 
         await Navigation.PopAsync();
 
-        var sessionUserId = await DatabaseService.GetUserIdFromSession(AppSession.SessionId);
-        var sessionUser = await DatabaseService.GetUserById((int)sessionUserId);
+        var sessionUserId = await _databaseService.GetUserIdFromSession(AppSession.SessionId);
+        var sessionUser = await _databaseService.GetUserById((int)sessionUserId);
 
         //logger for saved/updated Role
         Logger.Log("Changed by " + sessionUser.Username + " \nTask [#" + taskId + "] " + title + " is Updated: \n" +
@@ -123,7 +125,7 @@ public partial class UpdateTaskPage : ContentPage
     {
         bool answer = await DisplayAlert("Deletion Confirmation", "Are you sure you want to delete this task", "Yes", "No");
         if(answer){ 
-            await DatabaseService.RemoveAppTask(taskId.Value);
+            await _databaseService.RemoveAppTask(taskId.Value);
             await Navigation.PopAsync();
         }
     }

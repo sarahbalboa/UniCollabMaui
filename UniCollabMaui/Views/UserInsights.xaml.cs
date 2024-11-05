@@ -9,11 +9,21 @@ namespace UniCollabMaui.Views;
 
 public partial class UserInsights : ContentPage
 {
+    private readonly IDatabaseService _databaseService;
 
+    public UserInsights(IDatabaseService databaseService)
+    {
+        InitializeComponent();
+        _databaseService = databaseService ?? throw new ArgumentNullException(nameof(databaseService));
+
+
+    }
+    /// <summary>
+    /// parameterless contructor to be called in the MainTabbedOage as an object element
+    /// </summary>
     public UserInsights()
     {
         InitializeComponent();
-
     }
     protected override void OnAppearing()
     {
@@ -24,8 +34,8 @@ public partial class UserInsights : ContentPage
 
     private async void UpdateUserTasksChart()
     {
-        var tasks = await DatabaseService.GetAppTasks();
-        var users = await DatabaseService.GetUsers();
+        var tasks = await _databaseService.GetAppTasks();
+        var users = await _databaseService.GetUsers();
         var userTaskCount = new Dictionary<string, int>();
         List<ChartEntry> assignedTaskChartEntries = new List<ChartEntry>();
 
@@ -79,8 +89,8 @@ public partial class UserInsights : ContentPage
     
     private async void UpdateUserDoneTasksChart()
     {
-        var tasks = await DatabaseService.GetAppTasks();
-        var users = await DatabaseService.GetUsers();
+        var tasks = await _databaseService.GetAppTasks();
+        var users = await _databaseService.GetUsers();
         var userTaskCount = new Dictionary<string, int>();
         List<ChartEntry> doneChartEntries = new List<ChartEntry>();
 
