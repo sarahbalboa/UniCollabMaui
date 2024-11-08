@@ -27,7 +27,7 @@
 
 ![SkiaSharp.Views.Maui.Controls](https://img.shields.io/badge/SkiaSharp.Views.Maui.Controls-2.88.9-42A5F5?logo=sketchup&logoColor=white)
 
-![SkiaSharp.Views.Maui.Controls.Compatibility](https://img.shields.io/badge/SkiaSharp.Views.Maui.Controls.Compatibility-2.88.8-42A5F5?logo=sketchup&logoColor=white)
+![SkiaSharp.Views.Maui.Controls.Compatibility](https://img.shields.io/badge/SkiaSharp.Views.Maui.Controls.Compatibility-2.88.9-42A5F5?logo=sketchup&logoColor=white)
 
 ![Supabase-CSharp](https://img.shields.io/badge/Supabase--CSharp-0.16.1-brightgreen?logo=supabase)
 
