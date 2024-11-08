@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace UniCollabMaui.Service
 {
-    public class AppSession
+    public static class AppSession
     {
-        public static string SessionId { get; set; }
+        public static string? SessionId { get; set; }
     }
 }

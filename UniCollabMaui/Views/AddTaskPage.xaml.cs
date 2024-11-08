@@ -19,19 +19,13 @@ namespace UniCollabMaui.Views
             this.taskId = taskId;
             LoadUsers();
         }
-        protected override async void OnAppearing()
-        {
-            base.OnAppearing();
-
-            // Assuming you have a session ID in AppSession
-            
-        }
-        private async void LoadUsers()
+        
+        private async Task LoadUsers()
         {
             var users = await DatabaseService.GetUsers();
             var userId = await DatabaseService.GetUserIdFromSession(AppSession.SessionId);
-            List<User> userList = new List<User>(users);
-            List<User> activeUsersList = new List<User>();
+            List<User> userList = new(users);
+            List<User> activeUsersList = new();
             foreach (var user in userList)
             {
                 if (user.Active)
@@ -46,7 +40,7 @@ namespace UniCollabMaui.Views
             {
                 var userRole = await DatabaseService.GetUserRole(userId.Value);
 
-                if (userRole.IsTaskAdmin != true)
+                if (!userRole.IsTaskAdmin)
                 {
                     UserPicker.IsEnabled = false;
                     foreach (User user in users)
@@ -71,7 +65,6 @@ namespace UniCollabMaui.Views
                 await DisplayAlert("Error", "Please fill in all the task details.", "OK");
                 return;
             }
-            
 
             var selectedUser = (User)UserPicker.SelectedItem;
             var title = TaskTitleEntry.Text;
@@ -79,14 +72,22 @@ namespace UniCollabMaui.Views
             var column = TaskColumnPicker.SelectedItem.ToString();
             var priority = TaskPriorityPicker.SelectedItem.ToString();
 
+            
 
             if ((User)UserPicker.SelectedItem == null) //if user is not selected, assign it to Unassigned user
             {
-                await DatabaseService.AddAppTask(title, description, column, priority, 0);
+                if(column != null && priority != null)
+                {
+                    await DatabaseService.AddAppTask(title, description, column, priority, 0);
+                }
+                
             }
             else
             {
-                await DatabaseService.AddAppTask(title, description, column, priority, selectedUser.Id);
+                if (column != null && priority != null)
+                {
+                    await DatabaseService.AddAppTask(title, description, column, priority, selectedUser.Id);
+                }
             }
 
             

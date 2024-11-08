@@ -9,9 +9,9 @@ public partial class AddRolePage : ContentPage
 	{
 		InitializeComponent();
         this.roleId = roleId;
-        setActiveStatusPerColumn(column);
+        SetActiveStatusPerColumn(column);
     }
-    private void setActiveStatusPerColumn(bool column)
+    private void SetActiveStatusPerColumn(bool column)
     {
        ActiveCheckbox.IsChecked = column;
     }

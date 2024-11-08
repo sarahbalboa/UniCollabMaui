@@ -34,7 +34,7 @@ namespace UniCollabMaui.Views
             // Attempt to log in
             var user = await DatabaseService.ValidateUser(username, password);
             
-            if (user != null)
+            if (user is not null)
             {
                     if (user.Active)
                     {
@@ -55,53 +55,30 @@ namespace UniCollabMaui.Views
             }
         }
 
-        private void OnPasswordTextChanged(object sender, TextChangedEventArgs e)
+        private void OnTextChanged(object sender, TextChangedEventArgs e)
         {
             var entry = sender as Entry;
 
-            // Ensure only alphanumeric characters are allowed
-            string newText = Regex.Replace(entry.Text, @"[^a-zA-Z0-9]", "");
-
-            // Enforce the maximum length
-            if (newText.Length > MaxPasswordLength)
+            if (entry is not null)
             {
-                newText = newText.Substring(0, MaxPasswordLength);
+                // Ensure only alphanumeric characters are allowed
+                string newText = Regex.Replace(entry.Text, @"[^a-zA-Z0-9]", "");
+
+                // Enforce the maximum length
+                if (newText.Length > MaxPasswordLength)
+                {
+                    newText = newText[..MaxPasswordLength];
+                }
+
+                // Update the text if it has changed
+                if (entry.Text != newText)
+                {
+                    entry.Text = newText;
+                }
+
+                CheckIfNextButtonCanBeEnabled();
             }
-
-            // Update the text if it has changed
-            if (entry.Text != newText)
-            {
-                entry.Text = newText;
-            }
-
-            CheckIfNextButtonCanBeEnabled();
-        }
-
-        private void OnUsernameTextChanged(object sender, TextChangedEventArgs e)
-        {
-            var entry = sender as Entry;
-
-            // Ensure only alphanumeric characters are allowed
-            string newText = Regex.Replace(entry.Text, @"[^a-zA-Z0-9]", "");
-
-            // Enforce the maximum length
-            if (newText.Length > MaxPasswordLength)
-            {
-                newText = newText.Substring(0, MaxPasswordLength);
-            }
-
-            // Update the text if it has changed
-            if (entry.Text != newText)
-            {
-                entry.Text = newText;
-            }
-
-            CheckIfNextButtonCanBeEnabled();
-        }
-
-        private void OnEntryTextChanged(object sender, TextChangedEventArgs e)
-        {
-            CheckIfNextButtonCanBeEnabled();
+           
         }
 
         private void CheckIfNextButtonCanBeEnabled()

@@ -10,21 +10,23 @@ public partial class AccountPage : ContentPage
 	}
     protected override async void OnAppearing()
     {
-        var userId = await DatabaseService.GetUserIdFromSession(AppSession.SessionId);
-        var userRole = await DatabaseService.GetUserRole((int)userId);
-        var user = await DatabaseService.GetUserById((int)userId);
+        if (AppSession.SessionId != null)
+        {
+            var userId = await DatabaseService.GetUserIdFromSession(AppSession.SessionId);
+            var userRole = await DatabaseService.GetUserRole((int)userId);
+            var user = await DatabaseService.GetUserById((int)userId);
 
-        AccountName.Text = user.Name;
-        EmailLbl.Text = user.Email;
-        CurrentRoleLbl.Text = "Role: " + userRole.RoleName.ToString();
+            AccountName.Text = user.Name;
+            EmailLbl.Text = user.Email;
+            CurrentRoleLbl.Text = $"Role: {userRole.RoleName}";
 
-        DisplayUserTaskCount((int)userId);
-
+           await DisplayUserTaskCount((int)userId);
+        }
     }
-    private async void DisplayUserTaskCount(int? userId)
+    private async Task DisplayUserTaskCount(int? userId)
     {
         var tasks = await DatabaseService.GetAppTasks();
-        List<AppTask> allTasks = new List<AppTask>(tasks);
+        List<AppTask> allTasks = new(tasks);
 
 
         int todoTasks = 0;
@@ -61,19 +63,19 @@ public partial class AccountPage : ContentPage
         TotalTasksLbl.Text = "Total: " + totalUserTasks.ToString();
     }
 
-    private async void OnLogoutButtonClicked(object sender, EventArgs e)
+    private static async void OnLogoutButtonClicked(object sender, EventArgs e)
     {
-        // Log out the user by deleting the session
-        await DatabaseService.Logout(AppSession.SessionId);
-
-        // Clear the session ID stored in AppSession
-        AppSession.SessionId = null;
+        if (AppSession.SessionId != null)
+        {
+            // Log out the user by deleting the session
+            await DatabaseService.Logout(AppSession.SessionId);
+            // Clear the session ID stored in AppSession
+            AppSession.SessionId = null;
+        }
 
         // Clear the navigation stack by setting the login page as the new root
         Application.Current.MainPage = new NavigationPage(new MainPage());
 
-        // Optionally, you can also call GC.Collect() to clean up memory, though it's not usually necessary
-        // GC.Collect();
     }
 
 }
