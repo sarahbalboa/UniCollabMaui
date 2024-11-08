@@ -26,7 +26,7 @@ public partial class ProgressPage : ContentPage
     private async void UpdateTaskStatusCount()
     {
         var tasks = await DatabaseService.GetAppTasks();
-        List<AppTask> allTasks = new List<AppTask>(tasks);
+        List<AppTask> allTasks = new(tasks);
         
         
         int todoTasks = 0;
@@ -57,11 +57,11 @@ public partial class ProgressPage : ContentPage
     private async void UpdateProgressBar()
     {
         var tasks = await DatabaseService.GetAppTasks();
-        List<AppTask> allTasks = new List<AppTask>(tasks);
+        List<AppTask> allTasks = new(tasks);
         double doneTasks = 0.0;
         double progress = 0.0;
 
-        if(tasks.Count() != 0)
+        if(tasks.Any())
         {
             foreach (var task in tasks)
             {

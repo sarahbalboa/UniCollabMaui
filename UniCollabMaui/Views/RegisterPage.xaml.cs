@@ -22,11 +22,11 @@ namespace UniCollabMaui.Views
         private async void LoadRoles()
         {
             var roles = await DatabaseService.GetRoles();
-            List<Role> roleList = new List<Role>(roles);
-            List<Role> systemRoleList = new List<Role>();
+            List<Role> roleList = new(roles);
+            List<Role> systemRoleList = [];
             //remove non system default roles
             foreach (Role role in roleList) {   
-                if(role.IsSystemRole == true && role.Active == true)
+                if(role.IsSystemRole && role.Active)
                 {
                     systemRoleList.Add(role);
                 }
@@ -51,7 +51,6 @@ namespace UniCollabMaui.Views
 
             // Attempt to log in
             var isUniqueUser = await DatabaseService.ValidateUniqueUser(username);
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
             if (isUniqueUser)
             {
 
@@ -63,7 +62,7 @@ namespace UniCollabMaui.Views
                 await Toast.Make("User registered",
                           ToastDuration.Short,
                           16)
-                    .Show(cancellationTokenSource.Token);
+                    .Show(new CancellationTokenSource().Token);
 
                 // Navigate back to the login page
                 await Navigation.PopAsync();
@@ -74,8 +73,9 @@ namespace UniCollabMaui.Views
                 await Toast.Make("Username must be unique, please use a different username",
                           ToastDuration.Short,
                           16)
-                    .Show(cancellationTokenSource.Token);
+                    .Show(new CancellationTokenSource().Token);
             }
+
         }
 
         private void OnEntryTextChanged(object sender, TextChangedEventArgs e)
@@ -85,7 +85,7 @@ namespace UniCollabMaui.Views
                                        !string.IsNullOrEmpty(UsernameEntry.Text) &&
                                        !string.IsNullOrEmpty(EmailEntry.Text) &&
                                        !string.IsNullOrEmpty(PasswordEntry.Text) &&
-                                       !((Role)RolePicker.SelectedItem == null);
+                                       ((Role)RolePicker.SelectedItem != null);
         }
 
         private async void OnCancelButtonClicked(object sender, EventArgs e)

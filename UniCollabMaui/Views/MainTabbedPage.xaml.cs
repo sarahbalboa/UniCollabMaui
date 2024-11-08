@@ -30,7 +30,7 @@ public partial class MainTabbedPage : TabbedPage
             var userRole = await DatabaseService.GetUserRole(userId.Value);
 
             // Check if the user role is system role
-            if (userRole.IsRoleAdmin != true)
+            if (!userRole.IsRoleAdmin)
             {
                 // Find the RoleManagementPage tab and remove it if it exists
                 var manageRolesTab = this.Children.FirstOrDefault(c => c is RoleManagementPage);
@@ -39,7 +39,7 @@ public partial class MainTabbedPage : TabbedPage
                     this.Children.Remove(manageRolesTab);
                 }
             }
-            if (userRole.IsTaskViewer != true && userRole.IsTaskAdmin != true)
+            if (!userRole.IsTaskViewer && !userRole.IsTaskAdmin)
             {
                 // Find the RoleManagementPage tab and remove it if it exists
                 var taskBoardTab = this.Children.FirstOrDefault(c => c is TaskBoard);
@@ -48,7 +48,7 @@ public partial class MainTabbedPage : TabbedPage
                     this.Children.Remove(taskBoardTab);
                 }
             }
-            if (userRole.IsProgressViewer != true)
+            if (!userRole.IsProgressViewer)
             {
                 // Find the RoleManagementPage tab and remove it if it exists
                 var progressPageTab = this.Children.FirstOrDefault(c => c is ProgressPage);

@@ -20,7 +20,7 @@ public partial class RoleManagementPage : ContentPage
         await Navigation.PushAsync(new UpdateRolePage(roleId));
         //implement an update role page
     }
-    private Color GetRoleColor(Role role)
+    private static Color GetRoleColor(Role role)
     {
         // Example logic to determine the color based on task priority
         // You can modify this logic to fit your requirements
@@ -30,8 +30,6 @@ public partial class RoleManagementPage : ContentPage
                 return Colors.DarkBlue;
             case false:
                 return Colors.DarkGrey;
-            default:
-                return Colors.Blue;
         }
     }
 
