@@ -5,6 +5,9 @@ using Postgrest.Models;
 
 namespace UniCollabMaui.Models
 {
+    /// <summary>
+    /// User model that represents the User table from the database
+    /// </summary>
     [Table("User")]
     public class User : BaseModel
     {
