@@ -47,10 +47,13 @@ public partial class RoleManagementPage : ContentPage
         switch (role.Active)
         {
             case true:
+                if (role.IsSystemRole)
+                    return Colors.Blue;
                 return Colors.DarkBlue;
             case false:
                 return Colors.DarkGrey;
         }
+
     }
 
     /// <summary>
