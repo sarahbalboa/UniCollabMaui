@@ -2,12 +2,22 @@ using UniCollabMaui.Models;
 using UniCollabMaui.Service;
 namespace UniCollabMaui.Views;
 
+/// <summary>
+/// Accoun page of the mobile app with the puporse of allowing the user to Log Out and view their Tasks summary.
+/// </summary>
 public partial class AccountPage : ContentPage
 {
+    /// <summary>
+    /// Contructor
+    /// </summary>
 	public AccountPage()
 	{
 		InitializeComponent();
 	}
+
+    /// <summary>
+    /// Override the OnAppearing() so that the session of teh logged in user is used to identify it and update the data diplayed accordingly.
+    /// </summary>
     protected override async void OnAppearing()
     {
         if (AppSession.SessionId != null)
@@ -23,6 +33,12 @@ public partial class AccountPage : ContentPage
            await DisplayUserTaskCount((int)userId);
         }
     }
+
+    /// <summary>
+    /// Display teh task summary
+    /// </summary>
+    /// <param name="userId"></param>
+    /// <returns></returns>
     private async Task DisplayUserTaskCount(int? userId)
     {
         var tasks = await DatabaseService.GetAppTasks();
@@ -63,6 +79,11 @@ public partial class AccountPage : ContentPage
         TotalTasksLbl.Text = "Total: " + totalUserTasks.ToString();
     }
 
+    /// <summary>
+    /// Click lister for Log out button. Delete the session and redirect user to Main page.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private static async void OnLogoutButtonClicked(object sender, EventArgs e)
     {
         if (AppSession.SessionId != null)

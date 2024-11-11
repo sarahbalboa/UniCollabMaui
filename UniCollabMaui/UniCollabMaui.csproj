@@ -45,6 +45,8 @@
 		<AppInstallerUri>C:\Users\40496531\OneDrive - Edinburgh Napier University\Desktop\Uni\honours project\Publish\2.0</AppInstallerUri>
 		<HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
 		<PackageCertificateThumbprint>8A8F49DF9534AF8EBC9A259782FC22495A9651AE</PackageCertificateThumbprint>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<DocumentationFile>bin\Debug\UniCollabMaui.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>

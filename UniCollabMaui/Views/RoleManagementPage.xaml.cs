@@ -3,23 +3,43 @@ using UniCollabMaui.Models;
 using UniCollabMaui.Service;
 namespace UniCollabMaui.Views;
 
+/// <summary>
+/// RoleManagementPage view to manage and create custom roles.
+/// </summary>
 public partial class RoleManagementPage : ContentPage
 {
+    /// <summary>
+    /// Constructor
+    /// </summary>
 	public RoleManagementPage()
 	{
 		InitializeComponent();
 	}
+    /// <summary>
+    /// Execute the funtion that all teh database roles
+    /// </summary>
     protected override void OnAppearing()
     {
         base.OnAppearing();
         LoadRoles(); // Load roles when the page appears
     }
 
+    /// <summary>
+    /// If a role is tabbed redirect to the UpdateRolePage sending the role id as parameter.
+    /// </summary>
+    /// <param name="roleId"></param>
+    /// <returns></returns>
     private async Task OnRoleTapped(int roleId)
     {
         await Navigation.PushAsync(new UpdateRolePage(roleId));
         //implement an update role page
     }
+
+    /// <summary>
+    /// Set the role item colour depending on its Active status
+    /// </summary>
+    /// <param name="role"></param>
+    /// <returns></returns>
     private static Color GetRoleColor(Role role)
     {
         // Example logic to determine the color based on task priority
@@ -33,6 +53,9 @@ public partial class RoleManagementPage : ContentPage
         }
     }
 
+    /// <summary>
+    /// Load all the roles on teh corresponding active/inactive scroll columns
+    /// </summary>
     private async void LoadRoles()
     {
         var roles = await DatabaseService.GetRoles();
@@ -93,11 +116,21 @@ public partial class RoleManagementPage : ContentPage
         }
     }
 
+    /// <summary>
+    /// On click lister for the add role button on the active column. Redirects the user to the AddRolePage view passing the active status as a parameter.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void OnActiveAddRoleClicked(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new AddRolePage(true));
     }
 
+    /// <summary>
+    /// On click lister for the add role button on the inactive column. Redirects the user to the AddRolePage view passing the active status as a parameter.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void OnInactiveAddRoleClicked(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new AddRolePage(false));

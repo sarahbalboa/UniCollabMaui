@@ -10,8 +10,14 @@ using UniCollabMaui.Service;
 
 namespace UniCollabMaui.Views
 {
+    /// <summary>
+    /// RegisterPage view to register a new user on the database.
+    /// </summary>
     public partial class RegisterPage : ContentPage
     {
+        /// <summary>
+        /// Contructor that loads the system roles on the Roles picker.
+        /// </summary>
         public RegisterPage()
         {
             InitializeComponent();
@@ -19,6 +25,9 @@ namespace UniCollabMaui.Views
             LoadRoles();
         }
 
+        /// <summary>
+        /// Load the system roles (active ones) on the role picker.
+        /// </summary>
         private async void LoadRoles()
         {
             var roles = await DatabaseService.GetRoles();
@@ -34,6 +43,13 @@ namespace UniCollabMaui.Views
             RolePicker.ItemsSource = systemRoleList;
 
         }
+
+        /// <summary>
+        /// Register button listener that validates that the user is unique and all mandatory fields are entered. If all is correct then create the new user record and
+        /// redirect to the log in page.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void OnRegisterButtonClicked(object sender, EventArgs e)
         {
             // Validate input fields
@@ -78,6 +94,11 @@ namespace UniCollabMaui.Views
 
         }
 
+        /// <summary>
+        /// Enable the register button if all entries are filled.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnEntryTextChanged(object sender, TextChangedEventArgs e)
         {
             // Enable the register button if all entries are filled
@@ -88,6 +109,11 @@ namespace UniCollabMaui.Views
                                        ((Role)RolePicker.SelectedItem != null);
         }
 
+        /// <summary>
+        /// Cancel buttin click listener to redirec to the Log In page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void OnCancelButtonClicked(object sender, EventArgs e)
         {
             await Navigation.PopAsync();

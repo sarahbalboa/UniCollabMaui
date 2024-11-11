@@ -5,9 +5,17 @@ using UniCollabMaui.Service;
 
 namespace UniCollabMaui.Views;
 
+/// <summary>
+/// UpdateRolePage that allows the user to update an existing role in the database.
+/// </summary>
 public partial class UpdateRolePage : ContentPage
 {
     private int? roleId;
+
+    /// <summary>
+    /// Contructor that takes in the roleId to load the role data.
+    /// </summary>
+    /// <param name="roleId"></param>
     public UpdateRolePage(int? roleId = null)
     {
 		InitializeComponent();
@@ -19,7 +27,10 @@ public partial class UpdateRolePage : ContentPage
         
     }
 
-    
+    /// <summary>
+    /// Load teh role data from the database using the roleId
+    /// </summary>
+    /// <param name="roleId"></param>
     private async void LoadRole(int roleId)
     {
         var role = await DatabaseService.GetRoleById(roleId);
@@ -54,7 +65,11 @@ public partial class UpdateRolePage : ContentPage
 
     }
 
-
+    /// <summary>
+    /// Check that all teh mandatory fields are entered and update the role record.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void OnSaveRoleButtonClicked(object sender, EventArgs e)
     {
         //check that all required fields are entered

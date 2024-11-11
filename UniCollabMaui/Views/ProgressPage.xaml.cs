@@ -8,13 +8,23 @@ using System.Threading.Tasks;
 
 namespace UniCollabMaui.Views;
 
+/// <summary>
+/// ProgressPage that displays the overall project progress.
+/// </summary>
 public partial class ProgressPage : ContentPage
 {
+
+    /// <summary>
+    /// Cobstructor
+    /// </summary>
     public ProgressPage()
     {
         InitializeComponent();
     }
 
+    /// <summary>
+    /// Run the required funtions to udpate the progress visualisation.
+    /// </summary>
     protected override void OnAppearing()
     {
         base.OnAppearing();
@@ -23,6 +33,9 @@ public partial class ProgressPage : ContentPage
         
     }
 
+    /// <summary>
+    /// Update the Task summary
+    /// </summary>
     private async void UpdateTaskStatusCount()
     {
         var tasks = await DatabaseService.GetAppTasks();
@@ -54,6 +67,10 @@ public partial class ProgressPage : ContentPage
         DoneLbl.Text = "Done tasks: " + doneTasks.ToString();
         TotalTasksLbl.Text = "Total: " + allTasks.Count.ToString();
     }
+
+    /// <summary>
+    /// Update the progress bar
+    /// </summary>
     private async void UpdateProgressBar()
     {
         var tasks = await DatabaseService.GetAppTasks();
@@ -84,6 +101,12 @@ public partial class ProgressPage : ContentPage
         }
 
     }
+
+    /// <summary>
+    /// Click listener for the Refresh button to refresh the Task summary and the progress bar.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void OnRefreshClicked(object sender, EventArgs e)
     {
         //show Refreshing... label to let teh customer know if action behind the button
