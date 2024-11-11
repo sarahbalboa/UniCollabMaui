@@ -4,6 +4,9 @@ using Postgrest.Models;
 
 namespace UniCollabMaui.Models
 {
+    /// <summary>
+    /// AppTask model that represents the AppTask table from the database
+    /// </summary>
     [Table("AppTask")]
     public class AppTask : BaseModel
     {

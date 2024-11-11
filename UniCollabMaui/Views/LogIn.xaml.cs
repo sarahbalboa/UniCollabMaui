@@ -5,20 +5,37 @@ using UniCollabMaui.Service;
 
 namespace UniCollabMaui.Views
 {
+    /// <summary>
+    /// LogIn view to log in the system.
+    /// </summary>
     public partial class LogIn : ContentPage
     {
         private const int MaxPasswordLength = 15;
 
+        /// <summary>
+        /// Log In page constructor.
+        /// </summary>
         public LogIn()
         {
             InitializeComponent();
         }
+        
+
+        /// <summary>
+        /// Disable the back button
+        /// </summary>
+        /// <returns></returns>
         protected override bool OnBackButtonPressed()
         {
             // Return true to disable the back button functionality
             return true;
         }
 
+        /// <summary>
+        /// Log In buttin click listener that validates the user to check if the login credentials are correct and create a session for them.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void OnLogInButtonClicked(object sender, EventArgs e)
         {
             string username = Username.Text;
@@ -34,7 +51,7 @@ namespace UniCollabMaui.Views
             // Attempt to log in
             var user = await DatabaseService.ValidateUser(username, password);
             
-            if (user != null)
+            if (user is not null)
             {
                     if (user.Active)
                     {
@@ -55,60 +72,50 @@ namespace UniCollabMaui.Views
             }
         }
 
-        private void OnPasswordTextChanged(object sender, TextChangedEventArgs e)
+        /// <summary>
+        /// OnTextChanged listener to enable the log in button if all required fields are filled.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnTextChanged(object sender, TextChangedEventArgs e)
         {
             var entry = sender as Entry;
 
-            // Ensure only alphanumeric characters are allowed
-            string newText = Regex.Replace(entry.Text, @"[^a-zA-Z0-9]", "");
-
-            // Enforce the maximum length
-            if (newText.Length > MaxPasswordLength)
+            if (entry is not null)
             {
-                newText = newText.Substring(0, MaxPasswordLength);
-            }
+                // Ensure only alphanumeric characters are allowed
+                string newText = Regex.Replace(entry.Text, @"[^a-zA-Z0-9]", "");
 
-            // Update the text if it has changed
-            if (entry.Text != newText)
-            {
-                entry.Text = newText;
-            }
+                // Enforce the maximum length
+                if (newText.Length > MaxPasswordLength)
+                {
+                    newText = newText[..MaxPasswordLength];
+                }
 
-            CheckIfNextButtonCanBeEnabled();
+                // Update the text if it has changed
+                if (entry.Text != newText)
+                {
+                    entry.Text = newText;
+                }
+
+                CheckIfNextButtonCanBeEnabled();
+            }
+           
         }
 
-        private void OnUsernameTextChanged(object sender, TextChangedEventArgs e)
-        {
-            var entry = sender as Entry;
-
-            // Ensure only alphanumeric characters are allowed
-            string newText = Regex.Replace(entry.Text, @"[^a-zA-Z0-9]", "");
-
-            // Enforce the maximum length
-            if (newText.Length > MaxPasswordLength)
-            {
-                newText = newText.Substring(0, MaxPasswordLength);
-            }
-
-            // Update the text if it has changed
-            if (entry.Text != newText)
-            {
-                entry.Text = newText;
-            }
-
-            CheckIfNextButtonCanBeEnabled();
-        }
-
-        private void OnEntryTextChanged(object sender, TextChangedEventArgs e)
-        {
-            CheckIfNextButtonCanBeEnabled();
-        }
-
+        /// <summary>
+        /// OnTextChanged listener to enable the log in button if all required fields are filled.
+        /// </summary>
         private void CheckIfNextButtonCanBeEnabled()
         {
             NextButton.IsEnabled = !string.IsNullOrEmpty(Username.Text) && !string.IsNullOrEmpty(Password.Text);
         }
 
+        /// <summary>
+        /// Click button listener to navigate to the RegisterPage view.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void OnRegisterButtonClicked(object sender, EventArgs e)
         {
             // Navigate to the Register page (implement registration page navigation)

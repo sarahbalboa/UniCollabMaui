@@ -7,8 +7,9 @@ using System.IO;
 
 namespace UniCollabMaui.Service
 {
-
-
+    /// <summary>
+    /// Logger service used to create teh Log.txt output.
+    /// </summary>
     public class Logger
     {
         private static readonly string logFilePath ;

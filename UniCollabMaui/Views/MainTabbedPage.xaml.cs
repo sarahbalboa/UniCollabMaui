@@ -3,22 +3,34 @@ using UniCollabMaui.Models;
 using UniCollabMaui.Service;
 namespace UniCollabMaui.Views;
 
+/// <summary>
+/// Main tabbed page that contains all the views tabs.
+/// </summary>
 public partial class MainTabbedPage : TabbedPage
 {
+
+    /// <summary>
+    /// Conctructor
+    /// </summary>
 	public MainTabbedPage()
 	{
 		InitializeComponent();
 	}
     
-/** Function to disable the back button
- */
 
+    /// <summary>
+    /// Disable the back button
+    /// </summary>
+    /// <returns></returns>
     protected override bool OnBackButtonPressed()
     {
         // Return true to disable the back button functionality
         return true;
     }
 
+    /// <summary>
+    /// Change the base OnAppearing to check for the logged in user access level and determine what they are allowed to see (what child tabs they can interact with)
+    /// </summary>
     protected override async void OnAppearing()
     {
         base.OnAppearing();
@@ -30,7 +42,7 @@ public partial class MainTabbedPage : TabbedPage
             var userRole = await DatabaseService.GetUserRole(userId.Value);
 
             // Check if the user role is system role
-            if (userRole.IsRoleAdmin != true)
+            if (!userRole.IsRoleAdmin)
             {
                 // Find the RoleManagementPage tab and remove it if it exists
                 var manageRolesTab = this.Children.FirstOrDefault(c => c is RoleManagementPage);
@@ -39,7 +51,7 @@ public partial class MainTabbedPage : TabbedPage
                     this.Children.Remove(manageRolesTab);
                 }
             }
-            if (userRole.IsTaskViewer != true && userRole.IsTaskAdmin != true)
+            if (!userRole.IsTaskViewer && !userRole.IsTaskAdmin)
             {
                 // Find the RoleManagementPage tab and remove it if it exists
                 var taskBoardTab = this.Children.FirstOrDefault(c => c is TaskBoard);
@@ -48,7 +60,7 @@ public partial class MainTabbedPage : TabbedPage
                     this.Children.Remove(taskBoardTab);
                 }
             }
-            if (userRole.IsProgressViewer != true)
+            if (!userRole.IsProgressViewer)
             {
                 // Find the RoleManagementPage tab and remove it if it exists
                 var progressPageTab = this.Children.FirstOrDefault(c => c is ProgressPage);

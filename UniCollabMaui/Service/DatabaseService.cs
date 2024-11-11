@@ -6,11 +6,19 @@ using UniCollabMaui.Models;
 
 namespace UniCollabMaui.Service
 {
+    /// <summary>
+    /// DatabaseServic class.
+    /// Used to interact with the database stored in Supabase.com. 
+    /// </summary>
     public static class DatabaseService
     {
         private static Client _client;
 
-        // Initialize Supabase Client
+        /// <summary>
+        /// Ini()
+        /// Intialise the database service to connect to the Supabase database service
+        /// </summary>
+        /// <returns></returns>
         static async Task Init()
         {
             if (_client != null)
@@ -25,26 +33,36 @@ namespace UniCollabMaui.Service
         }
 
         //----------------------   User methods  -------------------------
-
+        /// <summary>
+        /// AddUser()
+        /// Add a user to the database asynchroniously.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="active"></param>
+        /// <param name="username"></param>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <param name="role"></param>
+        /// <returns></returns>
         public static async Task AddUser(string name, bool active, int username, string email, string password, int role)
         {
             await Init();
-            var user = new User
-            {
-                Name = name,
-                Active = active,
-                Username = username,
-                Email = email,
-                Password = password,
-                RoleId = role,
-            };
+            var user = new User { Name = name, Active = active, Username = username, Email = email, Password = password,  RoleId = role,};
 
             // Insert the user record into the Supabase User table
             var response = await _client.From<User>().Insert(user);
 
         }
 
-
+        /// <summary>
+        /// UpdateUser()
+        /// Update an existing user record asynchroniously from teh User table on the database.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="name"></param>
+        /// <param name="active"></param>
+        /// <param name="role"></param>
+        /// <returns></returns>
         public static async Task UpdateUser(int userId, string name, bool active, int role)
         {
             await Init();
@@ -58,6 +76,13 @@ namespace UniCollabMaui.Service
             }
         }
 
+        /// <summary>
+        /// ValidateUser()
+        /// Validate the password and username from a matching user record on the User table database asynchroniously.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public static async Task<User> ValidateUser(string username, string password)
         {
             await Init();
@@ -67,6 +92,13 @@ namespace UniCollabMaui.Service
                 .Single();
             return user;
         }
+
+        /// <summary>
+        /// GetUserbyId()
+        /// Get a user from the User table using the ID attribute asynchroniously.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public static async Task<User> GetUserById(int userId)
         {
             await Init();
@@ -75,7 +107,11 @@ namespace UniCollabMaui.Service
                 .Single();
         }
 
-        // Get all Users
+        /// <summary>
+        ///  GetUsers()
+        ///  Get all Users from the User table asynchroniously.
+        /// </summary>
+        /// <returns></returns>
         public static async Task<IEnumerable<User>> GetUsers()
         {
             await Init();
@@ -83,6 +119,12 @@ namespace UniCollabMaui.Service
             return users.Models; // Get the list of user models
         }
 
+        /// <summary>
+        /// ValidateUniqueUser()
+        /// Validate that there does not exist an existing user with the same username on the User table.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         public static async Task<bool> ValidateUniqueUser(int username)
         {
             await Init();
@@ -90,10 +132,13 @@ namespace UniCollabMaui.Service
             return user == null;
         }
 
-
-
         //----------------- Session methods --------------------------
-
+        /// <summary>
+        /// CreateSession()
+        /// Create a session record for the user in teh Session table using the user id.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public static async Task<string> CreateSession(int userId)
         {
             await Init();
@@ -109,6 +154,12 @@ namespace UniCollabMaui.Service
             return sessionId;
         }
 
+        /// <summary>
+        /// GetUserIdFromSession()
+        /// Get the user id from a sesson id
+        /// </summary>
+        /// <param name="sessionId"></param>
+        /// <returns></returns>
         public static async Task<int?> GetUserIdFromSession(string sessionId)
         {
             await Init();
@@ -119,6 +170,12 @@ namespace UniCollabMaui.Service
             return session?.UserId;
         }
 
+        /// <summary>
+        /// Logout()
+        /// Delete the session from the user using the session Id when logging out/
+        /// </summary>
+        /// <param name="sessionId"></param>
+        /// <returns></returns>
         public static async Task Logout(string sessionId)
         {
             await Init();
@@ -132,7 +189,12 @@ namespace UniCollabMaui.Service
         }
 
         //----------------- Role-based access control methods --------------------
-
+        /// <summary>
+        /// GetUserRole()
+        /// Get the user roe using the user Id.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public static async Task<Role> GetUserRole(int userId)
         {
             await Init();
@@ -142,7 +204,16 @@ namespace UniCollabMaui.Service
         }
 
         //----------------- Task methods --------------------------
-
+        /// <summary>
+        /// AddAppTask()
+        /// Add a new Task record to the AppTask table asynchroniously.
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="description"></param>
+        /// <param name="column"></param>
+        /// <param name="priority"></param>
+        /// <param name="assignedToUserId"></param>
+        /// <returns></returns>
         public static async Task AddAppTask(string title, string description, string column, string priority, int assignedToUserId)
         {
             await Init();
@@ -157,6 +228,12 @@ namespace UniCollabMaui.Service
             await _client.From<AppTask>().Insert(appTask);
         }
 
+        /// <summary>
+        /// GetAppTaskById()
+        /// Get an Task from the Task table using its id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public static async Task<AppTask> GetAppTaskById(int id)
         {
             await Init();
@@ -168,6 +245,17 @@ namespace UniCollabMaui.Service
 
         }
 
+        /// <summary>
+        /// UpdateAppTask()
+        /// Update a Task record values from the Task table.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="title"></param>
+        /// <param name="description"></param>
+        /// <param name="column"></param>
+        /// <param name="priority"></param>
+        /// <param name="assignedToUserId"></param>
+        /// <returns></returns>
         public static async Task UpdateAppTask(int id, string title, string description, string column, string priority, int assignedToUserId)
         {
             await Init();
@@ -183,6 +271,12 @@ namespace UniCollabMaui.Service
             }
         }
 
+        /// <summary>
+        /// RemoveAppTask()
+        /// Remove a Task record from the AppTask table using the id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public static async Task RemoveAppTask(int id)
         {
             await Init();
@@ -193,6 +287,10 @@ namespace UniCollabMaui.Service
             }
         }
 
+        /// <summary>
+        /// Get all the Tasks records from the AppTask table.
+        /// </summary>
+        /// <returns></returns>
         public static async Task<IEnumerable<AppTask>> GetAppTasks()
         {
             await Init();
@@ -201,7 +299,12 @@ namespace UniCollabMaui.Service
         }
 
         //-------------------  Role methods   ------------------
-
+        /// <summary>
+        /// AddRole()
+        /// Add a role to the Role table using a role object
+        /// </summary>
+        /// <param name="role"></param>
+        /// <returns></returns>
         public static async Task AddRole(Role role)
         {
             await Init();
@@ -212,6 +315,10 @@ namespace UniCollabMaui.Service
             }
         }
 
+        /// <summary>
+        /// Get all the role records in the Role table.
+        /// </summary>
+        /// <returns></returns>
         public static async Task<IEnumerable<Role>> GetRoles()
         {
             await Init();
@@ -219,7 +326,12 @@ namespace UniCollabMaui.Service
             return roles.Models;
         }
 
-        // Get Role by ID
+        /// <summary>
+        /// GetRoleById()
+        /// Get a role record from the Role table using the role id.
+        /// </summary>
+        /// <param name="roleId"></param>
+        /// <returns></returns>
         public static async Task<Role> GetRoleById(int roleId)
         {
             await Init();
@@ -228,7 +340,18 @@ namespace UniCollabMaui.Service
                 .Single();
         }
 
-        // Update Role
+        /// <summary>
+        /// UpdateRole()
+        /// Update a role record from the Role table.
+        /// </summary>
+        /// <param name="roleId"></param>
+        /// <param name="name"></param>
+        /// <param name="active"></param>
+        /// <param name="isRoleAdmin"></param>
+        /// <param name="isTaskAdmin"></param>
+        /// <param name="isTaskViewer"></param>
+        /// <param name="isProgressViewer"></param>
+        /// <returns></returns>
         public static async Task UpdateRole(int roleId, string name, bool active, bool isRoleAdmin, bool isTaskAdmin, bool isTaskViewer, bool isProgressViewer)
         {
             await Init();
@@ -252,8 +375,5 @@ namespace UniCollabMaui.Service
                 var response = await _client.From<Role>().Update(role);
             }
         }
-
-
-
     }
 }
