@@ -3,9 +3,16 @@ using UniCollabMaui.Service;
 
 namespace UniCollabMaui.Views;
 
+/// <summary>
+/// UpdateTaskPage to update an existing task record from teh AppTask table database
+/// </summary>
 public partial class UpdateTaskPage : ContentPage
 {
     private int? taskId;
+    /// <summary>
+    /// Contructor that takes in teh taskId to load the task data
+    /// </summary>
+    /// <param name="taskId"></param>
     public UpdateTaskPage(int? taskId = null)
 	{
 		InitializeComponent();
@@ -18,7 +25,9 @@ public partial class UpdateTaskPage : ContentPage
 
     }
 
-
+    /// <summary>
+    /// Override the OnAppearing() so that the user access level is checked to determine if they can update the task.
+    /// </summary>
     protected override async void OnAppearing()
     {
         base.OnAppearing();
@@ -31,7 +40,7 @@ public partial class UpdateTaskPage : ContentPage
             var task = await DatabaseService.GetAppTaskById(taskId.Value);
 
             // Check if the user role is system role
-            if (userRole.IsTaskAdmin != true && (task.AssignedToUserId != userId))
+            if (!userRole.IsTaskAdmin  && (task.AssignedToUserId != userId))
             {
                 UserPicker.IsEnabled = false;
                 TaskTitleEntry.IsEnabled = false;
@@ -44,12 +53,20 @@ public partial class UpdateTaskPage : ContentPage
         }
     }
 
+    /// <summary>
+    /// load the users into the User picker.
+    /// </summary>
+    /// <returns></returns>
     private async Task LoadUsers()
     {
         var users = await DatabaseService.GetUsers();
         UserPicker.ItemsSource = new List<User>(users);
     }
 
+    /// <summary>
+    /// Load the task data using its id
+    /// </summary>
+    /// <param name="id"> task id</param>
     private async void LoadTask(int id)
     {
         await LoadUsers();
@@ -72,7 +89,8 @@ public partial class UpdateTaskPage : ContentPage
                 if (user.Id == task.AssignedToUserId)
                 {
                     selectedUser = user;
-                    break; // Exit the loop once the user is found
+                    // Exit the loop once the user is found
+                    break; 
                 }
             }
 
@@ -83,6 +101,11 @@ public partial class UpdateTaskPage : ContentPage
 
     }
 
+    /// <summary>
+    /// Update the task record if all the mandartory details are entered.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void OnSaveTaskButtonClicked(object sender, EventArgs e)
     {
         //check that all required fields are entered
@@ -119,6 +142,11 @@ public partial class UpdateTaskPage : ContentPage
 
     }
 
+    /// <summary>
+    /// Delete the task record from the database after confirmation is recieved from the user.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void OnDeleteTaskButtonClicked(object sender, EventArgs e)
     {
         bool answer = await DisplayAlert("Deletion Confirmation", "Are you sure you want to delete this task", "Yes", "No");

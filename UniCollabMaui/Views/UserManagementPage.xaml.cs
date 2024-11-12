@@ -18,7 +18,7 @@ public partial class UserManagementPage : ContentPage
         await Navigation.PushAsync(new UpdateUserPage(userId));
         //implement an update role page
     }
-    private Color GetUserColor(User user)
+    private static Color GetUserColor(User user)
     {
         // Example logic to determine the color based on task priority
         // You can modify this logic to fit your requirements
@@ -28,8 +28,6 @@ public partial class UserManagementPage : ContentPage
                 return Colors.DarkBlue;
             case false:
                 return Colors.DarkGrey;
-            default:
-                return Colors.Blue;
         }
     }
     private async void LoadUsers()

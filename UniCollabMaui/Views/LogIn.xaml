@@ -30,8 +30,8 @@
                         TextColor="White"/>
                     
 
-                    <Entry x:Name="Username" Placeholder="Username(Student No.)" PlaceholderColor="Gray" TextColor="Black" BackgroundColor="#F0F0F0" TextChanged="OnUsernameTextChanged" MaxLength="40"/>
-                    <Entry x:Name="Password" Placeholder="Password" PlaceholderColor="Gray" TextColor="Black" BackgroundColor="#F0F0F0" IsPassword="True" TextTransform="Lowercase" TextChanged="OnPasswordTextChanged" MaxLength="20"/>
+                    <Entry x:Name="Username" Placeholder="Username(Student No.)" PlaceholderColor="Gray" TextColor="Black" BackgroundColor="#F0F0F0" TextChanged="OnTextChanged" MaxLength="40"/>
+                    <Entry x:Name="Password" Placeholder="Password" PlaceholderColor="Gray" TextColor="Black" BackgroundColor="#F0F0F0" IsPassword="True" TextTransform="Lowercase" TextChanged="OnTextChanged" MaxLength="20"/>
                     
                     <Button x:Name="NextButton" Text="Next" Clicked="OnLogInButtonClicked" BackgroundColor="LightBlue" FontAttributes="Bold" TextColor="Black" CornerRadius="10" IsEnabled="False"/>
                     <Button Text="Register" Clicked="OnRegisterButtonClicked" FontAttributes="Bold" TextColor="Black" BackgroundColor="AliceBlue"/>

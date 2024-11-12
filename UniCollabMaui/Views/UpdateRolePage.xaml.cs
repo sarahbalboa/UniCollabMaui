@@ -1,13 +1,18 @@
-using Supabase.Gotrue;
-using System.Threading.Tasks;
-using UniCollabMaui.Models;
 using UniCollabMaui.Service;
 
 namespace UniCollabMaui.Views;
 
+/// <summary>
+/// UpdateRolePage that allows the user to update an existing role in the database.
+/// </summary>
 public partial class UpdateRolePage : ContentPage
 {
     private int? roleId;
+
+    /// <summary>
+    /// Contructor that takes in the roleId to load the role data.
+    /// </summary>
+    /// <param name="roleId"></param>
     public UpdateRolePage(int? roleId = null)
     {
 		InitializeComponent();
@@ -19,7 +24,10 @@ public partial class UpdateRolePage : ContentPage
         
     }
 
-    
+    /// <summary>
+    /// Load teh role data from the database using the roleId
+    /// </summary>
+    /// <param name="roleId"></param>
     private async void LoadRole(int roleId)
     {
         var role = await DatabaseService.GetRoleById(roleId);
@@ -35,7 +43,7 @@ public partial class UpdateRolePage : ContentPage
             
         }
 
-        if (role.IsSystemRole == true)
+        if (role.IsSystemRole)
         {
             IsRoleAdminCheckbox.IsEnabled = false;
             IsTaskAdminCheckbox.IsEnabled = false;
@@ -54,7 +62,11 @@ public partial class UpdateRolePage : ContentPage
 
     }
 
-
+    /// <summary>
+    /// Check that all teh mandatory fields are entered and update the role record.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void OnSaveRoleButtonClicked(object sender, EventArgs e)
     {
         //check that all required fields are entered
@@ -73,7 +85,12 @@ public partial class UpdateRolePage : ContentPage
         var sessionUserId = await DatabaseService.GetUserIdFromSession(AppSession.SessionId);
         var sessionUser = await DatabaseService.GetUserById((int)sessionUserId);
 
-        await DatabaseService.UpdateRole(roleId.Value, roleName, isActive, isRoleAdmin, isTaskAdmin, isTaskViewer, isProgressViewer);
+
+        if(roleId != null)
+        {
+            await DatabaseService.UpdateRole(roleId.Value, roleName, isActive, isRoleAdmin, isTaskAdmin, isTaskViewer, isProgressViewer);
+        }
+
         //logger for saved/updated Role
         Logger.Log("Changed by " + sessionUser.Username + " \nRole [#" + roleId + "] " + roleName + " is Updated: \n" +
             "-Description: " + isActive +

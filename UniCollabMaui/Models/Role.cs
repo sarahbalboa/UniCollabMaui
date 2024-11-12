@@ -4,6 +4,9 @@ using Postgrest.Models;
 
 namespace UniCollabMaui.Models
 {
+    /// <summary>
+    /// Role model that represents the Role table from the database
+    /// </summary>
     [Table("Role")]
     public class Role : BaseModel
     {

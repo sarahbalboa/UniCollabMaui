@@ -1,20 +1,25 @@
-using Microsoft.Maui.Controls;
 using UniCollabMaui.Service;
 using UniCollabMaui.Models;
-using System.Data;
-using Microsoft.Maui.Platform;
-using System;
-using System.Threading.Tasks;
 
 namespace UniCollabMaui.Views;
 
+/// <summary>
+/// ProgressPage that displays the overall project progress.
+/// </summary>
 public partial class ProgressPage : ContentPage
 {
+
+    /// <summary>
+    /// Cobstructor
+    /// </summary>
     public ProgressPage()
     {
         InitializeComponent();
     }
 
+    /// <summary>
+    /// Run the required funtions to udpate the progress visualisation.
+    /// </summary>
     protected override void OnAppearing()
     {
         base.OnAppearing();
@@ -23,10 +28,13 @@ public partial class ProgressPage : ContentPage
         
     }
 
+    /// <summary>
+    /// Update the Task summary
+    /// </summary>
     private async void UpdateTaskStatusCount()
     {
         var tasks = await DatabaseService.GetAppTasks();
-        List<AppTask> allTasks = new List<AppTask>(tasks);
+        List<AppTask> allTasks = new(tasks);
         
         
         int todoTasks = 0;
@@ -54,14 +62,18 @@ public partial class ProgressPage : ContentPage
         DoneLbl.Text = "Done tasks: " + doneTasks.ToString();
         TotalTasksLbl.Text = "Total: " + allTasks.Count.ToString();
     }
+
+    /// <summary>
+    /// Update the progress bar
+    /// </summary>
     private async void UpdateProgressBar()
     {
         var tasks = await DatabaseService.GetAppTasks();
-        List<AppTask> allTasks = new List<AppTask>(tasks);
+        List<AppTask> allTasks = new(tasks);
         double doneTasks = 0.0;
         double progress = 0.0;
 
-        if(tasks.Count() != 0)
+        if(tasks.Any())
         {
             foreach (var task in tasks)
             {
@@ -84,6 +96,12 @@ public partial class ProgressPage : ContentPage
         }
 
     }
+
+    /// <summary>
+    /// Click listener for the Refresh button to refresh the Task summary and the progress bar.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void OnRefreshClicked(object sender, EventArgs e)
     {
         //show Refreshing... label to let teh customer know if action behind the button
