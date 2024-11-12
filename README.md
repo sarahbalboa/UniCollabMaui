@@ -9,7 +9,7 @@
 
 
 
-## **Libraries**
+## **NuGet packages**
 
 ![CommunityToolkit.Maui](https://img.shields.io/badge/CommunityToolkit.Maui-9.0.3-blueviolet)
 
