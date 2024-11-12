@@ -1,7 +1,3 @@
-using Microsoft.Maui.Controls;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using UniCollabMaui.Models;
 using UniCollabMaui.Service;
 

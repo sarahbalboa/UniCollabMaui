@@ -1,6 +1,3 @@
-using Supabase.Gotrue;
-using System.Threading.Tasks;
-using UniCollabMaui.Models;
 using UniCollabMaui.Service;
 
 namespace UniCollabMaui.Views;

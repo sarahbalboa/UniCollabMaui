@@ -1,10 +1,5 @@
-using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Maui.Core;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Storage;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
+using CommunityToolkit.Maui.Alerts; //toast
+using CommunityToolkit.Maui.Core; // toast duration
 using UniCollabMaui.Models;
 using UniCollabMaui.Service;
 

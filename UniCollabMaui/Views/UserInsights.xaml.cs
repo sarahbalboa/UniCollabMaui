@@ -1,5 +1,3 @@
-
-
 using Microcharts;
 using SkiaSharp;
 using UniCollabMaui.Models;
