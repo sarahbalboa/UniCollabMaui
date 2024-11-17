@@ -68,6 +68,7 @@ namespace UniCollabMaui.Views
                 // Add the user to the database
                 await DatabaseService.AddUser(name, true, username, email, password, role.Id);
                 //add toast of registration successful
+                await DisplayAlert("Error", "Please fill out all fields.", "OK");
 
 
                 await Toast.Make("User registered",
