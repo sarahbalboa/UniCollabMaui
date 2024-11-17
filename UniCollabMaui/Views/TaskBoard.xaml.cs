@@ -1,19 +1,25 @@
-using Microsoft.Maui.Controls;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using UniCollabMaui.Models;
 using UniCollabMaui.Service;
 
 namespace UniCollabMaui.Views
 {
+    /// <summary>
+    /// TaskBoard view to dislay the kanban board and allow management of tasks
+    /// </summary>
     public partial class TaskBoard : ContentPage
     {
+        /// <summary>
+        /// Constructor thet executes the LoadTasks()
+        /// </summary>
         public TaskBoard()
         {
             InitializeComponent();
             LoadTasks();
         }
+
+        /// <summary>
+        /// Reload the page when the 
+        /// </summary>
         private void ReloadPage()
         {
             // Assuming you are within a ContentPage
@@ -22,12 +28,19 @@ namespace UniCollabMaui.Views
             Navigation.PopAsync();
         }
 
-
+        /// <summary>
+        /// Click listener for the Add task button. Redirects the user to the Add Task view.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void OnAddTaskButtonClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new AddTaskPage());
         }
 
+        /// <summary>
+        /// Load the existing tasks on the database to the corresponding column of teh Kanban taskboard.
+        /// </summary>
         private async void LoadTasks()
         {
             var tasks = await DatabaseService.GetAppTasks();
@@ -50,15 +63,6 @@ namespace UniCollabMaui.Views
                 // Determine the background color based on the task property
                 var backgroundColor = GetTaskColor(task);
 
-                // Create an Image for the icon
-                var taskIcon = new Image
-                {
-                    Source = "unicollablogo1.png", // Replace with your icon file
-                    WidthRequest = 20,
-                    HeightRequest = 20,
-                    VerticalOptions = LayoutOptions.Center
-                };
-
                 // Create a Label for the task details
                 var taskLabel = new Label
                 {
@@ -71,7 +75,7 @@ namespace UniCollabMaui.Views
                 {
                     Orientation = StackOrientation.Horizontal,
                     Spacing = 10,
-                    Children = { taskIcon, taskLabel }
+                    Children = { taskLabel }
                 };
 
                 var taskView = new Frame
@@ -102,7 +106,11 @@ namespace UniCollabMaui.Views
             }
         }
 
-
+        /// <summary>
+        /// set a task colour depending on its priority
+        /// </summary>
+        /// <param name="task"></param>
+        /// <returns></returns>
         private Color GetTaskColor(AppTask task)
         {
             // Example logic to determine the color based on task priority

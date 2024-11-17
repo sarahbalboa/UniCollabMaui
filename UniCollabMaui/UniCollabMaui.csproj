@@ -45,6 +45,8 @@
 		<AppInstallerUri>C:\Users\40496531\OneDrive - Edinburgh Napier University\Desktop\Uni\honours project\Publish\2.0</AppInstallerUri>
 		<HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
 		<PackageCertificateThumbprint>8A8F49DF9534AF8EBC9A259782FC22495A9651AE</PackageCertificateThumbprint>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<DocumentationFile>bin\Debug\UniCollabMaui.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -86,8 +88,6 @@
 		<PackageReference Include="SkiaSharp.Views" Version="2.88.9" />
 		<PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.9" />
 		<PackageReference Include="SkiaSharp.Views.Maui.Controls.Compatibility" Version="2.88.9" />
-		<PackageReference Include="SQLite" Version="3.13.0" />
-		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
 		<PackageReference Include="supabase-csharp" Version="0.16.1" />
 	</ItemGroup>
 
