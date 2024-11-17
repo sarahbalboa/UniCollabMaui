@@ -1,10 +1,5 @@
-using Microsoft.Maui.Controls;
 using UniCollabMaui.Service;
 using UniCollabMaui.Models;
-using System.Data;
-using Microsoft.Maui.Platform;
-using System;
-using System.Threading.Tasks;
 
 namespace UniCollabMaui.Views;
 

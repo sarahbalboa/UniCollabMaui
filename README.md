@@ -9,7 +9,7 @@
 
 
 
-## **Libraries**
+## **NuGet packages**
 
 ![CommunityToolkit.Maui](https://img.shields.io/badge/CommunityToolkit.Maui-9.0.3-blueviolet)
 
@@ -21,13 +21,13 @@
 
 ![Microsoft.Extensions.Logging.Debug](https://img.shields.io/badge/Microsoft.Extensions.Logging.Debug-8.0.0-orange?logo=dotnet)
 
-![SkiaSharp](https://img.shields.io/badge/SkiaSharp-2.88.8-42A5F5?logo=sketchup&logoColor=white)
+![SkiaSharp](https://img.shields.io/badge/SkiaSharp-2.88.9-42A5F5?logo=sketchup&logoColor=white)
 
-![SkiaSharp.Views](https://img.shields.io/badge/SkiaSharp.Views-2.88.8-42A5F5?logo=sketchup&logoColor=white)
+![SkiaSharp.Views](https://img.shields.io/badge/SkiaSharp.Views-2.88.9-42A5F5?logo=sketchup&logoColor=white)
 
-![SkiaSharp.Views.Maui.Controls](https://img.shields.io/badge/SkiaSharp.Views.Maui.Controls-2.88.8-42A5F5?logo=sketchup&logoColor=white)
+![SkiaSharp.Views.Maui.Controls](https://img.shields.io/badge/SkiaSharp.Views.Maui.Controls-2.88.9-42A5F5?logo=sketchup&logoColor=white)
 
-![SkiaSharp.Views.Maui.Controls.Compatibility](https://img.shields.io/badge/SkiaSharp.Views.Maui.Controls.Compatibility-2.88.8-42A5F5?logo=sketchup&logoColor=white)
+![SkiaSharp.Views.Maui.Controls.Compatibility](https://img.shields.io/badge/SkiaSharp.Views.Maui.Controls.Compatibility-2.88.9-42A5F5?logo=sketchup&logoColor=white)
 
 ![Supabase-CSharp](https://img.shields.io/badge/Supabase--CSharp-0.16.1-brightgreen?logo=supabase)
 

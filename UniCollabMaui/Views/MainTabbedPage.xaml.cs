@@ -1,5 +1,3 @@
-using Microsoft.Maui.Controls;
-using UniCollabMaui.Models;
 using UniCollabMaui.Service;
 namespace UniCollabMaui.Views;
 
