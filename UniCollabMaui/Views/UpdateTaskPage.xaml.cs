@@ -39,16 +39,23 @@ public partial class UpdateTaskPage : ContentPage
             var userRole = await DatabaseService.GetUserRole(userId.Value);
             var task = await DatabaseService.GetAppTaskById(taskId.Value);
 
-            // Check if the user role is system role
-            if (!userRole.IsTaskAdmin  && (task.AssignedToUserId != userId))
+            // Check the user role to determine what they can edit
+            if (!userRole.IsTaskAdmin )
             {
-                UserPicker.IsEnabled = false;
-                TaskTitleEntry.IsEnabled = false;
-                TaskDescriptionEditor.IsEnabled = false;
-                TaskColumnPicker.IsEnabled = false;
-                TaskPriorityPicker.IsEnabled = false;
-                SaveButton.IsVisible = false;
-                DeleteButton.IsVisible = false;
+                if (task.AssignedToUserId != userId)
+                {
+                    UserPicker.IsEnabled = false;
+                    TaskTitleEntry.IsEnabled = false;
+                    TaskDescriptionEditor.IsEnabled = false;
+                    TaskColumnPicker.IsEnabled = false;
+                    TaskPriorityPicker.IsEnabled = false;
+                    SaveButton.IsVisible = false;
+                    DeleteButton.IsVisible = false;
+                }
+                else
+                {
+                    UserPicker.IsEnabled = false;
+                }
             }
         }
     }
