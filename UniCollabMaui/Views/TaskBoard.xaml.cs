@@ -58,6 +58,7 @@ namespace UniCollabMaui.Views
 
             foreach (var task in tasks)
             {
+                //if task user is not in the list of users assign it to Unknown
                 var userName = userDictionary.ContainsKey(task.AssignedToUserId.Value) ? userDictionary[task.AssignedToUserId.Value].Name : "Unknown";
 
                 // Determine the background color based on the task property
@@ -66,7 +67,7 @@ namespace UniCollabMaui.Views
                 // Create a Label for the task details
                 var taskLabel = new Label
                 {
-                    Text = $" [#{task.Id}] {task.Title} (Assigned to: {userName})",
+                    Text = $" [#{task.Id}] {task.Title} \n(Assigned to: {userName})",
                     VerticalOptions = LayoutOptions.Center
                 };
 
@@ -78,6 +79,7 @@ namespace UniCollabMaui.Views
                     Children = { taskLabel }
                 };
 
+                //create task as a Frame item
                 var taskView = new Frame
                 {
                     Padding = 10,
@@ -91,6 +93,7 @@ namespace UniCollabMaui.Views
                 tapGestureRecognizer.Tapped += async (s, e) => await OnTaskTapped(task.Id);
                 taskView.GestureRecognizers.Add(tapGestureRecognizer);
 
+                //add the task Frame to its corresponding Column child list
                 switch (task.Column)
                 {
                     case "ToDo":

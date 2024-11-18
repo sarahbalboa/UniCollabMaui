@@ -134,8 +134,7 @@ public partial class UserInsights : ContentPage
             );
         }
 
-        //create chart
-
+        //create chart Done Tasks per user chart
         userDoneTasksView.Chart = new BarChart
         {
             ShowYAxisLines = true,
