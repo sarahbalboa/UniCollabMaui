@@ -22,8 +22,11 @@
              Padding="0" />
         </HorizontalStackLayout>
 
-        <Label x:Name="ProgressLbl" FontSize="Small" TextColor="{StaticResource MyBlue2}" HorizontalOptions="Center" VerticalOptions="Center"/>
-        <Frame BorderColor="{StaticResource MyBlue2}" CornerRadius="5" Padding="0" HasShadow="False" HorizontalOptions="Center" VerticalOptions="Center" Background="White">
+        <Label x:Name="ProgressLbl" FontSize="Small" TextColor="{StaticResource MyBlue2}" 
+               HorizontalOptions="Center" VerticalOptions="Center"/>
+        <Frame BorderColor="{StaticResource MyBlue2}" CornerRadius="5" 
+               Padding="0" HasShadow="False" HorizontalOptions="Center" 
+               VerticalOptions="Center" Background="White">
             <ProgressBar x:Name="MyProgressBar"
                      ScaleY="4"
                      WidthRequest="400"
