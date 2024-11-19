@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['unicollabmaui_0',['UniCollabMaui',['../namespace_uni_collab_maui.html',1,'']]],
+  ['unicollabmaui_3a_3amodels_1',['Models',['../namespace_uni_collab_maui_1_1_models.html',1,'UniCollabMaui']]],
+  ['unicollabmaui_3a_3aservice_2',['Service',['../namespace_uni_collab_maui_1_1_service.html',1,'UniCollabMaui']]],
+  ['unicollabmaui_3a_3aviews_3',['Views',['../namespace_uni_collab_maui_1_1_views.html',1,'UniCollabMaui']]],
+  ['updateapptask_4',['UpdateAppTask',['../class_uni_collab_maui_1_1_service_1_1_database_service.html#a6754557d90824088b6b1c9964624c531',1,'UniCollabMaui::Service::DatabaseService']]],
+  ['updateprogressbar_5',['UpdateProgressBar',['../class_uni_collab_maui_1_1_views_1_1_progress_page.html#af19d3d3a35ff9063d41341002df1a468',1,'UniCollabMaui::Views::ProgressPage']]],
+  ['updaterole_6',['UpdateRole',['../class_uni_collab_maui_1_1_service_1_1_database_service.html#ad564d1d61f71ce53b4322eb8f4f54a63',1,'UniCollabMaui::Service::DatabaseService']]],
+  ['updaterolepage_7',['UpdateRolePage',['../class_uni_collab_maui_1_1_views_1_1_update_role_page.html',1,'UniCollabMaui.Views.UpdateRolePage'],['../class_uni_collab_maui_1_1_views_1_1_update_role_page.html#ab94a15c80b7ef0dc7b1f678134ae7ffe',1,'UniCollabMaui.Views.UpdateRolePage.UpdateRolePage()']]],
+  ['updatetaskpage_8',['UpdateTaskPage',['../class_uni_collab_maui_1_1_views_1_1_update_task_page.html',1,'UniCollabMaui.Views.UpdateTaskPage'],['../class_uni_collab_maui_1_1_views_1_1_update_task_page.html#a07e9ba4eb76c29ed91bc021f13753106',1,'UniCollabMaui.Views.UpdateTaskPage.UpdateTaskPage()']]],
+  ['updatetaskstatuscount_9',['UpdateTaskStatusCount',['../class_uni_collab_maui_1_1_views_1_1_progress_page.html#a9dea56f03a3a5034ce3072c50b185f40',1,'UniCollabMaui::Views::ProgressPage']]],
+  ['updateuser_10',['UpdateUser',['../class_uni_collab_maui_1_1_service_1_1_database_service.html#a4ddde27a354e80893ccbfffd609e5d4d',1,'UniCollabMaui::Service::DatabaseService']]],
+  ['updateuserdonetaskschart_11',['UpdateUserDoneTasksChart',['../class_uni_collab_maui_1_1_views_1_1_user_insights.html#a04def908fefc057b51f5c46394d74b0f',1,'UniCollabMaui::Views::UserInsights']]],
+  ['updateuserpage_12',['UpdateUserPage',['../class_uni_collab_maui_1_1_views_1_1_update_user_page.html',1,'UniCollabMaui.Views.UpdateUserPage'],['../class_uni_collab_maui_1_1_views_1_1_update_user_page.html#a5c3ab535feb08bcbb72153810bbd6a34',1,'UniCollabMaui.Views.UpdateUserPage.UpdateUserPage()']]],
+  ['updateusertaskschart_13',['UpdateUserTasksChart',['../class_uni_collab_maui_1_1_views_1_1_user_insights.html#ae835665b65c4d72f070f286e55f16a0a',1,'UniCollabMaui::Views::UserInsights']]],
+  ['user_14',['User',['../class_uni_collab_maui_1_1_models_1_1_user.html',1,'UniCollabMaui::Models']]],
+  ['userinsights_15',['UserInsights',['../class_uni_collab_maui_1_1_views_1_1_user_insights.html',1,'UniCollabMaui.Views.UserInsights'],['../class_uni_collab_maui_1_1_views_1_1_user_insights.html#a1640b8eb6f0af8b39cbe536941cae50c',1,'UniCollabMaui.Views.UserInsights.UserInsights()']]],
+  ['usermanagementpage_16',['UserManagementPage',['../class_uni_collab_maui_1_1_views_1_1_user_management_page.html',1,'UniCollabMaui::Views']]]
+];
