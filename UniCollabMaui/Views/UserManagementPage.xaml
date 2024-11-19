@@ -6,6 +6,22 @@
              NavigationPage.HasNavigationBar="False"
              Title="UserManagementPage">
     <StackLayout Padding="10, 10, 10, 10">
+        <HorizontalStackLayout HorizontalOptions="End" VerticalOptions="Start" Spacing="5">
+            <Label x:Name="RefreshLbl"
+            Text="Refreshing..."
+            TextColor="DarkSlateGrey"
+            IsVisible="False"
+            BackgroundColor="Transparent"
+            VerticalOptions="Center" />
+
+            <Button x:Name="RefreshBtn"
+             Clicked="OnRefreshClicked"
+             ImageSource="refresh_icon.png"
+             BackgroundColor="Transparent"
+             WidthRequest="30"
+             HeightRequest="30"
+             Padding="0" />
+        </HorizontalStackLayout>
         <Grid RowSpacing="0" ColumnSpacing="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="10, 10, 10, 30">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
